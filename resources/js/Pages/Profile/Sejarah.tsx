@@ -10,19 +10,28 @@ interface Props {
     domain: {
         judul_website: string;
     };
-    judul: string;
-    Deskripsi: string;
+    sejarah: {
+        judul_sejarah: string;
+        Deskripsi_sejarah: string;
+        isi_sejarah: string;
+        penulis_sejarah: string;
+        jabatan_penulis_sejarah: string;
+        created_at: string;
+    };
 }
 
-const Sejarah: React.FC<Props> = ({ domain, judul, Deskripsi }) => {
+const Sejarah: React.FC<Props> = ({ domain, sejarah }) => {
     const pathname = window.location.pathname;
 
     return (
         <Flowbite>
             <Navbar data={domain.judul_website} />
-            <Head title={judul} />
+            <Head title={sejarah.judul_sejarah} />
 
-            <Jumbroton judul={judul} Deskripsi={Deskripsi} />
+            <Jumbroton
+                judul={sejarah.judul_sejarah}
+                Deskripsi={sejarah.Deskripsi_sejarah}
+            />
 
             <div className="flex flex-row bg-white dark:bg-gray-900">
                 <div className=" w-8/12">
@@ -38,7 +47,7 @@ const Sejarah: React.FC<Props> = ({ domain, judul, Deskripsi }) => {
                                             <p>Home</p>
                                         </Breadcrumb.Item>
                                         <Breadcrumb.Item href={pathname}>
-                                            {judul}
+                                            {sejarah.judul_sejarah}
                                         </Breadcrumb.Item>
                                     </Breadcrumb>
                                     <address className="flex items-center mb-6 not-italic">
@@ -54,183 +63,26 @@ const Sejarah: React.FC<Props> = ({ domain, judul, Deskripsi }) => {
                                                     rel="author"
                                                     className="text-xl font-bold text-gray-900 dark:text-white"
                                                 >
-                                                    Jese Leos
+                                                    {sejarah.penulis_sejarah}
                                                 </a>
                                                 <p className="text-base font-light text-gray-500 dark:text-gray-400">
-                                                    Graphic Designer, educator &
-                                                    CEO Flowbite
+                                                    {
+                                                        sejarah.jabatan_penulis_sejarah
+                                                    }
                                                 </p>
                                                 <p className="text-base font-light text-gray-500 dark:text-gray-400">
                                                     <time title="February 8th, 2022">
-                                                        Feb. 8, 2022
+                                                        {sejarah.created_at}
                                                     </time>
                                                 </p>
                                             </div>
                                         </div>
                                     </address>
                                     <h1 className="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
-                                        Best practices for successful prototypes
+                                        {sejarah.judul_sejarah}
                                     </h1>
                                 </header>
-                                <p className="lead">
-                                    Flowbite is an open-source library of UI
-                                    components built with the utility-first
-                                    classes from Tailwind CSS. It also includes
-                                    interactive elements such as dropdowns,
-                                    modals, datepickers.
-                                </p>
-                                <p>
-                                    Before going digital, you might benefit from
-                                    scribbling down some ideas in a sketchbook.
-                                    This way, you can think things through
-                                    before committing to an actual design
-                                    project.
-                                </p>
-                                <p>
-                                    But then I found a{" "}
-                                    <a href="https://flowbite.com">
-                                        component library based on Tailwind CSS
-                                        called Flowbite
-                                    </a>
-                                    . It comes with the most commonly used UI
-                                    components, such as buttons, navigation
-                                    bars, cards, form elements, and more which
-                                    are conveniently built with the utility
-                                    classes from Tailwind CSS.
-                                </p>
-                                <figure>
-                                    <img
-                                        src="https://flowbite.s3.amazonaws.com/typography-plugin/typography-image-1.png"
-                                        alt=""
-                                    />
-                                    <figcaption>
-                                        Digital art by Anonymous
-                                    </figcaption>
-                                </figure>
-                                <h2>Getting started with Flowbite</h2>
-                                <p>
-                                    First of all you need to understand how
-                                    Flowbite works. This library is not another
-                                    framework. Rather, it is a set of components
-                                    based on Tailwind CSS that you can just
-                                    copy-paste from the documentation.
-                                </p>
-                                <p>
-                                    It also includes a JavaScript file that
-                                    enables interactive components, such as
-                                    modals, dropdowns, and datepickers which you
-                                    can optionally include into your project via
-                                    CDN or NPM.
-                                </p>
-                                <p>
-                                    You can check out the{" "}
-                                    <a href="https://flowbite.com/docs/getting-started/quickstart/">
-                                        quickstart guide
-                                    </a>{" "}
-                                    to explore the elements by including the CDN
-                                    files into your project. But if you want to
-                                    build a project with Flowbite I recommend
-                                    you to follow the build tools steps so that
-                                    you can purge and minify the generated CSS.
-                                </p>
-                                <p>
-                                    You'll also receive a lot of useful
-                                    application UI, marketing UI, and e-commerce
-                                    pages that can help you get started with
-                                    your projects even faster. You can check out
-                                    this{" "}
-                                    <a href="https://flowbite.com/docs/components/tables/">
-                                        comparison table
-                                    </a>{" "}
-                                    to better understand the differences between
-                                    the open-source and pro version of Flowbite.
-                                </p>
-                                <h2>When does design come in handy?</h2>
-                                <p>
-                                    While it might seem like extra work at a
-                                    first glance, here are some key moments in
-                                    which prototyping will come in handy:
-                                </p>
-                                <ol>
-                                    <li>
-                                        <strong>Usability testing</strong>. Does
-                                        your user know how to exit out of
-                                        screens? Can they follow your intended
-                                        user journey and buy something from the
-                                        site you’ve designed? By running a
-                                        usability test, you’ll be able to see
-                                        how users will interact with your design
-                                        once it’s live;
-                                    </li>
-                                    <li>
-                                        <strong>Involving stakeholders</strong>.
-                                        Need to check if your GDPR consent boxes
-                                        are displaying properly? Pass your
-                                        prototype to your data protection team
-                                        and they can test it for real;
-                                    </li>
-                                    <li>
-                                        <strong>Impressing a client</strong>.
-                                        Prototypes can help explain or even sell
-                                        your idea by providing your client with
-                                        a hands-on experience;
-                                    </li>
-                                    <li>
-                                        <strong>
-                                            Communicating your vision
-                                        </strong>
-                                        . By using an interactive medium to
-                                        preview and test design elements,
-                                        designers and developers can understand
-                                        each other — and the project — better.
-                                    </li>
-                                </ol>
-                                <h3>Laying the groundwork for best design</h3>
-                                <p>
-                                    Before going digital, you might benefit from
-                                    scribbling down some ideas in a sketchbook.
-                                    This way, you can think things through
-                                    before committing to an actual design
-                                    project.
-                                </p>
-                                <p>
-                                    Let's start by including the CSS file inside
-                                    the <code>head</code> tag of your HTML.
-                                </p>
-                                <h3>Understanding typography</h3>
-                                <h4>Type properties</h4>
-                                <p>
-                                    A typeface is a collection of letters. While
-                                    each letter is unique, certain shapes are
-                                    shared across letters. A typeface represents
-                                    shared patterns across a collection of
-                                    letters.
-                                </p>
-                                <h4>Baseline</h4>
-                                <p>
-                                    A typeface is a collection of letters. While
-                                    each letter is unique, certain shapes are
-                                    shared across letters. A typeface represents
-                                    shared patterns across a collection of
-                                    letters.
-                                </p>
-                                <h4>Measurement from the baseline</h4>
-                                <p>
-                                    A typeface is a collection of letters. While
-                                    each letter is unique, certain shapes are
-                                    shared across letters. A typeface represents
-                                    shared patterns across a collection of
-                                    letters.
-                                </p>
-                                <h3>Type classification</h3>
-                                <h4>Serif</h4>
-                                <p>
-                                    A serif is a small shape or projection that
-                                    appears at the beginning or end of a stroke
-                                    on a letter. Typefaces with serifs are
-                                    called serif typefaces. Serif fonts are
-                                    classified as one of the following:
-                                </p>
+                                {sejarah.isi_sejarah}
                             </article>
                         </div>
                     </main>

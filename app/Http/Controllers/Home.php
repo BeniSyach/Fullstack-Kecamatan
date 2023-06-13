@@ -10,10 +10,11 @@ use Inertia\Inertia;
 class Home extends Controller
 {
     public function index(){
-
+        // ambil url domain
         $GetDomain = FacadesRequest::getHost();
-
         $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
+        // get kode_kecamatan
+        $get_kd_kecamatan = $domain['kode_kecamatan'];
 
         return Inertia::render('Home',[
             'domain' => $domain
