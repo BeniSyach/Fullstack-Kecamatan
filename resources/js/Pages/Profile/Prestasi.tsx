@@ -5,16 +5,22 @@ import Navbar from "@/Components/Navbar";
 import { PageProps } from "@/types";
 import { Head } from "@inertiajs/react";
 import { Breadcrumb, Flowbite } from "flowbite-react";
+import React from "react";
 
-export default function Prestasi({
-    judul,
-    Deskripsi,
-}: PageProps<{ judul: string; Deskripsi: string }>) {
+interface Props {
+    domain: {
+        judul_website: string;
+    };
+    judul: string;
+    Deskripsi: string;
+}
+
+const Prestasi: React.FC<Props> = ({ domain, judul, Deskripsi }) => {
     const pathname = window.location.pathname;
     return (
         <Flowbite>
             <Head title="Letak Geografis" />
-            <Navbar />
+            <Navbar data={domain.judul_website} />
             <Jumbroton judul={judul} Deskripsi={Deskripsi} />
 
             <div className="flex flex-row bg-white dark:bg-gray-900">
@@ -444,4 +450,5 @@ export default function Prestasi({
             <Footer />
         </Flowbite>
     );
-}
+};
+export default Prestasi;

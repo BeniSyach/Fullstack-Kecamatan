@@ -4,11 +4,17 @@ import Navbar from "@/Components/Navbar";
 import { Head } from "@inertiajs/react";
 import { Flowbite, Carousel } from "flowbite-react";
 
-export default function Home() {
+interface Props {
+    domain: {
+        judul_website: string;
+    };
+}
+
+const Home: React.FC<Props> = ({ domain }) => {
     return (
         <Flowbite>
-            <Head title="Web Kecamatan" />
-            <Navbar />
+            <Head title={domain.judul_website} />
+            <Navbar data={domain.judul_website} />
             <div className="relative w-full z-0">
                 <Carousel slideInterval={5000} className=" h-56  md:h-96">
                     <img
@@ -1137,4 +1143,6 @@ export default function Home() {
             <Footer />
         </Flowbite>
     );
-}
+};
+
+export default Home;

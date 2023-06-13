@@ -1,7 +1,11 @@
 import { Link, router } from "@inertiajs/react";
 import { DarkThemeToggle, Navbar, Button, Dropdown } from "flowbite-react";
 
-export default function NavbarLandingPage() {
+interface ChildProps {
+    data: string;
+}
+
+const NavbarLandingPage: React.FC<ChildProps> = (props) => {
     return (
         <Navbar fluid>
             <Navbar.Brand href="/">
@@ -11,7 +15,7 @@ export default function NavbarLandingPage() {
                     src="/assets/image/logo/logo_kabupaten_deli_serdang.png"
                 />
                 <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-                    Web Kecamatan
+                    {props.data}
                 </span>
             </Navbar.Brand>
             <div className="flex md:order-2 ">
@@ -24,7 +28,7 @@ export default function NavbarLandingPage() {
 
             <Navbar.Collapse>
                 <Link href={route("home")} as="div" className=" cursor-pointer">
-                    <Navbar.Link active>
+                    <Navbar.Link>
                         <p>Home</p>
                     </Navbar.Link>
                 </Link>
@@ -116,4 +120,6 @@ export default function NavbarLandingPage() {
             </Navbar.Collapse>
         </Navbar>
     );
-}
+};
+
+export default NavbarLandingPage;

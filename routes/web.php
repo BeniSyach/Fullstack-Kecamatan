@@ -39,15 +39,15 @@ use Inertia\Inertia;
 Route::get('/', [Home::class,'index'])->name('home');
 
 // Profil
-Route::get('/sejarah',[Sejarah::class,'index'])->name('sejarah');
-Route::get('/letak_geografis',[Letak_Geografis::class,'index'])->name('letak_geografis');
-Route::get('/kependudukan',[Kependudukan::class,'index'])->name('kependududkan');
-Route::get('/adat_dan_budaya',[AdatDanBudaya::class,'index'])->name('adat_dan_budaya');
-Route::get('/visi_dan_misi',[VisiDanMisi::class,'index'])->name('visi_dan_misi');
-Route::get('/prestasi',[Prestasi::class,'index'])->name('prestasi');
-Route::get('/struktur_organisasi',[StrukturOrganisasi::class,'index'])->name('struktur_organisasi');
-Route::get('/tupoksi',[Tupoksi::class,'index'])->name('tupoksi');
-Route::get('/kepegawaian',[Kepegawaian::class,'index'])->name('kepegawaian');
+Route::get('/profil/sejarah',[Sejarah::class,'index'])->name('sejarah');
+Route::get('/profil/letak_geografis',[Letak_Geografis::class,'index'])->name('letak_geografis');
+Route::get('/profil/kependudukan',[Kependudukan::class,'index'])->name('kependududkan');
+Route::get('/profil/adat_dan_budaya',[AdatDanBudaya::class,'index'])->name('adat_dan_budaya');
+Route::get('/profil/visi_dan_misi',[VisiDanMisi::class,'index'])->name('visi_dan_misi');
+Route::get('/profil/prestasi',[Prestasi::class,'index'])->name('prestasi');
+Route::get('/profil/struktur_organisasi',[StrukturOrganisasi::class,'index'])->name('struktur_organisasi');
+Route::get('/profil/tupoksi',[Tupoksi::class,'index'])->name('tupoksi');
+Route::get('/profil/kepegawaian',[Kepegawaian::class,'index'])->name('kepegawaian');
 // Publikasi
 Route::get('/berita',[Berita::class,'index'])->name('berita');
 

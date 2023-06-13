@@ -5,16 +5,22 @@ import Letter from "../../Components/Letter";
 import Footer from "../../Components/Footer";
 import { PageProps } from "@/types";
 import Jumbroton from "@/Components/Jumbroton";
+import React from "react";
 
-export default function AdatDanBudaya({
-    judul,
-    Deskripsi,
-}: PageProps<{ judul: string; Deskripsi: string }>) {
+interface Props {
+    domain: {
+        judul_website: string;
+    };
+    judul: string;
+    Deskripsi: string;
+}
+
+const AdatDanBudaya: React.FC<Props> = ({ domain, judul, Deskripsi }) => {
     const pathname = window.location.pathname;
     return (
         <Flowbite>
             <Head title={judul} />
-            <Navbar />
+            <Navbar data={domain.judul_website} />
             <Jumbroton judul={judul} Deskripsi={Deskripsi} />
 
             <div className="flex flex-row bg-white dark:bg-gray-900">
@@ -444,4 +450,5 @@ export default function AdatDanBudaya({
             <Footer />
         </Flowbite>
     );
-}
+};
+export default AdatDanBudaya;
