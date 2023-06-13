@@ -1,8 +1,8 @@
-import Footer from "@/Components/Footer";
 import Letter from "@/Components/Letter";
 import Navbar from "@/Components/Navbar";
 import { Head } from "@inertiajs/react";
 import { Flowbite, Carousel } from "flowbite-react";
+import FooterLandingPage from "../Components/FooterLandingPage";
 
 interface Props {
     domain: {
@@ -1140,7 +1140,7 @@ const Home: React.FC<Props> = ({ domain }) => {
                     </div>
                 </div>
             </section>
-            <Footer />
+            <FooterLandingPage data={domain.judul_website} />
         </Flowbite>
     );
 };

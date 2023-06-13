@@ -2,10 +2,9 @@ import Navbar from "@/Components/Navbar";
 import { Head } from "@inertiajs/react";
 import { Breadcrumb, Flowbite } from "flowbite-react";
 import Letter from "../../Components/Letter";
-import Footer from "../../Components/Footer";
-import { PageProps } from "@/types";
 import Jumbroton from "@/Components/Jumbroton";
 import React from "react";
+import FooterLandingPage from "../../Components/FooterLandingPage";
 
 interface Props {
     domain: {
@@ -447,7 +446,7 @@ const AdatDanBudaya: React.FC<Props> = ({ domain, judul, Deskripsi }) => {
             </div>
 
             <Letter />
-            <Footer />
+            <FooterLandingPage data={domain.judul_website} />
         </Flowbite>
     );
 };

@@ -1,11 +1,10 @@
-import Footer from "@/Components/Footer";
 import Jumbroton from "@/Components/Jumbroton";
 import Letter from "@/Components/Letter";
 import Navbar from "@/Components/Navbar";
-import { PageProps } from "@/types";
 import { Head } from "@inertiajs/react";
 import { Breadcrumb, Flowbite } from "flowbite-react";
 import React from "react";
+import FooterLandingPage from "../../Components/FooterLandingPage";
 
 interface Props {
     domain: {
@@ -447,7 +446,7 @@ const LetakGeografis: React.FC<Props> = ({ domain, judul, Deskripsi }) => {
             </div>
 
             <Letter />
-            <Footer />
+            <FooterLandingPage data={domain.judul_website} />
         </Flowbite>
     );
 };

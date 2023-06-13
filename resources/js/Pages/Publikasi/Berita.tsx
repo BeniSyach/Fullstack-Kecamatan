@@ -1,4 +1,4 @@
-import Footer from "@/Components/Footer";
+import Footer from "@/Components/FooterLandingPage";
 import Navbar from "@/Components/Navbar";
 import ReadArticle from "@/Components/ReadArticle";
 import { Head } from "@inertiajs/react";
