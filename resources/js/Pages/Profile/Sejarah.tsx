@@ -82,7 +82,11 @@ const Sejarah: React.FC<Props> = ({ domain, sejarah }) => {
                                         {sejarah.judul_sejarah}
                                     </h1>
                                 </header>
-                                {sejarah.isi_sejarah}
+                                <div
+                                    dangerouslySetInnerHTML={{
+                                        __html: sejarah.isi_sejarah,
+                                    }}
+                                />
                             </article>
                         </div>
                     </main>

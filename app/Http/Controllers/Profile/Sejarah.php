@@ -17,6 +17,7 @@ class Sejarah extends Controller
         $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
         // ambil kode kecamatan melalui domain
         $get_kd_kecamatan = $domain['kode_kecamatan'];
+        // ambil data sejarah dengan kode kecamatan
         $sejarah = Sejarah_Model::where('kode_kecamatan',$get_kd_kecamatan)->first();
 
         return Inertia::render('Profile/Sejarah',[
