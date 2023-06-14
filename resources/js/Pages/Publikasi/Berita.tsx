@@ -3,15 +3,22 @@ import Navbar from "@/Components/Navbar";
 import ReadArticle from "@/Components/ReadArticle";
 import { Head } from "@inertiajs/react";
 import { Flowbite } from "flowbite-react";
+import React from "react";
 
-export default function Berita() {
+interface Props {
+    domain: {
+        judul_website: string;
+    };
+}
+
+const Berita: React.FC<Props> = ({ domain }) => {
     return (
         <Flowbite>
             <Head title="Berita Kecamatan" />
-            <Navbar />
-
+            <Navbar data={domain.judul_website} />
             <ReadArticle />
-            <Footer />
+            <Footer data={domain.judul_website} />
         </Flowbite>
     );
-}
+};
+export default Berita;

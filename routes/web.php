@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Home;
+use App\Http\Controllers\Kontak_Kami;
 use App\Http\Controllers\Profile\AdatDanBudaya;
 use App\Http\Controllers\Profile\Kepegawaian;
 use App\Http\Controllers\Profile\Kependudukan;
@@ -49,7 +50,9 @@ Route::get('/profil/struktur_organisasi',[StrukturOrganisasi::class,'index'])->n
 Route::get('/profil/tupoksi',[Tupoksi::class,'index'])->name('tupoksi');
 Route::get('/profil/kepegawaian',[Kepegawaian::class,'index'])->name('kepegawaian');
 // Publikasi
-Route::get('/berita',[Berita::class,'index'])->name('berita');
+Route::get('/publikasi/berita',[Berita::class,'index'])->name('berita');
+// Kontak Kami
+Route::get('/kontak_kami',[Kontak_Kami::class,'index'])->name('kontak_kami');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

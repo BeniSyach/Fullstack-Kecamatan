@@ -112,7 +112,11 @@ const NavbarLandingPage: React.FC<ChildProps> = (props) => {
                         </Dropdown.Item>
                     </Link>
                 </Dropdown>
-                <Link href={route("home")} as="div" className=" cursor-pointer">
+                <Link
+                    href={route("kontak_kami")}
+                    as="div"
+                    className=" cursor-pointer"
+                >
                     <Navbar.Link>
                         <p>Kontak</p>
                     </Navbar.Link>
