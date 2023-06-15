@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tb_tupoksi', function (Blueprint $table) {
             $table->id('idTupoksi');
             $table->string('kode_kecamatan')->unique();
+            $table->foreign('kode_kecamatan')->references('kode_kecamatan')->on('tb_domain_kecamatan');
             $table->string('judul_tupoksi');
             $table->string('deskripsi_tupoksi');
             $table->text('isi_tupoksi');

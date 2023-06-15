@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tb_struktur_organisasi', function (Blueprint $table) {
             $table->id('idStrukturOrganisasi');
             $table->string('kode_kecamatan')->unique();
+            $table->foreign('kode_kecamatan')->references('kode_kecamatan')->on('tb_domain_kecamatan');
             $table->string('judul_struktur_organisasi');
             $table->string('deskripsi_struktur_organisasi');
             $table->text('isi_struktur_organisasi');

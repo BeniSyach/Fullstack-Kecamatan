@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tb_kepegawaian', function (Blueprint $table) {
             $table->id('idKepegawaian');
             $table->string('kode_kecamatan');
+            $table->foreign('kode_kecamatan')->references('kode_kecamatan')->on('tb_domain_kecamatan');
             $table->string('nama_pegawai');
             $table->string('gambar_pegawai')->nullable();
             $table->string('jabatan_pegawai');

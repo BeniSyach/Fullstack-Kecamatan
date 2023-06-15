@@ -26,14 +26,14 @@ const NavbarLandingPage: React.FC<ChildProps> = (props) => {
                 <DarkThemeToggle className="mx-2" />
             </div>
 
-            <Navbar.Collapse>
+            <Navbar.Collapse className="dark:text-white">
                 <Link href={route("home")} as="div" className=" cursor-pointer">
                     <Navbar.Link>
-                        <p>Home</p>
+                        <p className="dark:text-white">Home</p>
                     </Navbar.Link>
                 </Link>
 
-                <Dropdown inline label="Profil">
+                <Dropdown inline label="Profil" className="dark:text-white">
                     <Link href={route("sejarah")}>
                         <Dropdown.Item>Sejarah</Dropdown.Item>
                     </Link>
@@ -118,7 +118,7 @@ const NavbarLandingPage: React.FC<ChildProps> = (props) => {
                     className=" cursor-pointer"
                 >
                     <Navbar.Link>
-                        <p>Kontak</p>
+                        <p className="dark:text-white">Kontak</p>
                     </Navbar.Link>
                 </Link>
             </Navbar.Collapse>

@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tb_slider', function (Blueprint $table) {
-            $table->id('idSlider');
-            $table->string('kode_kecamatan');
-            $table->foreign('kode_kecamatan')->references('kode_kecamatan')->on('tb_domain_kecamatan');
-            $table->string('gambar_slider');
+        Schema::create('tb_kategori_berita', function (Blueprint $table) {
+            $table->id('idKategoriBerita');
+            $table->string('jenis_kategori_berita');
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tb_slider');
+        Schema::dropIfExists('tb_kategori_berita');
     }
 };

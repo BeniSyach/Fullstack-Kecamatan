@@ -23,7 +23,10 @@ class DatabaseSeeder extends Seeder
             data_tupoksi::class,
             data_kepegawaian::class,
             data_prestasi::class,
-            data_visi_dan_misi::class
+            data_kata_sambutan::class,
+            data_kategori_berita::class,
+            data_struktur_organisasi::class,
+            data_berita::class
         ]);
     }
 }

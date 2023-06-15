@@ -168,6 +168,13 @@ class data_domain_kecamatan extends Seeder
                 'created_at' => now(),
                 'updated_at' => now()
             ],
+            [
+                'domain_kecamatan' => 'localhost',
+                'kode_kecamatan' =>'000000',
+                'judul_website' => 'Web Kecamatan',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
         ]
     );
     }

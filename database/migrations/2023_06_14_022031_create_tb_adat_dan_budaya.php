@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tb_adat_dan_budaya', function (Blueprint $table) {
             $table->id('idAdatDanBudaya');
             $table->string('kode_kecamatan')->unique();
+            $table->foreign('kode_kecamatan')->references('kode_kecamatan')->on('tb_domain_kecamatan');
             $table->string('judul_adatDanBudaya');
             $table->string('deskripsi_adatDanBudaya');
             $table->text('isi_adatDanBudaya');
