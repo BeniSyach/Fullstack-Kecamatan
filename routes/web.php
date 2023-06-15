@@ -3,6 +3,7 @@
 use App\Http\Controllers\Home;
 use App\Http\Controllers\Kontak_Kami;
 use App\Http\Controllers\Profile\AdatDanBudaya;
+use App\Http\Controllers\Profile\KataSambutan;
 use App\Http\Controllers\Profile\Kepegawaian;
 use App\Http\Controllers\Profile\Kependudukan;
 use App\Http\Controllers\Profile\Letak_Geografis;
@@ -28,15 +29,6 @@ use Inertia\Inertia;
 |
 */
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
-
 Route::get('/', [Home::class,'index'])->name('home');
 
 // Profil
@@ -49,8 +41,13 @@ Route::get('/profil/prestasi',[Prestasi::class,'index'])->name('prestasi');
 Route::get('/profil/struktur_organisasi',[StrukturOrganisasi::class,'index'])->name('struktur_organisasi');
 Route::get('/profil/tupoksi',[Tupoksi::class,'index'])->name('tupoksi');
 Route::get('/profil/kepegawaian',[Kepegawaian::class,'index'])->name('kepegawaian');
+
+// kata Sambutan
+Route::get('/profil/kata_sambutan',[KataSambutan::class,'index'])->name('kata_sambutan');
+
 // Publikasi
 Route::get('/publikasi/berita',[Berita::class,'index'])->name('berita');
+
 // Kontak Kami
 Route::get('/kontak_kami',[Kontak_Kami::class,'index'])->name('kontak_kami');
 

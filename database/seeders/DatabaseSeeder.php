@@ -17,6 +17,12 @@ class DatabaseSeeder extends Seeder
             data_sejarah_kecamatan::class,
             data_letak_geografis::class,
             data_kependudukan::class,
+            data_visi_dan_misi::class,
+            data_slider::class,
+            data_adat_dan_budaya::class,
+            data_tupoksi::class,
+            data_kepegawaian::class,
+            data_prestasi::class,
             data_visi_dan_misi::class
         ]);
     }

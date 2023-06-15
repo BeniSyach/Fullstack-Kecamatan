@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tb_slider', function (Blueprint $table) {
-            $table->id();
+            $table->id('idSlider');
+            $table->string('kode_kecamatan');
+            $table->string('gambar_slider');
             $table->timestamps();
         });
     }

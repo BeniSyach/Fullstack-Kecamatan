@@ -137,7 +137,7 @@ const Kepegawaian: React.FC<Props> = ({
                         </div>
                     ) : (
                         <p className="bg-base-300 m-5 p-5 text-4xl font-bold ">
-                            Tidak Pegawai
+                            Tidak ada Pegawai
                         </p>
                     )}
                 </div>

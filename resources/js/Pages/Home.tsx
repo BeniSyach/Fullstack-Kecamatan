@@ -1,49 +1,88 @@
 import Letter from "@/Components/Letter";
 import Navbar from "@/Components/Navbar";
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import { Flowbite, Carousel } from "flowbite-react";
 import FooterLandingPage from "../Components/FooterLandingPage";
+
+interface MyInterface {
+    gambar_slider: string;
+}
 
 interface Props {
     domain: {
         judul_website: string;
     };
+    slider: MyInterface[];
+    kata_sambutan: {
+        nama_kepala_camat: string;
+        gambar_camat: string;
+        judul_kataSambutan: string;
+        isi_kataSambutan: string;
+        created_at: string;
+    };
 }
 
-const Home: React.FC<Props> = ({ domain }) => {
+const truncateText = (text: string, maxLength: number) => {
+    if (text.length <= maxLength) {
+        return text;
+    }
+    return text.substring(0, maxLength) + "...";
+};
+
+const Home: React.FC<Props> = ({ domain, slider, kata_sambutan }) => {
+    const isi_kata_sambutan = truncateText(kata_sambutan.isi_kataSambutan, 400);
+
     return (
         <Flowbite>
             <Head title={domain.judul_website} />
             <Navbar data={domain.judul_website} />
+            {/* carousel */}
             <div className="relative w-full z-0">
-                <Carousel slideInterval={5000} className=" h-56  md:h-96">
-                    <img
-                        alt="..."
-                        src="/assets/image/carousel/carousel-1.svg"
-                    />
-                    <img
-                        alt="..."
-                        src="/assets/image/carousel/carousel-1.svg"
-                    />
-                    <img
-                        alt="..."
-                        src="https://flowbite.com/docs/images/carousel/carousel-3.svg"
-                    />
-                    <img
-                        alt="..."
-                        src="https://flowbite.com/docs/images/carousel/carousel-4.svg"
-                    />
-                    <img
-                        alt="..."
-                        src="https://flowbite.com/docs/images/carousel/carousel-5.svg"
-                    />
-                </Carousel>
+                {slider && slider.length > 0 ? (
+                    <Carousel slideInterval={5000} className=" h-56  md:h-96">
+                        {slider.map((slider: MyInterface, k: number) => (
+                            <img
+                                key={k}
+                                alt="..."
+                                src={slider.gambar_slider}
+                                className="img-responsive"
+                            />
+                        ))}
+                    </Carousel>
+                ) : (
+                    <Carousel slideInterval={5000} className=" h-56  md:h-96">
+                        <img
+                            alt="..."
+                            src="/assets/image/carousel/carousel-1.svg"
+                        />
+                        <img
+                            alt="..."
+                            src="/assets/image/carousel/carousel-1.svg"
+                        />
+                        <img
+                            alt="..."
+                            src="https://flowbite.com/docs/images/carousel/carousel-3.svg"
+                        />
+                    </Carousel>
+                )}
             </div>
-
+            {/* sekarpur Sirih */}
             <div className="flex flex-row flex-wrap justify-center items-center m-5">
                 <a
                     href="#"
-                    className="m-2 block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                    className="m-2 text-center block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                >
+                    <h5 className=" mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        Noteworthy technology acquisitions 2021
+                    </h5>
+                    <p className=" font-normal text-gray-700 dark:text-gray-400">
+                        Here are the biggest enterprise technology acquisitions
+                        of 2021 so far, in reverse chronological order.
+                    </p>
+                </a>
+                <a
+                    href="#"
+                    className="m-2 text-center block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                 >
                     <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                         Noteworthy technology acquisitions 2021
@@ -55,7 +94,7 @@ const Home: React.FC<Props> = ({ domain }) => {
                 </a>
                 <a
                     href="#"
-                    className="m-2  block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                    className="m-2 text-center block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                 >
                     <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                         Noteworthy technology acquisitions 2021
@@ -65,49 +104,33 @@ const Home: React.FC<Props> = ({ domain }) => {
                         of 2021 so far, in reverse chronological order.
                     </p>
                 </a>
-                <a
-                    href="#"
-                    className="m-2 block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-                >
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        Noteworthy technology acquisitions 2021
-                    </h5>
-                    <p className="font-normal text-gray-700 dark:text-gray-400">
-                        Here are the biggest enterprise technology acquisitions
-                        of 2021 so far, in reverse chronological order.
-                    </p>
-                </a>
-            </div>
-            <div className="flex flex-row flex-wrap justify-center items-center">
-                <h1 className=" text-4xl font-bold">Kata Sambutan</h1>
             </div>
             {/* Kata Sambutan */}
+            <div className="flex flex-row flex-wrap justify-center items-center pt-11">
+                <h1 className=" text-4xl font-bold">Kata Sambutan</h1>
+            </div>
+
             <section className="bg-white dark:bg-gray-900">
                 <div className="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
                     <img
                         className="w-full dark:hidden"
-                        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/cta/cta-dashboard-mockup.svg"
-                        alt="dashboard image"
+                        src={kata_sambutan.gambar_camat}
+                        alt="Gambar Camat"
                     />
                     <img
                         className="w-full hidden dark:block"
-                        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/cta/cta-dashboard-mockup-dark.svg"
-                        alt="dashboard image"
+                        src={kata_sambutan.gambar_camat}
+                        alt="Gambar Camat"
                     />
                     <div className="mt-4 md:mt-0">
                         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-                            Let's create more tools and ideas that brings us
-                            together.
+                            {kata_sambutan.judul_kataSambutan}
                         </h2>
                         <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
-                            Flowbite helps you connect with friends and
-                            communities of people who share your interests.
-                            Connecting with your friends and family as well as
-                            discovering new ones is easy with features like
-                            Groups.
+                            {isi_kata_sambutan}
                         </p>
-                        <a
-                            href="#"
+                        <Link
+                            href={route("kata_sambutan")}
                             className="inline-flex items-center dark:text-white text-black bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900"
                         >
                             Baca Selanjutnya
@@ -123,436 +146,21 @@ const Home: React.FC<Props> = ({ domain }) => {
                                     clipRule="evenodd"
                                 ></path>
                             </svg>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </section>
             {/* Berita */}
-            <div className="flex flex-row flex-wrap justify-center items-center">
+            <div className="flex flex-row flex-wrap justify-center items-center pt-11">
                 <div>
                     <h1 className="text-4xl font-bold text-center">Berita</h1>
                     <p className="text-center">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Exercitationem, inventore!
+                        Temukan Berita Utama anda di Kecamatan{" "}
+                        {domain.judul_website}
                     </p>
                 </div>
             </div>
             <div className="flex flex-row flex-wrap justify-center items-center my-5">
-                <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-3">
-                    <a href="#">
-                        <img
-                            className="p-8 rounded-t-lg"
-                            src="/docs/images/products/apple-watch.png"
-                            alt="product image"
-                        />
-                    </a>
-                    <div className="px-5 pb-5">
-                        <a href="#">
-                            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                                Apple Watch Series 7 GPS, Aluminium Case,
-                                Starlight Sport
-                            </h5>
-                        </a>
-                        <div className="flex items-center mt-2.5 mb-5">
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>First star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Second star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Third star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Fourth star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Fifth star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
-                                5.0
-                            </span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                            <span className="text-3xl font-bold text-gray-900 dark:text-white">
-                                $599
-                            </span>
-                            <a
-                                href="#"
-                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                            >
-                                Add to cart
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-3">
-                    <a href="#">
-                        <img
-                            className="p-8 rounded-t-lg"
-                            src="/docs/images/products/apple-watch.png"
-                            alt="product image"
-                        />
-                    </a>
-                    <div className="px-5 pb-5">
-                        <a href="#">
-                            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                                Apple Watch Series 7 GPS, Aluminium Case,
-                                Starlight Sport
-                            </h5>
-                        </a>
-                        <div className="flex items-center mt-2.5 mb-5">
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>First star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Second star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Third star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Fourth star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Fifth star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
-                                5.0
-                            </span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                            <span className="text-3xl font-bold text-gray-900 dark:text-white">
-                                $599
-                            </span>
-                            <a
-                                href="#"
-                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                            >
-                                Add to cart
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-3">
-                    <a href="#">
-                        <img
-                            className="p-8 rounded-t-lg"
-                            src="/docs/images/products/apple-watch.png"
-                            alt="product image"
-                        />
-                    </a>
-                    <div className="px-5 pb-5">
-                        <a href="#">
-                            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                                Apple Watch Series 7 GPS, Aluminium Case,
-                                Starlight Sport
-                            </h5>
-                        </a>
-                        <div className="flex items-center mt-2.5 mb-5">
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>First star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Second star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Third star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Fourth star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Fifth star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
-                                5.0
-                            </span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                            <span className="text-3xl font-bold text-gray-900 dark:text-white">
-                                $599
-                            </span>
-                            <a
-                                href="#"
-                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                            >
-                                Add to cart
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-3">
-                    <a href="#">
-                        <img
-                            className="p-8 rounded-t-lg"
-                            src="/docs/images/products/apple-watch.png"
-                            alt="product image"
-                        />
-                    </a>
-                    <div className="px-5 pb-5">
-                        <a href="#">
-                            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                                Apple Watch Series 7 GPS, Aluminium Case,
-                                Starlight Sport
-                            </h5>
-                        </a>
-                        <div className="flex items-center mt-2.5 mb-5">
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>First star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Second star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Third star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Fourth star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Fifth star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
-                                5.0
-                            </span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                            <span className="text-3xl font-bold text-gray-900 dark:text-white">
-                                $599
-                            </span>
-                            <a
-                                href="#"
-                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                            >
-                                Add to cart
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-3">
-                    <a href="#">
-                        <img
-                            className="p-8 rounded-t-lg"
-                            src="/docs/images/products/apple-watch.png"
-                            alt="product image"
-                        />
-                    </a>
-                    <div className="px-5 pb-5">
-                        <a href="#">
-                            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                                Apple Watch Series 7 GPS, Aluminium Case,
-                                Starlight Sport
-                            </h5>
-                        </a>
-                        <div className="flex items-center mt-2.5 mb-5">
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>First star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Second star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Third star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Fourth star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Fifth star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
-                                5.0
-                            </span>
-                        </div>
-                        <div className="flex items-center justify-between">
-                            <span className="text-3xl font-bold text-gray-900 dark:text-white">
-                                $599
-                            </span>
-                            <a
-                                href="#"
-                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                            >
-                                Add to cart
-                            </a>
-                        </div>
-                    </div>
-                </div>
                 <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-3">
                     <a href="#">
                         <img
@@ -642,12 +250,12 @@ const Home: React.FC<Props> = ({ domain }) => {
                 <div className="py-8 px-4 mx-auto items-center max-w-screen-xl sm:py-16 lg:px-6">
                     <div className=" mb-8 lg:mb-16">
                         <h2 className="text-center mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
-                            Designed for business teams like yours
+                            Data Statistik Kecamatan {domain.judul_website}
                         </h2>
                         <p className="text-center text-gray-500 sm:text-xl dark:text-gray-400">
-                            Here at Flowbite we focus on markets where
-                            technology, innovation, and capital can unlock
-                            long-term value and drive economic growth.
+                            Temukan Data Wilayah, Penduduk, Sosial, atau lebih
+                            banyak di Halaman Statistik Kecamatan{" "}
+                            {domain.judul_website}
                         </p>
                     </div>
                     <div className="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
@@ -667,13 +275,11 @@ const Home: React.FC<Props> = ({ domain }) => {
                                 </svg>
                             </div>
                             <h3 className="mb-2 text-xl font-bold dark:text-white">
-                                Marketing
+                                Menurut Wilayah Administratif
                             </h3>
                             <p className="text-gray-500 dark:text-gray-400">
-                                Plan it, create it, launch it. Collaborate
-                                seamlessly with all the organization and hit
-                                your marketing goals every month with our
-                                marketing plan.
+                                Data wilayah administratif merupakan data warga
+                                berdasarkan wilayah
                             </p>
                         </div>
                         <div>
@@ -688,12 +294,11 @@ const Home: React.FC<Props> = ({ domain }) => {
                                 </svg>
                             </div>
                             <h3 className="mb-2 text-xl font-bold dark:text-white">
-                                Legal
+                                Menurut Pendidikan
                             </h3>
                             <p className="text-gray-500 dark:text-gray-400">
-                                Protect your organization, devices and stay
-                                compliant with our structured workflows and
-                                custom permissions made for you.
+                                Data Pendidikan merupakan data warga berdasarkan
+                                jenjang pendidikan yang ditempuh
                             </p>
                         </div>
                         <div>
@@ -713,12 +318,11 @@ const Home: React.FC<Props> = ({ domain }) => {
                                 </svg>
                             </div>
                             <h3 className="mb-2 text-xl font-bold dark:text-white">
-                                Business Automation
+                                Menurut Jenis Kelamin
                             </h3>
                             <p className="text-gray-500 dark:text-gray-400">
-                                Auto-assign tasks, send Slack messages, and much
-                                more. Now power up with hundreds of new
-                                templates to help you get started.
+                                Data jenis kelamin merupakan data warga desa
+                                berdasarkan jenis kelamin
                             </p>
                         </div>
                         <div>
@@ -738,12 +342,11 @@ const Home: React.FC<Props> = ({ domain }) => {
                                 </svg>
                             </div>
                             <h3 className="mb-2 text-xl font-bold dark:text-white">
-                                Finance
+                                Menurut Pekerjaan
                             </h3>
                             <p className="text-gray-500 dark:text-gray-400">
-                                Audit-proof software built for critical
-                                financial operations like month-end close and
-                                quarterly budgeting.
+                                Data pekerjaan merupakan data pekerjaan dari
+                                setiap warga desa
                             </p>
                         </div>
                         <div>
@@ -758,12 +361,11 @@ const Home: React.FC<Props> = ({ domain }) => {
                                 </svg>
                             </div>
                             <h3 className="mb-2 text-xl font-bold dark:text-white">
-                                Enterprise Design
+                                Menurut Agama
                             </h3>
                             <p className="text-gray-500 dark:text-gray-400">
-                                Craft beautiful, delightful experiences for both
-                                marketing and product with real cross-company
-                                collaboration.
+                                Data Agama merupakan data Agama yang di percaya
+                                / dianut oleh warga desa
                             </p>
                         </div>
                         <div>
@@ -782,26 +384,25 @@ const Home: React.FC<Props> = ({ domain }) => {
                                 </svg>
                             </div>
                             <h3 className="mb-2 text-xl font-bold dark:text-white">
-                                Operations
+                                Menurut Umur
                             </h3>
                             <p className="text-gray-500 dark:text-gray-400">
-                                Keep your company’s lights on with customizable,
-                                iterative, and structured workflows built for
-                                all efficient teams and individual.
+                                Data Umur merupakan data warga desa berdasarkan
+                                rentang umur yang sudah di tentukan
                             </p>
                         </div>
                     </div>
                 </div>
             </section>
             {/* Galeri */}
-            <div className="flex flex-row flex-wrap justify-center items-center">
+            <div className="flex flex-row flex-wrap justify-center items-center pt-11">
                 <div>
                     <h1 className="text-4xl font-bold text-center">
                         Galeri Kegiatan
                     </h1>
                     <p className="text-center">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Exercitationem, inventore!
+                        Cari Tau Beragam Event Kekinian di{" "}
+                        {domain.judul_website}
                     </p>
                 </div>
             </div>
@@ -812,31 +413,19 @@ const Home: React.FC<Props> = ({ domain }) => {
                         type="button"
                         className="text-blue-700 hover:text-white border border-blue-600 bg-white hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full text-base font-medium px-5 py-2.5 text-center mr-3 mb-3 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:bg-gray-900 dark:focus:ring-blue-800"
                     >
-                        All categories
+                        Semua Kategori
                     </button>
                     <button
                         type="button"
                         className="text-gray-900 border border-white hover:border-gray-200 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-base font-medium px-5 py-2.5 text-center mr-3 mb-3 dark:text-white dark:focus:ring-gray-800"
                     >
-                        Shoes
+                        Foto
                     </button>
                     <button
                         type="button"
                         className="text-gray-900 border border-white hover:border-gray-200 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-base font-medium px-5 py-2.5 text-center mr-3 mb-3 dark:text-white dark:focus:ring-gray-800"
                     >
-                        Bags
-                    </button>
-                    <button
-                        type="button"
-                        className="text-gray-900 border border-white hover:border-gray-200 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-base font-medium px-5 py-2.5 text-center mr-3 mb-3 dark:text-white dark:focus:ring-gray-800"
-                    >
-                        Electronics
-                    </button>
-                    <button
-                        type="button"
-                        className="text-gray-900 border border-white hover:border-gray-200 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-base font-medium px-5 py-2.5 text-center mr-3 mb-3 dark:text-white dark:focus:ring-gray-800"
-                    >
-                        Gaming
+                        Video
                     </button>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-5">
@@ -847,69 +436,13 @@ const Home: React.FC<Props> = ({ domain }) => {
                             alt=""
                         />
                     </div>
-                    <div>
-                        <img
-                            className="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg"
-                            alt=""
-                        />
-                    </div>
-                    <div>
-                        <img
-                            className="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg"
-                            alt=""
-                        />
-                    </div>
-                    <div>
-                        <img
-                            className="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg"
-                            alt=""
-                        />
-                    </div>
-                    <div>
-                        <img
-                            className="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg"
-                            alt=""
-                        />
-                    </div>
-                    <div>
-                        <img
-                            className="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg"
-                            alt=""
-                        />
-                    </div>
-                    <div>
-                        <img
-                            className="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-6.jpg"
-                            alt=""
-                        />
-                    </div>
-                    <div>
-                        <img
-                            className="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-7.jpg"
-                            alt=""
-                        />
-                    </div>
-                    <div>
-                        <img
-                            className="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-8.jpg"
-                            alt=""
-                        />
-                    </div>
                 </div>
             </div>
             <Letter />
             <section className="bg-white dark:bg-gray-900">
                 <div className="py-8 lg:py-16 mx-auto max-w-screen-xl px-4">
                     <h2 className="mb-8 lg:mb-16 text-3xl font-extrabold tracking-tight leading-tight text-center text-gray-900 dark:text-white md:text-4xl">
-                        You’ll be in good company
+                        Dinas Yang Bekerjasama
                     </h2>
                     <div className="grid grid-cols-2 gap-8 text-gray-500 sm:gap-12 md:grid-cols-3 lg:grid-cols-6 dark:text-gray-400">
                         <a

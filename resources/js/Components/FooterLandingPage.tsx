@@ -74,7 +74,6 @@ const FooterLandingPage: React.FC<ChildProps> = (props) => {
                         <Footer.Icon href="#" icon={BsFacebook} />
                         <Footer.Icon href="#" icon={BsInstagram} />
                         <Footer.Icon href="#" icon={BsTwitter} />
-                        <Footer.Icon href="#" icon={BsGithub} />
                     </div>
                 </div>
             </div>
