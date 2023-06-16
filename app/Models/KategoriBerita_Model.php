@@ -13,4 +13,9 @@ class KategoriBerita_Model extends Model
     protected $primaryKey = 'idKategoriBerita';
     const CREATED_AT = 'creation_date';
     const UPDATED_AT = 'updated_date';
+
+    public function kategori_berita()
+    {
+        return $this->hasMany(Berita_Model::class);
+    }
 }

@@ -42,4 +42,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function penulis_berita()
+    {
+        return $this->hasMany(Berita_Model::class);
+    }
 }

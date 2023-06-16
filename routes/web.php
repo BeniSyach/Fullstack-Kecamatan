@@ -47,6 +47,7 @@ Route::get('/profil/kata_sambutan',[KataSambutan::class,'index'])->name('kata_sa
 
 // Publikasi
 Route::get('/publikasi/berita',[Berita::class,'index'])->name('berita');
+Route::get('/publikasi/berita/{slug}',[Berita::class,'detailBerita'])->name('detailBerita');
 
 // Kontak Kami
 Route::get('/kontak_kami',[Kontak_Kami::class,'index'])->name('kontak_kami');
