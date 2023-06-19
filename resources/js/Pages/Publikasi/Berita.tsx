@@ -30,7 +30,7 @@ const Berita: React.FC<Props> = ({ domain, berita, kategori_berita }) => {
             <Head title="Berita Kecamatan" />
             <Navbar data={domain.judul_website} />
             <KategoriBerita data={kategori_berita} />
-            <ReadArticle data_berita={berita} />
+            <ReadArticle data={berita} />
             <Footer data={domain.judul_website} />
         </Flowbite>
     );

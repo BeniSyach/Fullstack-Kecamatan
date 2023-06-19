@@ -14,7 +14,7 @@ interface childProps {
 }
 
 interface Props {
-    data_berita: {
+    data: {
         data: childProps[];
     };
 }
@@ -26,7 +26,7 @@ const truncateText = (text: string, maxlength: number) => {
     return text.substring(0, maxlength) + "....";
 };
 
-const ReadArticle: React.FC<Props> = ({ data_berita }) => {
+const ReadArticle: React.FC<Props> = ({ data }) => {
     return (
         <section className="py-4 lg:py-10 bg-gray-50 dark:bg-gray-800">
             <div className="px-4 mx-auto max-w-screen-xl ">
@@ -34,9 +34,9 @@ const ReadArticle: React.FC<Props> = ({ data_berita }) => {
                     Berita Terbaru
                 </h2>
 
-                {data_berita && data_berita.data.length > 0 ? (
+                {data && data.data.length > 0 ? (
                     <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
-                        {data_berita.data.map((data: childProps, k: number) => (
+                        {data.data.map((data: childProps, k: number) => (
                             <Link
                                 key={k}
                                 as="div"

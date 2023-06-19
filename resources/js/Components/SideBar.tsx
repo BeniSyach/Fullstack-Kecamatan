@@ -21,8 +21,11 @@ import {
     FaHiking,
 } from "react-icons/fa";
 import { Link } from "@inertiajs/react";
+import { IconType } from "react-icons";
 
-export default function SideBar() {
+type Props = {};
+
+const SideBar: React.FC<Props> = () => {
     return (
         <Sidebar
             aria-label="Sidebar with multi-level dropdown example"
@@ -69,8 +72,7 @@ export default function SideBar() {
                         </Sidebar.Item>
                     </Link>
                     <Link
-                        href={route("logout")}
-                        method="post"
+                        href={route("listKecamatan")}
                         as="div"
                         className=" cursor-pointer"
                     >
@@ -79,8 +81,7 @@ export default function SideBar() {
                         </Sidebar.Item>
                     </Link>
                     <Link
-                        href={route("logout")}
-                        method="post"
+                        href={route("listUser")}
                         as="div"
                         className=" cursor-pointer"
                     >
@@ -89,9 +90,15 @@ export default function SideBar() {
                         </Sidebar.Item>
                     </Link>
                     <Sidebar.Collapse label="Halaman Depan" icon={FaRegEdit}>
-                        <Sidebar.Item icon={FaImages} href="#">
-                            Gambar Slider
-                        </Sidebar.Item>
+                        <Link
+                            href={route("listSlider")}
+                            as="div"
+                            className=" cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaImages}>
+                                Gambar Slider
+                            </Sidebar.Item>
+                        </Link>
                         <Sidebar.Item icon={FaImages} href="#">
                             Gambar Slider
                         </Sidebar.Item>
@@ -183,4 +190,5 @@ export default function SideBar() {
             </Sidebar.Items>
         </Sidebar>
     );
-}
+};
+export default SideBar;

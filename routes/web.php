@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\ListKecamatan;
+use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\Kontak_Kami;
 use App\Http\Controllers\Profile\AdatDanBudaya;
@@ -68,6 +71,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // list Kecamatan
+    Route::get('/list_kecamatan',[ListKecamatan::class,'index'])->name('listKecamatan');
+
+    // list User
+    Route::get('/list_user', [UsersController::class,'index'])->name('listUser');
+
+    // list Slider
+    Route::get('/slider',[SliderController::class,'index'])->name('listSlider');
 });
 
 require __DIR__.'/auth.php';
