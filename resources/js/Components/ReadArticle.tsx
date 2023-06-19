@@ -1,4 +1,6 @@
 import { Link } from "@inertiajs/react";
+import { format, parseISO } from "date-fns";
+import { id } from "date-fns/locale";
 import React from "react";
 
 interface childProps {
@@ -12,7 +14,9 @@ interface childProps {
 }
 
 interface Props {
-    data: childProps[];
+    data: {
+        data: childProps[];
+    };
 }
 
 const truncateText = (text: string, maxlength: number) => {
@@ -27,12 +31,12 @@ const ReadArticle: React.FC<Props> = ({ data }) => {
         <section className="py-4 lg:py-10 bg-gray-50 dark:bg-gray-800">
             <div className="px-4 mx-auto max-w-screen-xl ">
                 <h2 className="mb-8 text-2xl font-bold text-gray-900 dark:text-white">
-                    Berita Terbaru
+                    Berita Terbaru 
                 </h2>
 
-                {data && data.length > 0 ? (
+                {data && data.data.length > 0 ? (
                     <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
-                        {data.map((data, k) => (
+                        {data.data.map((data: childProps, k: number) => (
                             <Link
                                 key={k}
                                 as="div"
@@ -56,7 +60,11 @@ const ReadArticle: React.FC<Props> = ({ data }) => {
                                         {data.name}
                                     </p>
                                     <p className="mb-1 text-sm inline-flex items-center font-thin text-primary-600 dark:text-primary-500 ">
-                                        {data.created_at}
+                                        {format(
+                                            parseISO(data.created_at),
+                                            "dd MMMM yyyy",
+                                            { locale: id }
+                                        )}
                                     </p>
                                     <p className="mb-4 font-light text-gray-500 dark:text-gray-400">
                                         {truncateText(data.isi_berita, 100)}

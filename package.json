@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "apexcharts": "^3.40.0",
+        "date-fns": "^2.30.0",
         "flowbite": "^1.6.5",
         "flowbite-react": "^0.4.6",
         "react-apexcharts": "^1.4.0",

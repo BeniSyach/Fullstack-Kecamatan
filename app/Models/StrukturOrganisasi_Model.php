@@ -11,6 +11,6 @@ class StrukturOrganisasi_Model extends Model
 
     protected $table = 'tb_struktur_organisasi';
     protected $primaryKey = 'idStrukturOrganisasi';
-    const CREATED_AT = 'creation_date';
-    const UPDATED_AT = 'updated_date';
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
 }

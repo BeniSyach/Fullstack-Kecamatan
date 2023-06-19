@@ -11,6 +11,6 @@ class VisiDanMisi_Model extends Model
 
     protected $table = 'tb_visi_dan_misi';
     protected $primaryKey = 'id_VisiDanMisi';
-    const CREATED_AT = 'creation_date';
-    const UPDATED_AT = 'updated_date';
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
 }

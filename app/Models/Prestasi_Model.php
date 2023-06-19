@@ -11,6 +11,6 @@ class Prestasi_Model extends Model
 
     protected $table = 'tb_prestasi';
     protected $primaryKey = 'idPrestasi';
-    const CREATED_AT = 'creation_date';
-    const UPDATED_AT = 'updated_date';
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
 }

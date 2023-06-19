@@ -2,6 +2,7 @@ import FooterLandingPage from "@/Components/FooterLandingPage";
 import KategoriBerita from "@/Components/KategoriBerita";
 import Letter from "@/Components/Letter";
 import NavbarLandingPage from "@/Components/Navbar";
+import ReadArticle from "@/Components/ReadArticle";
 import { Head } from "@inertiajs/react";
 import { Breadcrumb, Flowbite } from "flowbite-react";
 
@@ -28,12 +29,17 @@ interface Props {
         name: string;
         created_at: string;
     };
+    detail_berita: childPorps[];
     kategori_berita: childPorps[];
 }
 
-const DetailBerita: React.FC<Props> = ({ domain, berita, kategori_berita }) => {
+const DetailBerita: React.FC<Props> = ({
+    domain,
+    berita,
+    kategori_berita,
+    detail_berita,
+}) => {
     const pathname = window.location.pathname;
-
     return (
         <Flowbite>
             <Head title="Detail Berita" />
@@ -89,7 +95,14 @@ const DetailBerita: React.FC<Props> = ({ domain, berita, kategori_berita }) => {
                                     <h1 className="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
                                         {berita.judul_berita}
                                     </h1>
+                                    <figure>
+                                        <img
+                                            src={berita.gambar_berita}
+                                            alt=""
+                                        />
+                                    </figure>
                                 </header>
+
                                 <div
                                     dangerouslySetInnerHTML={{
                                         __html: berita.isi_berita,
@@ -310,7 +323,7 @@ const DetailBerita: React.FC<Props> = ({ domain, berita, kategori_berita }) => {
                     </div>
                 </div>
             </div>
-
+            <ReadArticle data={detail_berita} />
             <Letter />
             <FooterLandingPage data={domain.judul_website} />
         </Flowbite>

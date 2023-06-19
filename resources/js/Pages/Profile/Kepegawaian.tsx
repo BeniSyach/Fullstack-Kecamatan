@@ -43,7 +43,7 @@ const Kepegawaian: React.FC<Props> = ({
     Deskripsi,
 }) => {
     const pathname = window.location.pathname;
-    console.log(pegawai);
+
     return (
         <Flowbite>
             <Head title={judul} />

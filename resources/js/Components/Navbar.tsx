@@ -66,16 +66,16 @@ const NavbarLandingPage: React.FC<ChildProps> = (props) => {
                     <Link href={route("berita")}>
                         <Dropdown.Item>Berita</Dropdown.Item>
                     </Link>
-                    <Link href={route("berita")}>
+                    <Link href={route("videoKegiatan")}>
                         <Dropdown.Item>Video Kegiatan</Dropdown.Item>
                     </Link>
-                    <Link href={route("berita")}>
+                    <Link href={route("fotoKegiatan")}>
                         <Dropdown.Item>Foto Kegiatan</Dropdown.Item>
                     </Link>
-                    <Link href={route("berita")}>
+                    <Link href={route("wisata")}>
                         <Dropdown.Item>Wisata</Dropdown.Item>
                     </Link>
-                    <Link href={route("berita")}>
+                    <Link href={route("agenda")}>
                         <Dropdown.Item>Agenda</Dropdown.Item>
                     </Link>
                 </Dropdown>

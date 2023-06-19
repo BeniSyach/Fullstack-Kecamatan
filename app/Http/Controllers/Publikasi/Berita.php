@@ -19,7 +19,7 @@ class Berita extends Controller
         // get kode Kecamatan
         $get_kd_kecamatan = $domain['kode_kecamatan']; 
         // ambil data berita menurut kode kecamatannya
-        $berita = Berita_Model::join('tb_kategori_berita','tb_berita.kategori_berita_id','=','tb_kategori_berita.idKategoriBerita')->join('users','tb_berita.penulis_berita','=','users.id')->select('tb_berita.*','tb_kategori_berita.jenis_kategori_berita','users.name')->where('tb_berita.kode_kecamatan',$get_kd_kecamatan)->get();    
+        $berita = Berita_Model::join('tb_kategori_berita','tb_berita.kategori_berita_id','=','tb_kategori_berita.idKategoriBerita')->join('users','tb_berita.penulis_berita','=','users.id')->select('tb_berita.*','tb_kategori_berita.jenis_kategori_berita','users.name')->where('tb_berita.kode_kecamatan',$get_kd_kecamatan)->latest()->paginate(4);    
         $kategori_berita = KategoriBerita_Model::select('*')->get();
 
         return Inertia::render('Publikasi/Berita',[
@@ -36,14 +36,17 @@ class Berita extends Controller
         $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
         // get kode Kecamatan
         $get_kd_kecamatan = $domain['kode_kecamatan']; 
-        // ambil data berita menurut kode kecamatannya
+        // ambil detail data berita menurut kode kecamatannya
         $berita = Berita_Model::join('tb_kategori_berita','tb_berita.kategori_berita_id','=','tb_kategori_berita.idKategoriBerita')->join('users','tb_berita.penulis_berita','=','users.id')->select('tb_berita.*','tb_kategori_berita.jenis_kategori_berita','users.name')->where('tb_berita.kode_kecamatan',$get_kd_kecamatan)->where('tb_berita.slug_berita',$slug)->first();    
+        // ambil data berita menurut kode kecamatannya
+        $get_berita = Berita_Model::join('tb_kategori_berita','tb_berita.kategori_berita_id','=','tb_kategori_berita.idKategoriBerita')->join('users','tb_berita.penulis_berita','=','users.id')->select('tb_berita.*','tb_kategori_berita.jenis_kategori_berita','users.name')->where('tb_berita.kode_kecamatan',$get_kd_kecamatan)->paginate(4);          
         $kategori_berita = KategoriBerita_Model::select('*')->get();
 
         return Inertia::render('Publikasi/Detail/DetailBerita',[
             'judul'=>'Berita',
             'domain' => $domain,
             'berita' => $berita,
+            'detail_berita' =>$get_berita,
             'kategori_berita' =>$kategori_berita
         ]); 
     }

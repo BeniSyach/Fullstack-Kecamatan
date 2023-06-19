@@ -11,8 +11,8 @@ class Berita_Model extends Model
 
     protected $table = 'tb_berita';
     protected $primaryKey = 'idBerita';
-    const CREATED_AT = 'creation_date';
-    const UPDATED_AT = 'updated_date';
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
 
     public function get_kategori_berita()
     {

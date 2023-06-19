@@ -11,6 +11,6 @@ class Adat_dan_budaya_Model extends Model
 
     protected $table = 'tb_adat_dan_budaya';
     protected $primaryKey = 'idAdatDanBudaya';
-    const CREATED_AT = 'creation_date';
-    const UPDATED_AT = 'updated_date';
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
 }

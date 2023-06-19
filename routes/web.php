@@ -13,7 +13,11 @@ use App\Http\Controllers\Profile\StrukturOrganisasi;
 use App\Http\Controllers\Profile\Tupoksi;
 use App\Http\Controllers\Profile\VisiDanMisi;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Publikasi\Agenda;
 use App\Http\Controllers\Publikasi\Berita;
+use App\Http\Controllers\Publikasi\FotoKegiatan;
+use App\Http\Controllers\Publikasi\VideoKegiatan;
+use App\Http\Controllers\Publikasi\Wisata;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -48,6 +52,10 @@ Route::get('/profil/kata_sambutan',[KataSambutan::class,'index'])->name('kata_sa
 // Publikasi
 Route::get('/publikasi/berita',[Berita::class,'index'])->name('berita');
 Route::get('/publikasi/berita/{slug}',[Berita::class,'detailBerita'])->name('detailBerita');
+Route::get('/publikasi/video_kegiatan',[VideoKegiatan::class,'index'])->name('videoKegiatan');
+Route::get('/publikasi/foto_kegiatan',[FotoKegiatan::class,'index'])->name('fotoKegiatan');
+Route::get('/publikasi/wisata',[Wisata::class,'index'])->name('wisata');
+Route::get('/publikasi/agenda',[Agenda::class,'index'])->name('agenda');
 
 // Kontak Kami
 Route::get('/kontak_kami',[Kontak_Kami::class,'index'])->name('kontak_kami');
