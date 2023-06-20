@@ -99,15 +99,6 @@ const SideBar: React.FC<Props> = () => {
                                 Gambar Slider
                             </Sidebar.Item>
                         </Link>
-                        <Sidebar.Item icon={FaImages} href="#">
-                            Gambar Slider
-                        </Sidebar.Item>
-                        <Sidebar.Item icon={FaImages} href="#">
-                            Gambar Slider
-                        </Sidebar.Item>
-                        <Sidebar.Item icon={FaImages} href="#">
-                            Gambar Slider
-                        </Sidebar.Item>
                     </Sidebar.Collapse>
 
                     <Sidebar.Collapse label="Profil" icon={FaHome}>
@@ -120,12 +111,24 @@ const SideBar: React.FC<Props> = () => {
                                 Sejarah
                             </Sidebar.Item>
                         </Link>
-                        <Sidebar.Item icon={FaPeriscope} href="#">
-                            Letak Geografis
-                        </Sidebar.Item>
-                        <Sidebar.Item icon={FaPeopleArrows} href="#">
-                            Kependudukan
-                        </Sidebar.Item>
+                        <Link
+                            href={route("Adminletakgeografis")}
+                            as="div"
+                            className="cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaPeriscope} href="#">
+                                Letak Geografis
+                            </Sidebar.Item>
+                        </Link>
+                        <Link
+                            href={route("AdminKependudukan")}
+                            as="div"
+                            className="cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaPeopleArrows} href="#">
+                                Kependudukan
+                            </Sidebar.Item>
+                        </Link>
                         <Sidebar.Item icon={FaHiking} href="#">
                             Adat & Budaya
                         </Sidebar.Item>

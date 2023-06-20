@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\ListKecamatan;
+use App\Http\Controllers\Admin\Publikasi\AdminKependudukan;
+use App\Http\Controllers\Admin\Publikasi\AdminLetakGeografis;
 use App\Http\Controllers\Admin\Publikasi\AdminSejarah;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UsersController;
@@ -84,6 +86,8 @@ Route::middleware('auth')->group(function () {
 
     // Publikasi admin
     Route::get('/admin/sejarah',[AdminSejarah::class,'index'])->name('AdminSejarah');
+    Route::get('/admin/letak_geografis',[AdminLetakGeografis::class,'index'])->name('Adminletakgeografis');
+    Route::get('/admin/kependudukan',[AdminKependudukan::class,'index'])->name('AdminKependudukan');
 });
 
 require __DIR__.'/auth.php';
