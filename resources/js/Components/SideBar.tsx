@@ -116,7 +116,7 @@ const SideBar: React.FC<Props> = () => {
                             as="div"
                             className="cursor-pointer"
                         >
-                            <Sidebar.Item icon={FaPeriscope} href="#">
+                            <Sidebar.Item icon={FaPeriscope}>
                                 Letak Geografis
                             </Sidebar.Item>
                         </Link>
@@ -125,16 +125,28 @@ const SideBar: React.FC<Props> = () => {
                             as="div"
                             className="cursor-pointer"
                         >
-                            <Sidebar.Item icon={FaPeopleArrows} href="#">
+                            <Sidebar.Item icon={FaPeopleArrows}>
                                 Kependudukan
                             </Sidebar.Item>
                         </Link>
-                        <Sidebar.Item icon={FaHiking} href="#">
-                            Adat & Budaya
-                        </Sidebar.Item>
-                        <Sidebar.Item icon={FaInfoCircle} href="#">
-                            Visi & Misi
-                        </Sidebar.Item>
+                        <Link
+                            href={route("AdatDanBudaya")}
+                            as="div"
+                            className="cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaHiking}>
+                                Adat & Budaya
+                            </Sidebar.Item>
+                        </Link>
+                        <Link
+                            href={route("adminVisiDanMisi")}
+                            as="div"
+                            className="cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaInfoCircle}>
+                                Visi & Misi
+                            </Sidebar.Item>
+                        </Link>
                         <Sidebar.Item icon={FaImages} href="#">
                             Prestasi
                         </Sidebar.Item>

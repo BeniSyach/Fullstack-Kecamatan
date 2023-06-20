@@ -17,7 +17,8 @@ return new class extends Migration
             $table->foreign('kode_kecamatan')->references('kode_kecamatan')->on('tb_domain_kecamatan');
             $table->string('judul_VisiDanMisi');
             $table->string('deskripsi_VisiDanMisi');
-            $table->text('isi_VisiDanMisi');
+            $table->text('isi_Visi');
+            $table->text('isi_Misi');
             $table->timestamps();
         });
     }

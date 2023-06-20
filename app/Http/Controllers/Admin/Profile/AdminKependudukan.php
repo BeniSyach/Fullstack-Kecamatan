@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Publikasi;
+namespace App\Http\Controllers\Admin\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kecamatan;
@@ -28,7 +28,7 @@ class AdminKependudukan extends Controller
         return Inertia::render('Admin/Profile/Kependudukan',[
             'domain' => $domain,
             'status' => session('status'),
-            'getAllKecamatan' => $get_kependudukan
+            'getKependudukan' => $get_kependudukan
         ]);
     }
 }

@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\ListKecamatan;
-use App\Http\Controllers\Admin\Publikasi\AdminKependudukan;
-use App\Http\Controllers\Admin\Publikasi\AdminLetakGeografis;
-use App\Http\Controllers\Admin\Publikasi\AdminSejarah;
+use App\Http\Controllers\Admin\Profile\AdminAdatDanBudaya;
+use App\Http\Controllers\Admin\Profile\AdminKependudukan;
+use App\Http\Controllers\Admin\Profile\AdminLetakGeografis;
+use App\Http\Controllers\Admin\Profile\AdminSejarah;
+use App\Http\Controllers\Admin\Profile\AdminVisiDanMisi;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Home;
@@ -88,6 +90,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/sejarah',[AdminSejarah::class,'index'])->name('AdminSejarah');
     Route::get('/admin/letak_geografis',[AdminLetakGeografis::class,'index'])->name('Adminletakgeografis');
     Route::get('/admin/kependudukan',[AdminKependudukan::class,'index'])->name('AdminKependudukan');
+    Route::get('/admin/adatdanbudaya',[AdminAdatDanBudaya::class,'index'])->name('AdatDanBudaya');
+    Route::get('/admin/visi_dan_misi',[AdminVisiDanMisi::class,'index'])->name('adminVisiDanMisi');
 });
 
 require __DIR__.'/auth.php';

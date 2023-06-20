@@ -13,7 +13,8 @@ interface Props {
     VisiDanMisi: {
         judul_VisiDanMisi: string;
         deskripsi_VisiDanMisi: string;
-        isi_VisiDanMisi: string;
+        isi_Visi: string;
+        isi_Misi: string;
         created_at: string;
     };
 }
@@ -53,7 +54,12 @@ const VisiDanMisi: React.FC<Props> = ({ domain, VisiDanMisi }) => {
                                 </header>
                                 <div
                                     dangerouslySetInnerHTML={{
-                                        __html: VisiDanMisi.isi_VisiDanMisi,
+                                        __html: VisiDanMisi.isi_Visi,
+                                    }}
+                                />
+                                <div
+                                    dangerouslySetInnerHTML={{
+                                        __html: VisiDanMisi.isi_Misi,
                                     }}
                                 />
                             </article>

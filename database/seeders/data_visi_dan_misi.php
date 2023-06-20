@@ -18,7 +18,8 @@ class data_visi_dan_misi extends Seeder
                 'kode_kecamatan' => '000000',
                 'judul_VisiDanMisi' => 'Visi & Misi Web Kecamatan',
                 'deskripsi_VisiDanMisi' => 'ini adalah data Visi & Misi di web Kecamatan',
-                'isi_VisiDanMisi' => '<p>Web Kecamatan Ini Menggunakan Teknologi</p> <br> <h2> PHP,JS,React js,TypeScript, dan dibungkus Menggunakan framework Laravel versi 10 </h2>',
+                'isi_Visi' => '<p>Web Kecamatan Ini Menggunakan Teknologi</p> <br> <h2> PHP,JS,React js,TypeScript, dan dibungkus Menggunakan framework Laravel versi 10 </h2>',
+                'isi_Misi' => '<p>Web Kecamatan Ini Menggunakan Teknologi</p> <br> <h2> PHP,JS,React js,TypeScript, dan dibungkus Menggunakan framework Laravel versi 10 </h2>',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -27,6 +28,7 @@ class data_visi_dan_misi extends Seeder
                 'judul_VisiDanMisi' => 'Visi & Misi Web Kecamatan Bangun Purba',
                 'deskripsi_VisiDanMisi' => 'ini adalah data Visi & Misi di web Kecamatan Bangun Purba',
                 'isi_VisiDanMisi' => '<p>Web Kecamatan Ini Menggunakan Teknologi</p> <br> <h2> PHP,JS,React js,TypeScript, dan dibungkus Menggunakan framework Laravel versi 10 </h2>',
+                'isi_Misi' => '<p>Web Kecamatan Ini Menggunakan Teknologi</p> <br> <h2> PHP,JS,React js,TypeScript, dan dibungkus Menggunakan framework Laravel versi 10 </h2>',
                 'created_at' => now(),
                 'updated_at' => now()
             ],

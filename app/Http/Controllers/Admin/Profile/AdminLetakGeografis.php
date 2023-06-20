@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Publikasi;
+namespace App\Http\Controllers\Admin\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Models\Kecamatan;
 use App\Models\LetakGeografis_Model;
-use App\Models\Sejarah_Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Inertia\Inertia;
@@ -27,7 +26,7 @@ class AdminLetakGeografis extends Controller
         return Inertia::render('Admin/Profile/LetakGeografis',[
             'domain' => $domain,
             'status' => session('status'),
-            'getAllKecamatan' => $get_letak_geografis
+            'getLetakGeografis' => $get_letak_geografis
         ]);
     }
 }
