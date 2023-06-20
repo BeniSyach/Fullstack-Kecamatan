@@ -4,7 +4,9 @@ use App\Http\Controllers\Admin\ListKecamatan;
 use App\Http\Controllers\Admin\Profile\AdminAdatDanBudaya;
 use App\Http\Controllers\Admin\Profile\AdminKependudukan;
 use App\Http\Controllers\Admin\Profile\AdminLetakGeografis;
+use App\Http\Controllers\Admin\Profile\AdminPrestasi;
 use App\Http\Controllers\Admin\Profile\AdminSejarah;
+use App\Http\Controllers\Admin\Profile\AdminStrukturOrganisasi;
 use App\Http\Controllers\Admin\Profile\AdminVisiDanMisi;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UsersController;
@@ -92,6 +94,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/kependudukan',[AdminKependudukan::class,'index'])->name('AdminKependudukan');
     Route::get('/admin/adatdanbudaya',[AdminAdatDanBudaya::class,'index'])->name('AdatDanBudaya');
     Route::get('/admin/visi_dan_misi',[AdminVisiDanMisi::class,'index'])->name('adminVisiDanMisi');
+    Route::get('/admin/prestasi',[AdminPrestasi::class,'index'])->name('AdminPrestasi');
+    Route::get('/admin/struktur_organisasi',[AdminStrukturOrganisasi::class,'index'])->name('AdminStrukturOrganisasi');
 });
 
 require __DIR__.'/auth.php';

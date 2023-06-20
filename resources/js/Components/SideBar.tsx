@@ -147,12 +147,24 @@ const SideBar: React.FC<Props> = () => {
                                 Visi & Misi
                             </Sidebar.Item>
                         </Link>
-                        <Sidebar.Item icon={FaImages} href="#">
-                            Prestasi
-                        </Sidebar.Item>
-                        <Sidebar.Item icon={FaImages} href="#">
-                            Struktur Organisasi
-                        </Sidebar.Item>
+                        <Link
+                            href={route("AdminPrestasi")}
+                            as="div"
+                            className="cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaImages}>
+                                Prestasi
+                            </Sidebar.Item>
+                        </Link>
+                        <Link
+                            href={route("AdminStrukturOrganisasi")}
+                            as="div"
+                            className="cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaImages}>
+                                Struktur Organisasi
+                            </Sidebar.Item>
+                        </Link>
                         <Sidebar.Item icon={FaImages} href="#">
                             Tupoksi
                         </Sidebar.Item>
