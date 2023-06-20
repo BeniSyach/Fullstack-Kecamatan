@@ -126,8 +126,7 @@ export default function Authenticated({
                             <Link href={route("profile.edit")}>
                                 <Dropdown.Item>Pengaturan Profil</Dropdown.Item>
                             </Link>
-                            <Dropdown.Item>Earnings</Dropdown.Item>
-                            <Dropdown.Divider />
+
                             <Link
                                 href={route("logout")}
                                 method="post"

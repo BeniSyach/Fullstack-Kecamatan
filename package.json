@@ -25,6 +25,8 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^38.0.1",
+        "@ckeditor/ckeditor5-react": "^6.0.0",
         "apexcharts": "^3.40.0",
         "date-fns": "^2.30.0",
         "flowbite": "^1.6.5",

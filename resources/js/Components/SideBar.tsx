@@ -111,9 +111,15 @@ const SideBar: React.FC<Props> = () => {
                     </Sidebar.Collapse>
 
                     <Sidebar.Collapse label="Profil" icon={FaHome}>
-                        <Sidebar.Item icon={FaImages} href="#">
-                            Sejarah
-                        </Sidebar.Item>
+                        <Link
+                            href={route("AdminSejarah")}
+                            as="div"
+                            className="cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaImages} href="#">
+                                Sejarah
+                            </Sidebar.Item>
+                        </Link>
                         <Sidebar.Item icon={FaPeriscope} href="#">
                             Letak Geografis
                         </Sidebar.Item>

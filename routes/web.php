@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ListKecamatan;
+use App\Http\Controllers\Admin\Publikasi\AdminSejarah;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Home;
@@ -73,13 +74,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // list Kecamatan
-    Route::get('/list_kecamatan',[ListKecamatan::class,'index'])->name('listKecamatan');
+    Route::get('/admin/list_kecamatan',[ListKecamatan::class,'index'])->name('listKecamatan');
 
     // list User
-    Route::get('/list_user', [UsersController::class,'index'])->name('listUser');
+    Route::get('/admin/list_user', [UsersController::class,'index'])->name('listUser');
 
     // list Slider
-    Route::get('/slider',[SliderController::class,'index'])->name('listSlider');
+    Route::get('/admin/slider',[SliderController::class,'index'])->name('listSlider');
+
+    // Publikasi admin
+    Route::get('/admin/sejarah',[AdminSejarah::class,'index'])->name('AdminSejarah');
 });
 
 require __DIR__.'/auth.php';
