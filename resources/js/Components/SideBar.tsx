@@ -99,6 +99,15 @@ const SideBar: React.FC<Props> = () => {
                                 Gambar Slider
                             </Sidebar.Item>
                         </Link>
+                        <Link
+                            href={route("AdminKataSambutan")}
+                            as="div"
+                            className=" cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaImages}>
+                                Kata Sambutan
+                            </Sidebar.Item>
+                        </Link>
                     </Sidebar.Collapse>
 
                     <Sidebar.Collapse label="Profil" icon={FaHome}>
@@ -165,12 +174,22 @@ const SideBar: React.FC<Props> = () => {
                                 Struktur Organisasi
                             </Sidebar.Item>
                         </Link>
-                        <Sidebar.Item icon={FaImages} href="#">
-                            Tupoksi
-                        </Sidebar.Item>
-                        <Sidebar.Item icon={FaImages} href="#">
-                            Kepegawaian
-                        </Sidebar.Item>
+                        <Link
+                            href={route("adminTupoksi")}
+                            as="div"
+                            className="cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaImages}>Tupoksi</Sidebar.Item>
+                        </Link>
+                        <Link
+                            href={route("AdminKepegawaian")}
+                            as="div"
+                            className="cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaImages}>
+                                Kepegawaian
+                            </Sidebar.Item>
+                        </Link>
                     </Sidebar.Collapse>
                     <Sidebar.Collapse label="Publikasi" icon={FaNewspaper}>
                         <Sidebar.Item icon={FaRegNewspaper} href="#">
