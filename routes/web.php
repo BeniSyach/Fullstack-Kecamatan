@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\Profile\AdminSejarah;
 use App\Http\Controllers\Admin\Profile\AdminStrukturOrganisasi;
 use App\Http\Controllers\Admin\Profile\AdminTupoksi;
 use App\Http\Controllers\Admin\Profile\AdminVisiDanMisi;
+use App\Http\Controllers\Admin\Publikasi\AdminBerita;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Home;
@@ -93,7 +94,7 @@ Route::middleware('auth')->group(function () {
     // Kata Sambutan
     Route::get('/admin/kata_sambutan',[KataSambutan::class,'index'])->name('AdminKataSambutan');
 
-    // Publikasi admin
+    // Profile admin
     Route::get('/admin/sejarah',[AdminSejarah::class,'index'])->name('AdminSejarah');
     Route::get('/admin/letak_geografis',[AdminLetakGeografis::class,'index'])->name('Adminletakgeografis');
     Route::get('/admin/kependudukan',[AdminKependudukan::class,'index'])->name('AdminKependudukan');
@@ -103,6 +104,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/struktur_organisasi',[AdminStrukturOrganisasi::class,'index'])->name('AdminStrukturOrganisasi');
     Route::get('/admin/tupoksi',[AdminTupoksi::class,'index'])->name('adminTupoksi');
     Route::get('/admin/kepegawaian',[AdminKepegawaian::class,'index'])->name('AdminKepegawaian');
+
+    // Publikasi Admin
+    Route::get('/admin/berita',[AdminBerita::class,'index'])->name('AdminBerita');
 });
 
 require __DIR__.'/auth.php';

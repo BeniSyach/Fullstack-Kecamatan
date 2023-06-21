@@ -192,9 +192,15 @@ const SideBar: React.FC<Props> = () => {
                         </Link>
                     </Sidebar.Collapse>
                     <Sidebar.Collapse label="Publikasi" icon={FaNewspaper}>
-                        <Sidebar.Item icon={FaRegNewspaper} href="#">
-                            Berita
-                        </Sidebar.Item>
+                        <Link
+                            href={route("AdminBerita")}
+                            as="div"
+                            className="cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaRegNewspaper}>
+                                Berita
+                            </Sidebar.Item>
+                        </Link>
                         <Sidebar.Item icon={FaIcons} href="#">
                             Video Kegiatan
                         </Sidebar.Item>
