@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\KataSambuatan;
+use App\Http\Controllers\Admin\KataSambutan;
 use App\Http\Controllers\Admin\ListKecamatan;
 use App\Http\Controllers\Admin\Profile\AdminAdatDanBudaya;
 use App\Http\Controllers\Admin\Profile\AdminKepegawaian;
@@ -16,7 +16,6 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\Kontak_Kami;
 use App\Http\Controllers\Profile\AdatDanBudaya;
-use App\Http\Controllers\Profile\KataSambutan;
 use App\Http\Controllers\Profile\Kepegawaian;
 use App\Http\Controllers\Profile\Kependudukan;
 use App\Http\Controllers\Profile\Letak_Geografis;
@@ -92,7 +91,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/slider',[SliderController::class,'index'])->name('listSlider');
 
     // Kata Sambutan
-    Route::get('/admin/kata_sambutan',[KataSambuatan::class,'index'])->name('AdminKataSambutan');
+    Route::get('/admin/kata_sambutan',[KataSambutan::class,'index'])->name('AdminKataSambutan');
 
     // Publikasi admin
     Route::get('/admin/sejarah',[AdminSejarah::class,'index'])->name('AdminSejarah');
