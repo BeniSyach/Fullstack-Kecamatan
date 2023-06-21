@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Request as FacadesRequest;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class KataSambutan extends Controller
+class AdminKataSambutan extends Controller
 {
     public function index(Request $request): Response
     {

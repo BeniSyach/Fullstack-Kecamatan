@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Admin\KataSambutan;
+use App\Http\Controllers\Admin\AdminKataSambutan;
+use App\Http\Controllers\KataSambutan;
 use App\Http\Controllers\Admin\ListKecamatan;
 use App\Http\Controllers\Admin\Profile\AdminAdatDanBudaya;
 use App\Http\Controllers\Admin\Profile\AdminKepegawaian;
@@ -95,7 +96,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/slider',[SliderController::class,'index'])->name('listSlider');
 
     // Kata Sambutan
-    Route::get('/admin/kata_sambutan',[KataSambutan::class,'index'])->name('AdminKataSambutan');
+    Route::get('/admin/kata_sambutan',[AdminKataSambutan::class,'index'])->name('AdminKataSambutan');
 
     // Profile admin
     Route::get('/admin/sejarah',[AdminSejarah::class,'index'])->name('AdminSejarah');

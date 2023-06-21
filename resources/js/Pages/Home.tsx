@@ -1,13 +1,22 @@
 import Letter from "@/Components/Letter";
 import Navbar from "@/Components/Navbar";
 import { Head, Link } from "@inertiajs/react";
-import { Flowbite, Carousel } from "flowbite-react";
+import { Flowbite, Carousel, Badge } from "flowbite-react";
 import FooterLandingPage from "../Components/FooterLandingPage";
 import { FaTachometerAlt } from "react-icons/fa";
 import Kerjasama from "@/Components/KerjaSama";
+import { format, parseISO } from "date-fns";
+import { id } from "date-fns/locale";
 
 interface MyInterface {
     gambar_slider: string;
+    judul_berita: string;
+    slug_berita: string;
+    gambar_berita: string;
+    isi_berita: string;
+    jenis_kategori_berita: string;
+    name: string;
+    created_at: string;
 }
 
 interface Props {
@@ -15,6 +24,9 @@ interface Props {
         judul_website: string;
     };
     slider: MyInterface[];
+    get_berita: {
+        data: MyInterface[];
+    };
     kata_sambutan: {
         nama_kepala_camat: string;
         gambar_camat: string;
@@ -31,9 +43,14 @@ const truncateText = (text: string, maxLength: number) => {
     return text.substring(0, maxLength) + "...";
 };
 
-const Home: React.FC<Props> = ({ domain, slider, kata_sambutan }) => {
+const Home: React.FC<Props> = ({
+    domain,
+    slider,
+    kata_sambutan,
+    get_berita,
+}) => {
     const isi_kata_sambutan = truncateText(kata_sambutan.isi_kataSambutan, 400);
-
+    console.log(get_berita);
     return (
         <Flowbite>
             <Head title={domain.judul_website} />
@@ -70,44 +87,56 @@ const Home: React.FC<Props> = ({ domain, slider, kata_sambutan }) => {
             </div>
             {/* sekarpur Sirih */}
             <div className="flex flex-row flex-wrap justify-center items-center m-5">
-                <div className="flex flex-row flex-wrap justify-center items-center m-2 text-center  max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <FaTachometerAlt size={50} color="#FF0000" />
+                <Link
+                    href={route("sejarah")}
+                    as="div"
+                    className="cursor-pointer"
+                >
+                    <div className="flex flex-row flex-wrap justify-center items-center m-2 text-center  max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <FaTachometerAlt size={50} color="#FF0000" />
 
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        Data Profil Kecamatan {domain.judul_website}
-                    </h5>
-                    <p className=" font-normal text-gray-700 dark:text-gray-400">
-                        Lihat Data Profil Kecamatan {domain.judul_website}
-                    </p>
-                </div>
+                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                            Data Profil Kecamatan {domain.judul_website}
+                        </h5>
+                        <p className=" font-normal text-gray-700 dark:text-gray-400">
+                            Lihat Data Profil Kecamatan {domain.judul_website}
+                        </p>
+                    </div>
+                </Link>
+                <Link href="" as="div" className="cursor-pointer">
+                    <div className="flex flex-row flex-wrap justify-center items-center m-2 text-center  max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <FaTachometerAlt size={50} color="#FF0000" />
 
-                <div className="flex flex-row flex-wrap justify-center items-center m-2 text-center  max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <FaTachometerAlt size={50} color="#FF0000" />
+                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                            Data Statistik Kecamatan {domain.judul_website}
+                        </h5>
+                        <p className=" font-normal text-gray-700 dark:text-gray-400">
+                            Lihat Data Statistik Kecamatan{" "}
+                            {domain.judul_website}
+                        </p>
+                    </div>
+                </Link>
+                <Link
+                    href={route("wisata")}
+                    as="div"
+                    className="cursor-pointer"
+                >
+                    <div className="flex flex-row flex-wrap justify-center items-center m-2 text-center  max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <FaTachometerAlt size={50} color="#FF0000" />
 
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        Data Statistik Kecamatan {domain.judul_website}
-                    </h5>
-                    <p className=" font-normal text-gray-700 dark:text-gray-400">
-                        Lihat Data Statistik Kecamatan {domain.judul_website}
-                    </p>
-                </div>
-
-                <div className="flex flex-row flex-wrap justify-center items-center m-2 text-center  max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                    <FaTachometerAlt size={50} color="#FF0000" />
-
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        Data Desa di Kecamatan {domain.judul_website}
-                    </h5>
-                    <p className=" font-normal text-gray-700 dark:text-gray-400">
-                        Lihat Data Desa Kecamatan {domain.judul_website}
-                    </p>
-                </div>
+                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                            Info Wisata di Kecamatan {domain.judul_website}
+                        </h5>
+                        <p className=" font-normal text-gray-700 dark:text-gray-400">
+                            Lihat Info Wisata Kecamatan {domain.judul_website}
+                        </p>
+                    </div>
+                </Link>
             </div>
             {/* Kata Sambutan */}
             <div className="flex flex-row flex-wrap justify-center items-center pt-11">
                 <h1 className=" text-4xl font-bold">Kata Sambutan</h1>
             </div>
-
             <section className="bg-white dark:bg-gray-900">
                 <div className="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-8 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
                     <img
@@ -158,91 +187,71 @@ const Home: React.FC<Props> = ({ domain, slider, kata_sambutan }) => {
                     </p>
                 </div>
             </div>
-            <div className="flex flex-row flex-wrap justify-center items-center my-5">
-                <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-3">
-                    <a href="#">
-                        <img
-                            className="p-8 rounded-t-lg"
-                            src="/docs/images/products/apple-watch.png"
-                            alt="product image"
-                        />
-                    </a>
-                    <div className="px-5 pb-5">
-                        <a href="#">
-                            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                                Apple Watch Series 7 GPS, Aluminium Case,
-                                Starlight Sport
-                            </h5>
-                        </a>
-                        <div className="flex items-center mt-2.5 mb-5">
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
+            {get_berita.data && get_berita.data.length > 0 ? (
+                <div className="flex flex-row flex-wrap justify-center items-center my-5">
+                    {get_berita.data.map((berita: MyInterface, k: number) => (
+                        <div
+                            key={k}
+                            className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-3"
+                        >
+                            <Link
+                                href={route("detailBerita", {
+                                    slug: berita.slug_berita,
+                                })}
                             >
-                                <title>First star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Second star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Third star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Fourth star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <svg
-                                aria-hidden="true"
-                                className="w-5 h-5 text-yellow-300"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <title>Fifth star</title>
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>
-                            <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
-                                5.0
-                            </span>
+                                <img
+                                    className="p-8 rounded-t-lg"
+                                    src={berita.gambar_berita}
+                                    alt="product image"
+                                />
+                            </Link>
+                            <div className="px-5 pb-5">
+                                <Link
+                                    href={route("detailBerita", {
+                                        slug: berita.slug_berita,
+                                    })}
+                                >
+                                    <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                                        {berita.judul_berita}
+                                    </h5>
+                                </Link>
+
+                                <p className="text-sm">
+                                    {" "}
+                                    {format(
+                                        parseISO(berita.created_at),
+                                        "EEEE, dd MMMM yyyy",
+                                        { locale: id }
+                                    )}{" "}
+                                </p>
+                                <div className="flex items-center mt-2.5 mb-5">
+                                    {truncateText(berita.isi_berita, 100)}
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <Badge color="warning">
+                                        {" "}
+                                        {berita.jenis_kategori_berita}{" "}
+                                    </Badge>
+
+                                    <Link
+                                        href={route("detailBerita", {
+                                            slug: berita.slug_berita,
+                                        })}
+                                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                    >
+                                        Baca Selengkapnya
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
-                        <div className="flex items-center justify-between">
-                            <span className="text-3xl font-bold text-gray-900 dark:text-white">
-                                $599
-                            </span>
-                            <a
-                                href="#"
-                                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                            >
-                                Add to cart
-                            </a>
-                        </div>
-                    </div>
+                    ))}
                 </div>
-            </div>
+            ) : (
+                <p className="text-center text-4xl font-bold py-10">
+                    Tidak Ada Berita
+                </p>
+            )}
+
             {/* Data Statistik */}
             <section className="bg-white dark:bg-gray-900">
                 <div className="py-8 px-4 mx-auto items-center max-w-screen-xl sm:py-16 lg:px-6">
