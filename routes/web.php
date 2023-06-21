@@ -12,6 +12,9 @@ use App\Http\Controllers\Admin\Profile\AdminStrukturOrganisasi;
 use App\Http\Controllers\Admin\Profile\AdminTupoksi;
 use App\Http\Controllers\Admin\Profile\AdminVisiDanMisi;
 use App\Http\Controllers\Admin\Publikasi\AdminBerita;
+use App\Http\Controllers\Admin\Publikasi\AdminFotoKegiatan;
+use App\Http\Controllers\Admin\Publikasi\AdminVideoKegiatan;
+use App\Http\Controllers\Admin\Publikasi\AdminWisata;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Home;
@@ -107,6 +110,9 @@ Route::middleware('auth')->group(function () {
 
     // Publikasi Admin
     Route::get('/admin/berita',[AdminBerita::class,'index'])->name('AdminBerita');
+    Route::get('/admin/video_kegiatan',[AdminVideoKegiatan::class,'index'])->name('AdminVideoKegiatan');
+    Route::get('/admin/foto_kegiatan',[AdminFotoKegiatan::class,'index'])->name('AdminFotoKegiatan');
+    Route::get('/admin/wisata',[AdminWisata::class,'index'])->name('AdminWisata');
 });
 
 require __DIR__.'/auth.php';

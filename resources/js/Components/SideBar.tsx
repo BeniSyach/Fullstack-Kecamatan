@@ -201,15 +201,32 @@ const SideBar: React.FC<Props> = () => {
                                 Berita
                             </Sidebar.Item>
                         </Link>
-                        <Sidebar.Item icon={FaIcons} href="#">
-                            Video Kegiatan
-                        </Sidebar.Item>
-                        <Sidebar.Item icon={FaImage} href="#">
-                            Foto Kegiatan
-                        </Sidebar.Item>
-                        <Sidebar.Item icon={FaImages} href="#">
-                            Wisata
-                        </Sidebar.Item>
+                        <Link
+                            href={route("AdminVideoKegiatan")}
+                            as="div"
+                            className="cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaIcons}>
+                                Video Kegiatan
+                            </Sidebar.Item>
+                        </Link>
+                        <Link
+                            href={route("AdminFotoKegiatan")}
+                            as="div"
+                            className="cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaImage}>
+                                Foto Kegiatan
+                            </Sidebar.Item>
+                        </Link>
+                        <Link
+                            href={route("AdminWisata")}
+                            as="div"
+                            className="cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaImages}>Wisata</Sidebar.Item>
+                        </Link>
+
                         <Sidebar.Item icon={FaImages} href="#">
                             Agenda
                         </Sidebar.Item>

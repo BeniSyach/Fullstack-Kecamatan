@@ -3,43 +3,31 @@ import { Flowbite, Table } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
 
-interface myBerita {
-    idBerita: number;
-    judul_berita: string;
-    gambar_berita: string;
-    jenis_kategori_berita: string;
-    name: string;
-}
+interface myVideo {}
 
 interface Props {
     domain: {
         judul_website: string;
     };
-    getBerita: myBerita[];
+    // getVideo: myVideo[];
 }
 
-const AdminBerita: React.FC<PageProps & Props> = ({
-    auth,
-    domain,
-    getBerita,
-}) => {
+const AdminVideoKegiatan: React.FC<PageProps & Props> = ({ auth, domain }) => {
     return (
         <Flowbite>
-            <Head title="List Berita" />
-            <AuthenticatedLayout user={auth.user} header={<h4>List Berita</h4>}>
+            <Head title="List Video" />
+            <AuthenticatedLayout user={auth.user} header={<h4>List Video</h4>}>
                 <Table hoverable>
                     <Table.Head>
                         <Table.HeadCell>No</Table.HeadCell>
-                        <Table.HeadCell>Judul Berita</Table.HeadCell>
-                        <Table.HeadCell>Gambar Berita</Table.HeadCell>
-                        <Table.HeadCell>Kategori Berita</Table.HeadCell>
-                        <Table.HeadCell>Penulis Berita</Table.HeadCell>
+                        <Table.HeadCell>Judul Video</Table.HeadCell>
+                        <Table.HeadCell>Video</Table.HeadCell>
                         <Table.HeadCell>
                             <span className="sr-only">Edit</span>
                         </Table.HeadCell>
                     </Table.Head>
 
-                    {getBerita && getBerita.length > 0 ? (
+                    {/* {getBerita && getBerita.length > 0 ? (
                         <Table.Body className="divide-y">
                             {getBerita.map((berita: myBerita, k: number) => (
                                 <Table.Row
@@ -77,11 +65,11 @@ const AdminBerita: React.FC<PageProps & Props> = ({
                             ))}
                         </Table.Body>
                     ) : (
-                        <p> tidak ada Berita </p>
-                    )}
+                        <p> tidak ada Video Kegiatan </p>
+                    )} */}
                 </Table>
             </AuthenticatedLayout>
         </Flowbite>
     );
 };
-export default AdminBerita;
+export default AdminVideoKegiatan;
