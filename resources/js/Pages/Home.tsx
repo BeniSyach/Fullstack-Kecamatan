@@ -158,7 +158,7 @@ const Home: React.FC<Props> = ({
                         </p>
                         <Link
                             href={route("kata_sambutan")}
-                            className="inline-flex items-center dark:text-white text-black bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900"
+                            className="inline-flex items-center bg-blue-600 dark:text-white text-black bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900"
                         >
                             Baca Selanjutnya
                             <svg
@@ -446,7 +446,7 @@ const Home: React.FC<Props> = ({
                 </div>
             </div>
             <Letter />
-            <Kerjasama />
+            {/* <Kerjasama /> */}
             <FooterLandingPage data={domain.judul_website} />
         </Flowbite>
     );

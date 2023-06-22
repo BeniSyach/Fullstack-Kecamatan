@@ -11,54 +11,62 @@ const FooterLandingPage: React.FC<ChildProps> = (props) => {
         <Footer container>
             <div className="w-full">
                 <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
-                    <div>
+                    <div className="w-1/3 mt-5">
                         <Footer.Brand
                             alt="logo Kecamatan"
                             href="/"
                             name={props.data}
                             src="/assets/image/logo/logo_kabupaten_deli_serdang.png"
                         />
+                        <p className="mt-5 dark:text-white">
+                            Lorem ipsum, dolor sit amet consectetur adipisicing
+                            elit. Excepturi aliquid, non libero deleniti fuga
+                            nostrum distinctio illo perspiciatis enim
+                            reprehenderit! Voluptas placeat aspernatur
+                            voluptatibus pariatur, voluptatum dolorem magnam
+                            doloribus! A.
+                        </p>
                     </div>
-                    <div className="grid w-9/12 grid-cols-2 gap-8 px-4 py-8 md:grid-cols-4">
+
+                    <div className="grid w-9/12 grid-cols-2 gap-8 px-4 py-8 md:grid-cols-4 ml-10">
                         <div>
-                            <Footer.Title title="Company" />
+                            <Footer.Title title="Tentang Kami" />
                             <Footer.LinkGroup col>
-                                <Footer.Link href="#">About</Footer.Link>
-                                <Footer.Link href="#">Careers</Footer.Link>
-                                <Footer.Link href="#">Brand Center</Footer.Link>
-                                <Footer.Link href="#">Blog</Footer.Link>
+                                <Footer.Link href="#">Visi & Misi</Footer.Link>
+                                <Footer.Link href="#">Sejarah</Footer.Link>
+                                <Footer.Link href="#">Wisata</Footer.Link>
+                                <Footer.Link href="#">Tupoksi</Footer.Link>
                             </Footer.LinkGroup>
                         </div>
                         <div>
-                            <Footer.Title title="help center" />
+                            <Footer.Title title="Bantuan" />
                             <Footer.LinkGroup col>
-                                <Footer.Link href="#">
-                                    Discord Server
-                                </Footer.Link>
-                                <Footer.Link href="#">Twitter</Footer.Link>
-                                <Footer.Link href="#">Facebook</Footer.Link>
-                                <Footer.Link href="#">Contact Us</Footer.Link>
+                                <Footer.Link href="#">Kontak Kami</Footer.Link>
+                                <Footer.Link href="#">Pelayanan</Footer.Link>
+                                <Footer.Link href="#">SP4N Lapor</Footer.Link>
                             </Footer.LinkGroup>
                         </div>
                         <div>
                             <Footer.Title title="legal" />
                             <Footer.LinkGroup col>
                                 <Footer.Link href="#">
-                                    Privacy Policy
+                                    Kebijakan pribadi
                                 </Footer.Link>
-                                <Footer.Link href="#">Licensing</Footer.Link>
+                                <Footer.Link href="#">Lisensi</Footer.Link>
                                 <Footer.Link href="#">
-                                    Terms & Conditions
+                                    Syarat & Ketentuan
                                 </Footer.Link>
                             </Footer.LinkGroup>
                         </div>
                         <div>
                             <Footer.Title title="download" />
                             <Footer.LinkGroup col>
-                                <Footer.Link href="#">iOS</Footer.Link>
-                                <Footer.Link href="#">Android</Footer.Link>
-                                <Footer.Link href="#">Windows</Footer.Link>
-                                <Footer.Link href="#">MacOS</Footer.Link>
+                                <Footer.Link href="#">
+                                    Dokumen Publik
+                                </Footer.Link>
+                                <Footer.Link href="#">
+                                    Dokumen Hukum
+                                </Footer.Link>
                             </Footer.LinkGroup>
                         </div>
                     </div>

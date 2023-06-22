@@ -20,7 +20,7 @@ interface Props {
     domain: {
         judul_website: string;
     };
-    berita: childPorps[];
+    berita: any;
     kategori_berita: childPorps[];
 }
 
