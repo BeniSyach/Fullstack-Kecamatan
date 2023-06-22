@@ -21,7 +21,6 @@ import {
     FaHiking,
 } from "react-icons/fa";
 import { Link } from "@inertiajs/react";
-import { IconType } from "react-icons";
 
 type Props = {};
 
