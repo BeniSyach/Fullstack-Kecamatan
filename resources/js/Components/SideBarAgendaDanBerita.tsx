@@ -62,12 +62,18 @@ const SideBarAgendaDanBerita: React.FC<Props> = ({
                                         ></path>
                                     </svg>
                                 </span>
-                                <h3 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
-                                    {agenda.judul_agenda}
-                                    {/* <span className="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300 ml-3">
+                                <Link
+                                    href={route("detailBerita", {
+                                        slug: agenda.slug_agenda,
+                                    })}
+                                >
+                                    <h3 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+                                        {agenda.judul_agenda}
+                                        {/* <span className="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300 ml-3">
                                         Latest
                                     </span> */}
-                                </h3>
+                                    </h3>
+                                </Link>
                                 <time className="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                                     {format(
                                         parseISO(agenda.tanggal_agenda),
