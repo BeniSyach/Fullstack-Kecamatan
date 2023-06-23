@@ -72,6 +72,7 @@ Route::get('/publikasi/berita/{slug}',[Berita::class,'detailBerita'])->name('det
 Route::get('/publikasi/video_kegiatan',[VideoKegiatan::class,'index'])->name('videoKegiatan');
 Route::get('/publikasi/foto_kegiatan',[FotoKegiatan::class,'index'])->name('fotoKegiatan');
 Route::get('/publikasi/wisata',[Wisata::class,'index'])->name('wisata');
+Route::get('/publikasi/wisata/{slug}',[Wisata::class,'detailWisata'])->name('detailWisata');
 Route::get('/publikasi/agenda',[Agenda::class,'index'])->name('agenda');
 
 // Kontak Kami

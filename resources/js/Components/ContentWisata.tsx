@@ -34,7 +34,7 @@ const ContentWisata: React.FC<Props> = ({ data }) => {
                             <Link
                                 key={k}
                                 as="div"
-                                href={route("detailBerita", {
+                                href={route("detailWisata", {
                                     slug: data.slug_wisata,
                                 })}
                                 method="get"

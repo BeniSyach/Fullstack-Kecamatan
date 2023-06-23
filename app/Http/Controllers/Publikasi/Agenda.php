@@ -26,4 +26,6 @@ class Agenda extends Controller
             'agenda' => $agenda
         ]);
     }
+
+   
 }
