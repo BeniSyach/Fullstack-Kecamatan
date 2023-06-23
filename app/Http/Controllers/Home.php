@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita_Model;
+use App\Models\Foto_Model;
 use App\Models\KataSambutan_Model;
 use App\Models\Kecamatan;
 use App\Models\Slider_Model;
@@ -25,11 +26,14 @@ class Home extends Controller
           // ambil data berita menurut kode kecamatannya
         $berita = Berita_Model::join('tb_kategori_berita','tb_berita.kategori_berita_id','=','tb_kategori_berita.idKategoriBerita')->join('users','tb_berita.penulis_berita','=','users.id')->select('tb_berita.*','tb_kategori_berita.jenis_kategori_berita','users.name')->where('tb_berita.kode_kecamatan',$get_kd_kecamatan)->latest()->paginate(6);   
 
+        $foto = Foto_Model::where('kode_kecamatan',$get_kd_kecamatan)->latest()->paginate(6);
+
         return Inertia::render('Home',[
             'domain' => $domain,
             'slider' => $slider,
             'kata_sambutan' => $kata_sambutan,
             'get_berita' => $berita,
+            'foto' => $foto
         ]);
     }
 }

@@ -19,7 +19,7 @@ class Agenda extends Controller
          // get kode Kecamatan
          $get_kd_kecamatan = $domain['kode_kecamatan']; 
          // get data agenda dengan kode kecamatan
-         $agenda = Agenda_Model::where('kode_kecamatan',$get_kd_kecamatan)->latest()->paginate(8);  
+         $agenda = Agenda_Model::where('kode_kecamatan',$get_kd_kecamatan)->latest()->paginate(10);  
 
         return Inertia::render('Publikasi/Agenda',[
             'domain' => $domain,

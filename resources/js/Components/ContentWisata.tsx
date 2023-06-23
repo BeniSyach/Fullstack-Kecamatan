@@ -25,7 +25,6 @@ const truncateText = (text: string, maxlength: number) => {
 };
 
 const ContentWisata: React.FC<Props> = ({ data }) => {
-    console.log(data);
     return (
         <section className="py-4 lg:py-10 bg-gray-50 dark:bg-gray-800">
             <div className="px-4 mx-auto max-w-screen-xl ">

@@ -19,6 +19,12 @@ interface MyInterface {
     created_at: string;
 }
 
+interface myPhoto {
+    judul_foto_kegiatan: string;
+    foto: string;
+    created_at: string;
+}
+
 interface Props {
     domain: {
         judul_website: string;
@@ -34,6 +40,9 @@ interface Props {
         isi_kataSambutan: string;
         created_at: string;
     };
+    foto: {
+        data: myPhoto[];
+    };
 }
 
 const truncateText = (text: string, maxLength: number) => {
@@ -48,9 +57,10 @@ const Home: React.FC<Props> = ({
     slider,
     kata_sambutan,
     get_berita,
+    foto,
 }) => {
     const isi_kata_sambutan = truncateText(kata_sambutan.isi_kataSambutan, 400);
-    console.log(get_berita);
+
     return (
         <Flowbite>
             <Head title={domain.judul_website} />
@@ -85,6 +95,7 @@ const Home: React.FC<Props> = ({
                     </Carousel>
                 )}
             </div>
+
             {/* sekarpur Sirih */}
             <div className="flex flex-row flex-wrap justify-center items-center m-5">
                 <Link
@@ -420,12 +431,6 @@ const Home: React.FC<Props> = ({
                         type="button"
                         className="text-blue-700 hover:text-white border border-blue-600 bg-white hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full text-base font-medium px-5 py-2.5 text-center mr-3 mb-3 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:bg-gray-900 dark:focus:ring-blue-800"
                     >
-                        Semua Kategori
-                    </button>
-                    <button
-                        type="button"
-                        className="text-gray-900 border border-white hover:border-gray-200 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-base font-medium px-5 py-2.5 text-center mr-3 mb-3 dark:text-white dark:focus:ring-gray-800"
-                    >
                         Foto
                     </button>
                     <button
@@ -435,15 +440,23 @@ const Home: React.FC<Props> = ({
                         Video
                     </button>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-5">
-                    <div>
-                        <img
-                            className="h-auto max-w-full rounded-lg"
-                            src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg"
-                            alt=""
-                        />
+                {foto && foto.data.length > 0 ? (
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 my-5">
+                        {foto.data.map((data_foto: myPhoto, k: number) => (
+                            <div key={k}>
+                                <img
+                                    className="h-auto max-w-full rounded-lg"
+                                    src={data_foto.foto}
+                                    alt="Foto Wisata"
+                                />
+                            </div>
+                        ))}
                     </div>
-                </div>
+                ) : (
+                    <p className="text-4xl font-bold text-center mb-5">
+                        Tidak Ada Foto
+                    </p>
+                )}
             </div>
             <Letter />
             {/* <Kerjasama /> */}
