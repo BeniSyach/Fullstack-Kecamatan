@@ -26,7 +26,12 @@ class DatabaseSeeder extends Seeder
             data_kata_sambutan::class,
             data_kategori_berita::class,
             data_struktur_organisasi::class,
-            data_berita::class
+            data_berita::class,
+            data_foto::class,
+            data_video::class,
+            data_wisata::class,
+            data_agenda::class
+
         ]);
     }
 }
