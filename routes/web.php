@@ -102,9 +102,13 @@ Route::middleware('auth')->group(function () {
     // Profile admin
     Route::get('/admin/sejarah',[AdminSejarah::class,'index'])->name('AdminSejarah');
     Route::put('admin/sejarah/update_sejarah/{id}',[AdminSejarah::class,'updateSejarah'])->name('updateSejarah');
+
     Route::get('/admin/letak_geografis',[AdminLetakGeografis::class,'index'])->name('Adminletakgeografis');
     Route::put('admin/letak_gografis/update_letak_geografis/{id}',[AdminLetakGeografis::class,'updateLetakGeografis'])->name('updateLetakGeografis');
+
     Route::get('/admin/kependudukan',[AdminKependudukan::class,'index'])->name('AdminKependudukan');
+    Route::put('admin/kependudukan/update_kependudukan/{id}',[AdminKependudukan::class,'updateKependudukan'])->name('updateKependudukan');
+
     Route::get('/admin/adatdanbudaya',[AdminAdatDanBudaya::class,'index'])->name('AdatDanBudaya');
     Route::get('/admin/visi_dan_misi',[AdminVisiDanMisi::class,'index'])->name('adminVisiDanMisi');
     Route::get('/admin/prestasi',[AdminPrestasi::class,'index'])->name('AdminPrestasi');

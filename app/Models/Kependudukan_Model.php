@@ -13,4 +13,10 @@ class Kependudukan_Model extends Model
     protected $primaryKey = 'idKependudukan';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
+
+    protected $fillable = [
+        'judul_kependudukan',
+        'deskripsi_kependudukan',
+        'isi_kependudukan'
+    ];
 }

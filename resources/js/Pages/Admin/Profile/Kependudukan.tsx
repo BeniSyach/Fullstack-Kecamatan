@@ -1,16 +1,46 @@
 import { PageProps } from "@/types";
-import { Head } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import { Button, Flowbite, Label, TextInput } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { useState } from "react";
 import CKEditorComponen from "@/Components/CKEditorComponen";
 
-interface Props {}
+interface CustomFormData {
+    [key: string]: unknown;
+    judul_kependudukan: string;
+    deskripsi_kependudukan: string;
+    isi_kependudukan: any;
+}
 
-const Penduduk: React.FC<PageProps & Props> = ({ auth }) => {
-    const [EditorContent, SetEditorContent] = useState("");
-    const handleEditorChange = (content: string) => {
+interface Props {
+    getKependudukan: {
+        idKependudukan: number;
+        judul_kependudukan: string;
+        deskripsi_kependudukan: string;
+        isi_kependudukan: any;
+    };
+}
+
+const Penduduk: React.FC<PageProps & Props> = ({ auth, getKependudukan }) => {
+    const [EditorContent, SetEditorContent] = useState(
+        getKependudukan.isi_kependudukan
+    );
+    const handleEditorChange = (content: any) => {
         SetEditorContent(content);
+        setData("isi_kependudukan", EditorContent);
+    };
+
+    const { data, setData, put, errors, processing } = useForm<CustomFormData>({
+        judul_kependudukan: getKependudukan.judul_kependudukan,
+        deskripsi_kependudukan: getKependudukan.deskripsi_kependudukan,
+        isi_kependudukan: getKependudukan.isi_kependudukan,
+    });
+
+    const submit = (e: React.FormEvent) => {
+        e.preventDefault();
+        put(
+            route("updateKependudukan", { id: getKependudukan.idKependudukan })
+        );
     };
     return (
         <Flowbite>
@@ -19,7 +49,7 @@ const Penduduk: React.FC<PageProps & Props> = ({ auth }) => {
                 user={auth.user}
                 header={<h4>Form Kependudukan</h4>}
             >
-                <form action="#" className="mx-5">
+                <form onSubmit={submit} className="mx-5">
                     <div className="flex max-w-4xl flex-col gap-4">
                         <div>
                             <div className="mb-2 block">
@@ -29,16 +59,15 @@ const Penduduk: React.FC<PageProps & Props> = ({ auth }) => {
                                 />
                             </div>
                             <TextInput
-                                // helperText={
-                                //     <>
-                                //         <span className="font-medium">
-                                //             Alright!
-                                //         </span>
-                                //         Username available!
-                                //     </>
-                                // }
                                 id="judul_kependudukan"
                                 name="judul_kependudukan"
+                                value={data.judul_kependudukan}
+                                onChange={(e) =>
+                                    setData(
+                                        "judul_kependudukan",
+                                        e.target.value
+                                    )
+                                }
                                 placeholder="Judul Kependudukan"
                                 required
                             />
@@ -51,16 +80,15 @@ const Penduduk: React.FC<PageProps & Props> = ({ auth }) => {
                                 />
                             </div>
                             <TextInput
-                                // helperText={
-                                //     <>
-                                //         <span className="font-medium">
-                                //             Alright!
-                                //         </span>
-                                //         Username available!
-                                //     </>
-                                // }
                                 id="deskripsi_kependudukan"
                                 name="deskripsi_kependudukan"
+                                value={data.deskripsi_kependudukan}
+                                onChange={(e) =>
+                                    setData(
+                                        "deskripsi_kependudukan",
+                                        e.target.value
+                                    )
+                                }
                                 placeholder="Deskripsi Singkat Kependudukan"
                                 required
                             />
@@ -79,7 +107,12 @@ const Penduduk: React.FC<PageProps & Props> = ({ auth }) => {
                             />
                         </div>
                     </div>
-                    <Button className="my-5" color="success">
+                    <Button
+                        className="my-5"
+                        color="success"
+                        type="submit"
+                        disabled={processing}
+                    >
                         Ubah
                     </Button>
                 </form>
