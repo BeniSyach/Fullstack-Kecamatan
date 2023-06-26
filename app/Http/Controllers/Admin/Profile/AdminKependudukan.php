@@ -41,6 +41,6 @@ class AdminKependudukan extends Controller
             'isi_kependudukan'=>$request->isi_kependudukan
         ]);
 
-        return redirect()->back()->with('message','data berhasil diubah');
+        return redirect()->back()->with('success','data berhasil diubah');
     }
 }

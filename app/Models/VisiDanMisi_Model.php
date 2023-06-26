@@ -13,4 +13,11 @@ class VisiDanMisi_Model extends Model
     protected $primaryKey = 'id_VisiDanMisi';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
+
+    protected $fillable = [
+        'judul_VisiDanMisi',
+        'deskripsi_VisiDanMisi',
+        'isi_Visi',
+        'isi_Misi',
+    ];
 }

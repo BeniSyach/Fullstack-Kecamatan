@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAdatDanBudaya;
 use App\Models\Adat_dan_budaya_Model;
 use App\Models\Kecamatan;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class AdminAdatDanBudaya extends Controller
         // get kode Kecamatan
         $get_kd_kecamatan = $domain['kode_kecamatan'];
        // ambil gambar slider melalui kode kecamatan
-       $get_adatDanBudaya = Adat_dan_budaya_Model::where('kode_kecamatan',$get_kd_kecamatan)->get();
+       $get_adatDanBudaya = Adat_dan_budaya_Model::where('kode_kecamatan',$get_kd_kecamatan)->first();
 
         
         return Inertia::render('Admin/Profile/AdatDanBudaya',[
@@ -28,5 +29,14 @@ class AdminAdatDanBudaya extends Controller
             'status' => session('status'),
             'getAdatDanBudaya' => $get_adatDanBudaya
         ]);
+    }
+
+    public function updateAdatDanBudaya(StoreAdatDanBudaya $request,Adat_dan_budaya_Model $budaya){
+        $budaya::find(request()->segment(4))->update([
+            'judul_adatDanBudaya'=>$request->judul_adatDanBudaya,
+            'deskripsi_adatDanBudaya'=>$request->deskripsi_adatDanBudaya,
+            'isi_adatDanBudaya'=>$request->isi_adatDanBudaya
+        ]);
+        return redirect()->back()->with('success','data berhasil diubah');
     }
 }

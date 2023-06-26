@@ -100,20 +100,36 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/kata_sambutan',[AdminKataSambutan::class,'index'])->name('AdminKataSambutan');
 
     // Profile admin
+    // sejarah
     Route::get('/admin/sejarah',[AdminSejarah::class,'index'])->name('AdminSejarah');
     Route::put('admin/sejarah/update_sejarah/{id}',[AdminSejarah::class,'updateSejarah'])->name('updateSejarah');
 
+    // Letak Geografis
     Route::get('/admin/letak_geografis',[AdminLetakGeografis::class,'index'])->name('Adminletakgeografis');
     Route::put('admin/letak_gografis/update_letak_geografis/{id}',[AdminLetakGeografis::class,'updateLetakGeografis'])->name('updateLetakGeografis');
 
+    // Kependudukan
     Route::get('/admin/kependudukan',[AdminKependudukan::class,'index'])->name('AdminKependudukan');
     Route::put('admin/kependudukan/update_kependudukan/{id}',[AdminKependudukan::class,'updateKependudukan'])->name('updateKependudukan');
 
+    // Adat Dan Budaya
     Route::get('/admin/adatdanbudaya',[AdminAdatDanBudaya::class,'index'])->name('AdatDanBudaya');
+    Route::put('/admin/adatdanbudaya/update/{id}',[AdminAdatDanBudaya::class,'updateAdatDanBudaya'])->name('updateAdatDanBudaya');
+
+    // Visi Dan Misi
     Route::get('/admin/visi_dan_misi',[AdminVisiDanMisi::class,'index'])->name('adminVisiDanMisi');
+    Route::put('/admin/visiMisi/update/{id}',[AdminVisiDanMisi::class,'updateVisiMisi'])->name('updateVisiMisi');
+
+    // Prestasi
     Route::get('/admin/prestasi',[AdminPrestasi::class,'index'])->name('AdminPrestasi');
+
+    // Struktur Organisasi
     Route::get('/admin/struktur_organisasi',[AdminStrukturOrganisasi::class,'index'])->name('AdminStrukturOrganisasi');
+
+    // Tupoksi
     Route::get('/admin/tupoksi',[AdminTupoksi::class,'index'])->name('adminTupoksi');
+    
+    // Kepegawaian
     Route::get('/admin/kepegawaian',[AdminKepegawaian::class,'index'])->name('AdminKepegawaian');
 
     // Publikasi Admin

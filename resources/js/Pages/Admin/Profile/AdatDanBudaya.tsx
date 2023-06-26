@@ -1,16 +1,51 @@
 import { PageProps } from "@/types";
-import { Head } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import { Button, Flowbite, Label, TextInput } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { useState } from "react";
 import CKEditorComponen from "@/Components/CKEditorComponen";
 
-interface Props {}
+interface Props {
+    getAdatDanBudaya: {
+        idAdatDanBudaya: number;
+        judul_adatDanBudaya: string;
+        deskripsi_adatDanBudaya: string;
+        isi_adatDanBudaya: any;
+    };
+}
 
-const AdatDanBudaya: React.FC<PageProps & Props> = ({ auth }) => {
-    const [EditorContent, SetEditorContent] = useState("");
-    const handleEditorChange = (content: string) => {
+interface CustomFormData {
+    [key: string]: unknown;
+    judul_adatDanBudaya: string;
+    deskripsi_adatDanBudaya: string;
+    isi_adatDanBudaya: any;
+}
+
+const AdatDanBudaya: React.FC<PageProps & Props> = ({
+    auth,
+    getAdatDanBudaya,
+}) => {
+    const [EditorContent, SetEditorContent] = useState(
+        getAdatDanBudaya.isi_adatDanBudaya
+    );
+    const handleEditorChange = (content: any) => {
         SetEditorContent(content);
+        setData("isi_adatDanBudaya", EditorContent);
+    };
+
+    const { data, setData, put, errors, processing } = useForm<CustomFormData>({
+        judul_adatDanBudaya: getAdatDanBudaya.judul_adatDanBudaya,
+        deskripsi_adatDanBudaya: getAdatDanBudaya.deskripsi_adatDanBudaya,
+        isi_adatDanBudaya: getAdatDanBudaya.isi_adatDanBudaya,
+    });
+
+    const submit = (e: React.FormEvent) => {
+        e.preventDefault();
+        put(
+            route("updateAdatDanBudaya", {
+                id: getAdatDanBudaya.idAdatDanBudaya,
+            })
+        );
     };
     return (
         <Flowbite>
@@ -19,7 +54,7 @@ const AdatDanBudaya: React.FC<PageProps & Props> = ({ auth }) => {
                 user={auth.user}
                 header={<h4>Form Adat Dan Budaya</h4>}
             >
-                <form action="#" className="mx-5">
+                <form onSubmit={submit} className="mx-5">
                     <div className="flex max-w-4xl flex-col gap-4">
                         <div>
                             <div className="mb-2 block">
@@ -29,16 +64,15 @@ const AdatDanBudaya: React.FC<PageProps & Props> = ({ auth }) => {
                                 />
                             </div>
                             <TextInput
-                                // helperText={
-                                //     <>
-                                //         <span className="font-medium">
-                                //             Alright!
-                                //         </span>
-                                //         Username available!
-                                //     </>
-                                // }
                                 id="judul_adatDanBudaya"
                                 name="judul_adatDanBudaya"
+                                value={data.judul_adatDanBudaya}
+                                onChange={(e) =>
+                                    setData(
+                                        "judul_adatDanBudaya",
+                                        e.target.value
+                                    )
+                                }
                                 placeholder="Judul Adat Dan Budaya"
                                 required
                             />
@@ -51,16 +85,15 @@ const AdatDanBudaya: React.FC<PageProps & Props> = ({ auth }) => {
                                 />
                             </div>
                             <TextInput
-                                // helperText={
-                                //     <>
-                                //         <span className="font-medium">
-                                //             Alright!
-                                //         </span>
-                                //         Username available!
-                                //     </>
-                                // }
                                 id="deskripsi_adatDanBudaya"
                                 name="deskripsi_adatDanBudaya"
+                                value={data.deskripsi_adatDanBudaya}
+                                onChange={(e) =>
+                                    setData(
+                                        "deskripsi_adatDanBudaya",
+                                        e.target.value
+                                    )
+                                }
                                 placeholder="Deskripsi Singkat Adat Dan Budaya"
                                 required
                             />
@@ -79,7 +112,12 @@ const AdatDanBudaya: React.FC<PageProps & Props> = ({ auth }) => {
                             />
                         </div>
                     </div>
-                    <Button className="my-5" color="success">
+                    <Button
+                        className="my-5"
+                        color="success"
+                        type="submit"
+                        disabled={processing}
+                    >
                         Ubah
                     </Button>
                 </form>

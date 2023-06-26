@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreVisiMisiRequest;
 use App\Models\Kecamatan;
 use App\Models\VisiDanMisi_Model;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class AdminVisiDanMisi extends Controller
         // get kode Kecamatan
         $get_kd_kecamatan = $domain['kode_kecamatan'];
        // ambil gambar slider melalui kode kecamatan
-       $get_VisiDanMisi = VisiDanMisi_Model::where('kode_kecamatan',$get_kd_kecamatan)->get();
+       $get_VisiDanMisi = VisiDanMisi_Model::where('kode_kecamatan',$get_kd_kecamatan)->first();
 
         
         return Inertia::render('Admin/Profile/VisiDanMisi',[
@@ -28,5 +29,16 @@ class AdminVisiDanMisi extends Controller
             'status' => session('status'),
             'getVisiDanMisi' => $get_VisiDanMisi
         ]);
+    }
+
+    public function updateVisiMisi(StoreVisiMisiRequest $request,VisiDanMisi_Model $visiMisi){
+
+        $visiMisi::find(request()->segment(4))->update([
+        'judul_VisiDanMisi'=>$request->judul_VisiDanMisi,
+        'deskripsi_VisiDanMisi'=>$request->deskripsi_VisiDanMisi,
+        'isi_Visi'=>$request->isi_Visi,
+        'isi_Misi'=>$request->isi_Misi
+        ]);
+        return redirect()->back()->with('message','data berhasil diubah');
     }
 }

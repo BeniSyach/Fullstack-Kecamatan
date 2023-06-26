@@ -13,4 +13,10 @@ class Adat_dan_budaya_Model extends Model
     protected $primaryKey = 'idAdatDanBudaya';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
+
+    protected $fillable = [
+        'judul_adatDanBudaya',
+        'deskripsi_adatDanBudaya',
+        'isi_adatDanBudaya',
+    ];
 }
