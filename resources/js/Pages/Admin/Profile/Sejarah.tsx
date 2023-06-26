@@ -8,6 +8,7 @@ import InputError from "@/Components/InputError";
 
 interface Props {
     sejarah: {
+        idSejarah: number;
         judul_sejarah: string;
         Deskripsi_sejarah: string;
         penulis_sejarah: string;
@@ -22,12 +23,12 @@ interface CustomFormData {
     Deskripsi_sejarah: string;
     penulis_sejarah: string;
     jabatan_penulis_sejarah: string;
-    content: string;
+    content: any;
 }
 
 const Sejarah: React.FC<PageProps & Props> = ({ auth, sejarah }) => {
     const [EditorContent, SetEditorContent] = useState(sejarah.isi_sejarah);
-    const handleEditorChange = (content: string) => {
+    const handleEditorChange = (content: any) => {
         SetEditorContent(content);
         setData("content", EditorContent);
     };
@@ -38,7 +39,7 @@ const Sejarah: React.FC<PageProps & Props> = ({ auth, sejarah }) => {
         judul_sejarah: sejarah.judul_sejarah,
         Deskripsi_sejarah: sejarah.Deskripsi_sejarah,
         penulis_sejarah: sejarah.penulis_sejarah,
-        jabatan_penulis_sejarah: sejarah.penulis_sejarah,
+        jabatan_penulis_sejarah: sejarah.jabatan_penulis_sejarah,
         content: EditorContent,
     });
 
@@ -51,7 +52,7 @@ const Sejarah: React.FC<PageProps & Props> = ({ auth, sejarah }) => {
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
-        put(route("dashboard"));
+        put(route("updateSejarah", { id: sejarah.idSejarah }));
     };
 
     return (
