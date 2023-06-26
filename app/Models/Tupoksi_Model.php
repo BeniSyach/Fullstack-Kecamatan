@@ -13,4 +13,10 @@ class Tupoksi_Model extends Model
     protected $primaryKey = 'idTupoksi';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
+
+    protected $fillable = [
+        'judul_tupoksi',
+        'deskripsi_tupoksi',
+        'isi_tupoksi'
+    ];
 }

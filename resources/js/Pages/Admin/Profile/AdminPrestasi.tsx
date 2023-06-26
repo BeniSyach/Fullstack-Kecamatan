@@ -1,16 +1,44 @@
 import { PageProps } from "@/types";
-import { Head } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import { Button, Flowbite, Label, TextInput } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { useState } from "react";
 import CKEditorComponen from "@/Components/CKEditorComponen";
 
-interface Props {}
+interface Props {
+    getPrestasi: {
+        idPrestasi: number;
+        judul_prestasi: string;
+        deskripsi_prestasi: string;
+        isi_prestasi: any;
+    };
+}
 
-const AdminPrestasi: React.FC<PageProps & Props> = ({ auth }) => {
-    const [EditorContent, SetEditorContent] = useState("");
-    const handleEditorChange = (content: string) => {
+interface CustomFormData {
+    [key: string]: unknown;
+    judul_prestasi: string;
+    deskripsi_prestasi: string;
+    isi_prestasi: any;
+}
+
+const AdminPrestasi: React.FC<PageProps & Props> = ({ auth, getPrestasi }) => {
+    const [EditorContent, SetEditorContent] = useState(
+        getPrestasi.isi_prestasi
+    );
+    const handleEditorChange = (content: any) => {
         SetEditorContent(content);
+        setData("isi_prestasi", EditorContent);
+    };
+
+    const { data, setData, put, errors, processing } = useForm<CustomFormData>({
+        judul_prestasi: getPrestasi.judul_prestasi,
+        deskripsi_prestasi: getPrestasi.deskripsi_prestasi,
+        isi_prestasi: getPrestasi.isi_prestasi,
+    });
+
+    const submit = (e: React.FormEvent) => {
+        e.preventDefault();
+        put(route("updatePrestasi", { id: getPrestasi.idPrestasi }));
     };
     return (
         <Flowbite>
@@ -19,7 +47,7 @@ const AdminPrestasi: React.FC<PageProps & Props> = ({ auth }) => {
                 user={auth.user}
                 header={<h4>Form Prestasi</h4>}
             >
-                <form action="#" className="mx-5">
+                <form onSubmit={submit} className="mx-5">
                     <div className="flex max-w-4xl flex-col gap-4">
                         <div>
                             <div className="mb-2 block">
@@ -29,16 +57,12 @@ const AdminPrestasi: React.FC<PageProps & Props> = ({ auth }) => {
                                 />
                             </div>
                             <TextInput
-                                // helperText={
-                                //     <>
-                                //         <span className="font-medium">
-                                //             Alright!
-                                //         </span>
-                                //         Username available!
-                                //     </>
-                                // }
                                 id="judul_prestasi"
                                 name="judul_prestasi"
+                                value={data.judul_prestasi}
+                                onChange={(e) =>
+                                    setData("judul_prestasi", e.target.value)
+                                }
                                 placeholder="Judul Prestasi"
                                 required
                             />
@@ -51,16 +75,15 @@ const AdminPrestasi: React.FC<PageProps & Props> = ({ auth }) => {
                                 />
                             </div>
                             <TextInput
-                                // helperText={
-                                //     <>
-                                //         <span className="font-medium">
-                                //             Alright!
-                                //         </span>
-                                //         Username available!
-                                //     </>
-                                // }
                                 id="deskripsi_prestasi"
                                 name="deskripsi_prestasi"
+                                value={data.deskripsi_prestasi}
+                                onChange={(e) =>
+                                    setData(
+                                        "deskripsi_prestasi",
+                                        e.target.value
+                                    )
+                                }
                                 placeholder="Deskripsi Singkat Prestasi"
                                 required
                             />
@@ -79,7 +102,12 @@ const AdminPrestasi: React.FC<PageProps & Props> = ({ auth }) => {
                             />
                         </div>
                     </div>
-                    <Button className="my-5" color="success">
+                    <Button
+                        className="my-5"
+                        color="success"
+                        type="submit"
+                        disabled={processing}
+                    >
                         Ubah
                     </Button>
                 </form>

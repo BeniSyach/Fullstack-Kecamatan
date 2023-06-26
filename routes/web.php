@@ -122,12 +122,15 @@ Route::middleware('auth')->group(function () {
 
     // Prestasi
     Route::get('/admin/prestasi',[AdminPrestasi::class,'index'])->name('AdminPrestasi');
+    Route::put('/admin/prestasi/update/{id}',[AdminPrestasi::class,'updatePrestasi'])->name('updatePrestasi');
 
     // Struktur Organisasi
     Route::get('/admin/struktur_organisasi',[AdminStrukturOrganisasi::class,'index'])->name('AdminStrukturOrganisasi');
+    Route::put('/admin/strukturOrganisasi/update/{id}',[AdminStrukturOrganisasi::class,'updateStrukturOrganisasi'])->name('update_struktur_organisasi');
 
     // Tupoksi
     Route::get('/admin/tupoksi',[AdminTupoksi::class,'index'])->name('adminTupoksi');
+    Route::put('/admin/tupoksi/update/{id}',[AdminTupoksi::class,'updateTupoksi'])->name('updateTupoksi');
     
     // Kepegawaian
     Route::get('/admin/kepegawaian',[AdminKepegawaian::class,'index'])->name('AdminKepegawaian');

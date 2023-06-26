@@ -13,4 +13,10 @@ class StrukturOrganisasi_Model extends Model
     protected $primaryKey = 'idStrukturOrganisasi';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
+
+    protected $fillable = [
+        'judul_struktur_organisasi',
+        'deskripsi_struktur_organisasi',
+        'isi_struktur_organisasi'
+    ];
 }

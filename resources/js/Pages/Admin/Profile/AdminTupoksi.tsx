@@ -1,17 +1,44 @@
 import { PageProps } from "@/types";
-import { Head } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import { Button, Flowbite, Label, TextInput } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { useState } from "react";
 import CKEditorComponen from "@/Components/CKEditorComponen";
 
-interface Props {}
+interface Props {
+    getTupoksi: {
+        idTupoksi: number;
+        judul_tupoksi: string;
+        deskripsi_tupoksi: string;
+        isi_tupoksi: any;
+    };
+}
 
-const AdminTupoksi: React.FC<PageProps & Props> = ({ auth }) => {
-    const [EditorContent, SetEditorContent] = useState("");
+interface CustomFormData {
+    [key: string]: unknown;
+    judul_tupoksi: string;
+    deskripsi_tupoksi: string;
+    isi_tupoksi: any;
+}
+
+const AdminTupoksi: React.FC<PageProps & Props> = ({ auth, getTupoksi }) => {
+    const [EditorContent, SetEditorContent] = useState(getTupoksi.isi_tupoksi);
     const handleEditorChange = (content: string) => {
         SetEditorContent(content);
+        setData("isi_tupoksi", EditorContent);
     };
+
+    const { data, setData, put, errors, processing } = useForm<CustomFormData>({
+        judul_tupoksi: getTupoksi.judul_tupoksi,
+        deskripsi_tupoksi: getTupoksi.deskripsi_tupoksi,
+        isi_tupoksi: getTupoksi.isi_tupoksi,
+    });
+
+    const submit = (e: React.FormEvent) => {
+        e.preventDefault();
+        put(route("updateTupoksi", { id: getTupoksi.idTupoksi }));
+    };
+
     return (
         <Flowbite>
             <Head title="Setting Tupoksi" />
@@ -19,7 +46,7 @@ const AdminTupoksi: React.FC<PageProps & Props> = ({ auth }) => {
                 user={auth.user}
                 header={<h4>Form Tupoksi</h4>}
             >
-                <form action="#" className="mx-5">
+                <form onSubmit={submit} className="mx-5">
                     <div className="flex max-w-4xl flex-col gap-4">
                         <div>
                             <div className="mb-2 block">
@@ -29,16 +56,12 @@ const AdminTupoksi: React.FC<PageProps & Props> = ({ auth }) => {
                                 />
                             </div>
                             <TextInput
-                                // helperText={
-                                //     <>
-                                //         <span className="font-medium">
-                                //             Alright!
-                                //         </span>
-                                //         Username available!
-                                //     </>
-                                // }
                                 id="judul_tupoksi"
                                 name="judul_tupoksi"
+                                value={data.judul_tupoksi}
+                                onChange={(e) =>
+                                    setData("judul_tupoksi", e.target.value)
+                                }
                                 placeholder="Judul Tupoksi"
                                 required
                             />
@@ -51,16 +74,12 @@ const AdminTupoksi: React.FC<PageProps & Props> = ({ auth }) => {
                                 />
                             </div>
                             <TextInput
-                                // helperText={
-                                //     <>
-                                //         <span className="font-medium">
-                                //             Alright!
-                                //         </span>
-                                //         Username available!
-                                //     </>
-                                // }
                                 id="deskripsi_tupoksi"
                                 name="deskripsi_tupoksi"
+                                value={data.deskripsi_tupoksi}
+                                onChange={(e) =>
+                                    setData("deskripsi_tupoksi", e.target.value)
+                                }
                                 placeholder="Deskripsi Singkat Tupoksi"
                                 required
                             />
@@ -79,7 +98,12 @@ const AdminTupoksi: React.FC<PageProps & Props> = ({ auth }) => {
                             />
                         </div>
                     </div>
-                    <Button className="my-5" color="success">
+                    <Button
+                        className="my-5"
+                        color="success"
+                        type="submit"
+                        disabled={processing}
+                    >
                         Ubah
                     </Button>
                 </form>

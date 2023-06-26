@@ -1,17 +1,55 @@
 import { PageProps } from "@/types";
-import { Head } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import { Button, Flowbite, Label, TextInput } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { useState } from "react";
 import CKEditorComponen from "@/Components/CKEditorComponen";
 
-interface Props {}
+interface Props {
+    getStrukturOrganisasi: {
+        idStrukturOrganisasi: number;
+        judul_struktur_organisasi: string;
+        deskripsi_struktur_organisasi: string;
+        isi_struktur_organisasi: any;
+    };
+}
 
-const AdminStrukturOrganisasi: React.FC<PageProps & Props> = ({ auth }) => {
-    const [EditorContent, SetEditorContent] = useState("");
+interface CustomFormData {
+    [key: string]: unknown;
+    judul_struktur_organisasi: string;
+    deskripsi_struktur_organisasi: string;
+    isi_struktur_organisasi: any;
+}
+
+const AdminStrukturOrganisasi: React.FC<PageProps & Props> = ({
+    auth,
+    getStrukturOrganisasi,
+}) => {
+    const [EditorContent, SetEditorContent] = useState(
+        getStrukturOrganisasi.isi_struktur_organisasi
+    );
     const handleEditorChange = (content: string) => {
         SetEditorContent(content);
+        setData("isi_struktur_organisasi", EditorContent);
     };
+
+    const { data, setData, put, errors, processing } = useForm<CustomFormData>({
+        judul_struktur_organisasi:
+            getStrukturOrganisasi.judul_struktur_organisasi,
+        deskripsi_struktur_organisasi:
+            getStrukturOrganisasi.deskripsi_struktur_organisasi,
+        isi_struktur_organisasi: getStrukturOrganisasi.isi_struktur_organisasi,
+    });
+
+    const submit = (e: React.FormEvent) => {
+        e.preventDefault();
+        put(
+            route("update_struktur_organisasi", {
+                id: getStrukturOrganisasi.idStrukturOrganisasi,
+            })
+        );
+    };
+
     return (
         <Flowbite>
             <Head title="Setting Struktur Organisasi" />
@@ -19,7 +57,7 @@ const AdminStrukturOrganisasi: React.FC<PageProps & Props> = ({ auth }) => {
                 user={auth.user}
                 header={<h4>Form Struktur Organisasi</h4>}
             >
-                <form action="#" className="mx-5">
+                <form onSubmit={submit} className="mx-5">
                     <div className="flex max-w-4xl flex-col gap-4">
                         <div>
                             <div className="mb-2 block">
@@ -29,16 +67,15 @@ const AdminStrukturOrganisasi: React.FC<PageProps & Props> = ({ auth }) => {
                                 />
                             </div>
                             <TextInput
-                                // helperText={
-                                //     <>
-                                //         <span className="font-medium">
-                                //             Alright!
-                                //         </span>
-                                //         Username available!
-                                //     </>
-                                // }
                                 id="judul_struktur_organisasi"
                                 name="judul_struktur_organisasi"
+                                value={data.judul_struktur_organisasi}
+                                onChange={(e) =>
+                                    setData(
+                                        "judul_struktur_organisasi",
+                                        e.target.value
+                                    )
+                                }
                                 placeholder="Judul Struktur Organisasi"
                                 required
                             />
@@ -51,16 +88,15 @@ const AdminStrukturOrganisasi: React.FC<PageProps & Props> = ({ auth }) => {
                                 />
                             </div>
                             <TextInput
-                                // helperText={
-                                //     <>
-                                //         <span className="font-medium">
-                                //             Alright!
-                                //         </span>
-                                //         Username available!
-                                //     </>
-                                // }
                                 id="deskripsi_struktur_organisasi"
                                 name="deskripsi_struktur_organisasi"
+                                value={data.deskripsi_struktur_organisasi}
+                                onChange={(e) =>
+                                    setData(
+                                        "deskripsi_struktur_organisasi",
+                                        e.target.value
+                                    )
+                                }
                                 placeholder="Deskripsi Singkat Struktur Organisasi"
                                 required
                             />
@@ -79,7 +115,12 @@ const AdminStrukturOrganisasi: React.FC<PageProps & Props> = ({ auth }) => {
                             />
                         </div>
                     </div>
-                    <Button className="my-5" color="success">
+                    <Button
+                        className="my-5"
+                        color="success"
+                        type="submit"
+                        disabled={processing}
+                    >
                         Ubah
                     </Button>
                 </form>

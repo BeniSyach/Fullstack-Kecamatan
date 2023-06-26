@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreStrukturOrganisasiRequest;
 use App\Models\Kecamatan;
 use App\Models\StrukturOrganisasi_Model;
 use App\Models\VisiDanMisi_Model;
@@ -21,7 +22,7 @@ class AdminStrukturOrganisasi extends Controller
         // get kode Kecamatan
         $get_kd_kecamatan = $domain['kode_kecamatan'];
        // ambil gambar slider melalui kode kecamatan
-       $get_StrukturOrganisasi = StrukturOrganisasi_Model::where('kode_kecamatan',$get_kd_kecamatan)->get();
+       $get_StrukturOrganisasi = StrukturOrganisasi_Model::where('kode_kecamatan',$get_kd_kecamatan)->first();
 
         
         return Inertia::render('Admin/Profile/AdminStrukturOrganisasi',[
@@ -29,5 +30,14 @@ class AdminStrukturOrganisasi extends Controller
             'status' => session('status'),
             'getStrukturOrganisasi' => $get_StrukturOrganisasi
         ]);
+    }
+
+    public function updateStrukturOrganisasi(StoreStrukturOrganisasiRequest $request,StrukturOrganisasi_Model $strukturOrganisasi){
+        $strukturOrganisasi::find(request()->segment(4))->update([
+        'judul_struktur_organisasi'=>$request->judul_struktur_organisasi,
+        'deskripsi_struktur_organisasi'=>$request->deskripsi_struktur_organisasi,
+        'isi_struktur_organisasi'=>$request->isi_struktur_organisasi
+        ]);
+        return redirect()->back()->with('message','data berhasil diubah');
     }
 }
