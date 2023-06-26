@@ -1,17 +1,53 @@
 import { PageProps } from "@/types";
-import { Head } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import { Button, Flowbite, Label, TextInput } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { useState } from "react";
 import CKEditorComponen from "@/Components/CKEditorComponen";
 
-interface Props {}
-
-const LetakGeografis: React.FC<PageProps & Props> = ({ auth }) => {
-    const [EditorContent, SetEditorContent] = useState("");
-    const handleEditorChange = (content: string) => {
-        SetEditorContent(content);
+interface Props {
+    getLetakGeografis: {
+        idLetakGeografis: number;
+        judul_letak_geografis: string;
+        Deskripsi_letak_geografis: string;
+        isi_letak_geografis: any;
     };
+}
+
+interface CustomFormData {
+    [key: string]: unknown;
+    judul_letak_geografis: string;
+    Deskripsi_letak_geografis: string;
+    isi_letak_geografis: any;
+}
+
+const LetakGeografis: React.FC<PageProps & Props> = ({
+    auth,
+    getLetakGeografis,
+}) => {
+    const [EditorContent, SetEditorContent] = useState(
+        getLetakGeografis.isi_letak_geografis
+    );
+    const handleEditorChange = (content: any) => {
+        SetEditorContent(content);
+        setData("isi_letak_geografis", EditorContent);
+    };
+
+    const { data, setData, put, errors, processing } = useForm<CustomFormData>({
+        judul_letak_geografis: getLetakGeografis.judul_letak_geografis,
+        Deskripsi_letak_geografis: getLetakGeografis.Deskripsi_letak_geografis,
+        isi_letak_geografis: getLetakGeografis.isi_letak_geografis,
+    });
+
+    const submit = (e: React.FormEvent) => {
+        e.preventDefault();
+        put(
+            route("updateLetakGeografis", {
+                id: getLetakGeografis.idLetakGeografis,
+            })
+        );
+    };
+
     return (
         <Flowbite>
             <Head title="Setting Letak Geografis" />
@@ -19,7 +55,7 @@ const LetakGeografis: React.FC<PageProps & Props> = ({ auth }) => {
                 user={auth.user}
                 header={<h4>Form Letak Geografis</h4>}
             >
-                <form action="#" className="mx-5">
+                <form onSubmit={submit} className="mx-5">
                     <div className="flex max-w-4xl flex-col gap-4">
                         <div>
                             <div className="mb-2 block">
@@ -29,16 +65,15 @@ const LetakGeografis: React.FC<PageProps & Props> = ({ auth }) => {
                                 />
                             </div>
                             <TextInput
-                                // helperText={
-                                //     <>
-                                //         <span className="font-medium">
-                                //             Alright!
-                                //         </span>
-                                //         Username available!
-                                //     </>
-                                // }
                                 id="judul_letak_geografis"
                                 name="judul_letak_geografis"
+                                value={data.judul_letak_geografis}
+                                onChange={(e) =>
+                                    setData(
+                                        "judul_letak_geografis",
+                                        e.target.value
+                                    )
+                                }
                                 placeholder="Judul Letak Geografis"
                                 required
                             />
@@ -51,16 +86,15 @@ const LetakGeografis: React.FC<PageProps & Props> = ({ auth }) => {
                                 />
                             </div>
                             <TextInput
-                                // helperText={
-                                //     <>
-                                //         <span className="font-medium">
-                                //             Alright!
-                                //         </span>
-                                //         Username available!
-                                //     </>
-                                // }
                                 id="Deskripsi_letak_geografis"
                                 name="Deskripsi_letak_geografis"
+                                value={data.Deskripsi_letak_geografis}
+                                onChange={(e) =>
+                                    setData(
+                                        "Deskripsi_letak_geografis",
+                                        e.target.value
+                                    )
+                                }
                                 placeholder="Deskripsi Singkat Letak Geografis"
                                 required
                             />
@@ -79,7 +113,12 @@ const LetakGeografis: React.FC<PageProps & Props> = ({ auth }) => {
                             />
                         </div>
                     </div>
-                    <Button className="my-5" color="success">
+                    <Button
+                        className="my-5"
+                        color="success"
+                        type="submit"
+                        disabled={processing}
+                    >
                         Ubah
                     </Button>
                 </form>
