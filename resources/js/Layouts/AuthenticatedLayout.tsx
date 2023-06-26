@@ -107,7 +107,7 @@ export default function Authenticated({
                             label={
                                 <Avatar
                                     alt="User settings"
-                                    img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                                    img="/assets/image/logo/logo_kabupaten_deli_serdang.png"
                                     rounded
                                 />
                             }

@@ -1,17 +1,59 @@
 import { PageProps } from "@/types";
-import { Head } from "@inertiajs/react";
+import { Head, router, useForm, usePage } from "@inertiajs/react";
 import { Button, Flowbite, Label, TextInput } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CKEditorComponen from "@/Components/CKEditorComponen";
+import InputError from "@/Components/InputError";
 
-interface Props {}
+interface Props {
+    sejarah: {
+        judul_sejarah: string;
+        Deskripsi_sejarah: string;
+        penulis_sejarah: string;
+        jabatan_penulis_sejarah: string;
+        isi_sejarah: string;
+    };
+}
 
-const Sejarah: React.FC<PageProps & Props> = ({ auth }) => {
-    const [EditorContent, SetEditorContent] = useState("");
+interface CustomFormData {
+    [key: string]: unknown;
+    judul_sejarah: string;
+    Deskripsi_sejarah: string;
+    penulis_sejarah: string;
+    jabatan_penulis_sejarah: string;
+    content: string;
+}
+
+const Sejarah: React.FC<PageProps & Props> = ({ auth, sejarah }) => {
+    const [EditorContent, SetEditorContent] = useState(sejarah.isi_sejarah);
     const handleEditorChange = (content: string) => {
         SetEditorContent(content);
+        setData("content", EditorContent);
     };
+
+    const { mySejarah } = usePage().props;
+
+    const { data, setData, put, errors, processing } = useForm<CustomFormData>({
+        judul_sejarah: sejarah.judul_sejarah,
+        Deskripsi_sejarah: sejarah.Deskripsi_sejarah,
+        penulis_sejarah: sejarah.penulis_sejarah,
+        jabatan_penulis_sejarah: sejarah.penulis_sejarah,
+        content: EditorContent,
+    });
+
+    useEffect(() => {
+        if (!mySejarah) {
+            router.get(route("AdminSejarah"));
+        }
+        return;
+    }, []);
+
+    const submit = (e: React.FormEvent) => {
+        e.preventDefault();
+        put(route("dashboard"));
+    };
+
     return (
         <Flowbite>
             <Head title="Setting Sejarah" />
@@ -19,7 +61,29 @@ const Sejarah: React.FC<PageProps & Props> = ({ auth }) => {
                 user={auth.user}
                 header={<h4>Form Sejarah</h4>}
             >
-                <form action="#" className="mx-5">
+                {/* <div>
+                    {flash.message && (
+                        <div className="alert alert-info shadow-lg">
+                            <div>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    className="stroke-current flex-shrink-0 w-6 h-6"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    ></path>
+                                </svg>
+                                <span>{flash.message}.</span>
+                            </div>
+                        </div>
+                    )}
+                </div> */}
+                <form onSubmit={submit} className="mx-5">
                     <div className="flex max-w-4xl flex-col gap-4">
                         <div>
                             <div className="mb-2 block">
@@ -29,18 +93,18 @@ const Sejarah: React.FC<PageProps & Props> = ({ auth }) => {
                                 />
                             </div>
                             <TextInput
-                                // helperText={
-                                //     <>
-                                //         <span className="font-medium">
-                                //             Alright!
-                                //         </span>
-                                //         Username available!
-                                //     </>
-                                // }
                                 id="judul_sejarah"
                                 name="judul_sejarah"
+                                value={data.judul_sejarah}
+                                onChange={(e) =>
+                                    setData("judul_sejarah", e.target.value)
+                                }
                                 placeholder="Judul Sejarah"
                                 required
+                            />
+                            <InputError
+                                message={errors.judul_sejarah}
+                                className="mt-2"
                             />
                         </div>
                         <div>
@@ -51,16 +115,12 @@ const Sejarah: React.FC<PageProps & Props> = ({ auth }) => {
                                 />
                             </div>
                             <TextInput
-                                // helperText={
-                                //     <>
-                                //         <span className="font-medium">
-                                //             Alright!
-                                //         </span>
-                                //         Username available!
-                                //     </>
-                                // }
                                 id="Deskripsi_sejarah"
                                 name="Deskripsi_sejarah"
+                                value={data.Deskripsi_sejarah}
+                                onChange={(e) =>
+                                    setData("Deskripsi_sejarah", e.target.value)
+                                }
                                 placeholder="Deskripsi Singkat Sejarah"
                                 required
                             />
@@ -73,16 +133,12 @@ const Sejarah: React.FC<PageProps & Props> = ({ auth }) => {
                                 />
                             </div>
                             <TextInput
-                                // helperText={
-                                //     <>
-                                //         <span className="font-medium">
-                                //             Alright!
-                                //         </span>
-                                //         Username available!
-                                //     </>
-                                // }
                                 id="penulis_sejarah"
                                 name="penulis_sejarah"
+                                value={data.penulis_sejarah}
+                                onChange={(e) =>
+                                    setData("penulis_sejarah", e.target.value)
+                                }
                                 placeholder="Penulis Sejarah"
                                 required
                             />
@@ -95,16 +151,15 @@ const Sejarah: React.FC<PageProps & Props> = ({ auth }) => {
                                 />
                             </div>
                             <TextInput
-                                // helperText={
-                                //     <>
-                                //         <span className="font-medium">
-                                //             Alright!
-                                //         </span>
-                                //         Username available!
-                                //     </>
-                                // }
                                 id="jabatan_penulis_sejarah"
                                 name="jabatan_penulis_sejarah"
+                                value={data.jabatan_penulis_sejarah}
+                                onChange={(e) =>
+                                    setData(
+                                        "jabatan_penulis_sejarah",
+                                        e.target.value
+                                    )
+                                }
                                 placeholder="Jabatan Penulis"
                                 required
                             />
@@ -122,7 +177,12 @@ const Sejarah: React.FC<PageProps & Props> = ({ auth }) => {
                             />
                         </div>
                     </div>
-                    <Button className="my-5" color="success">
+                    <Button
+                        className="my-5"
+                        color="success"
+                        type="submit"
+                        disabled={processing}
+                    >
                         Ubah
                     </Button>
                 </form>

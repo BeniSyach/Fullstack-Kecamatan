@@ -1,7 +1,9 @@
 import { PageProps } from "@/types";
-import { Flowbite, Table } from "flowbite-react";
+import { Flowbite, Pagination, Table } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
+import TambahDataKecamatan from "@/Components/TambahDataKecamatan";
+import { useState } from "react";
 
 interface myKecamatan {
     id: number;
@@ -22,6 +24,8 @@ const ListKecamatan: React.FC<PageProps & Props> = ({
     domain,
     getAllKecamatan,
 }) => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const onPageChange = (page: number) => setCurrentPage(page);
     return (
         <Flowbite>
             <Head title="Data Kecamatan" />
@@ -29,7 +33,8 @@ const ListKecamatan: React.FC<PageProps & Props> = ({
                 user={auth.user}
                 header={<h4>Data Kecamatan</h4>}
             >
-                <Table hoverable>
+                <TambahDataKecamatan />
+                <Table hoverable className="mt-5">
                     <Table.Head>
                         <Table.HeadCell>No</Table.HeadCell>
                         <Table.HeadCell>Nama Kecamatan</Table.HeadCell>
@@ -62,14 +67,12 @@ const ListKecamatan: React.FC<PageProps & Props> = ({
                                             {kecamatan.kode_kecamatan}{" "}
                                         </Table.Cell>
                                         <Table.Cell>
-                                            <Link
-                                                className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                                                href={route("dashboard", {
-                                                    id: kecamatan.id,
-                                                })}
-                                            >
-                                                <p>Edit</p>
-                                            </Link>
+                                            <p className="text-blue-500">
+                                                edit
+                                            </p>
+                                            <p className="text-red-500">
+                                                hapus
+                                            </p>
                                         </Table.Cell>
                                     </Table.Row>
                                 )
@@ -79,6 +82,17 @@ const ListKecamatan: React.FC<PageProps & Props> = ({
                         <p> tidak ada Kecamatan </p>
                     )}
                 </Table>
+                <div className="flex items-center justify-center text-center">
+                    <Pagination
+                        currentPage={2}
+                        layout="table"
+                        onPageChange={(page) => {
+                            setCurrentPage(page);
+                        }}
+                        showIcons
+                        totalPages={1000}
+                    />
+                </div>
             </AuthenticatedLayout>
         </Flowbite>
     );

@@ -13,4 +13,12 @@ class Sejarah_Model extends Model
     protected $primaryKey = 'idSejarah';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
+
+    protected $fillable = [
+        'judul_sejarah',
+        'Deskripsi_sejarah',
+        'penulis_sejarah',
+        'jabatan_penulis_sejarah',
+        'isi_sejarah',
+    ];
 }

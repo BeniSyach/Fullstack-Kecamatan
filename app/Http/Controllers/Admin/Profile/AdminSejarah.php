@@ -20,13 +20,14 @@ class AdminSejarah extends Controller
         // get kode Kecamatan
         $get_kd_kecamatan = $domain['kode_kecamatan'];
        // ambil gambar slider melalui kode kecamatan
-       $get_sejarah = Sejarah_Model::where('kode_kecamatan',$get_kd_kecamatan)->get();
+       $get_sejarah = Sejarah_Model::where('kode_kecamatan',$get_kd_kecamatan)->first();
 
-        
         return Inertia::render('Admin/Profile/Sejarah',[
             'domain' => $domain,
             'status' => session('status'),
-            'getAllKecamatan' => $get_sejarah
+            'mySejarah' => $get_sejarah,
+            'sejarah' => $get_sejarah
         ]);
     }
+
 }
