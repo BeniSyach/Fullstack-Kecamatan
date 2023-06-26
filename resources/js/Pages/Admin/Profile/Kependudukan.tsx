@@ -24,8 +24,7 @@ interface Props {
 
 interface FlashProps {
     flash: {
-        success?: string;
-        error?: string;
+        message?: string;
         // Add more flash message types if needed
     };
 }
@@ -65,20 +64,21 @@ const Penduduk: React.FC<PageProps & Props & FlashProps> = ({
                 popup: "colored-toast",
             },
             showConfirmButton: false,
-            timer: 1500,
+            timer: 2500,
             timerProgressBar: true,
         });
-        if (flash && flash.success) {
+        if (flash && flash.message) {
             Toast.fire({
                 icon: "success",
-                title: flash.success,
-            });
-        } else if (flash && flash.error) {
-            Toast.fire({
-                icon: "error",
-                title: "Data Gagal Diubah",
+                title: flash.message,
             });
         }
+        // else if (flash && flash.error) {
+        //     Toast.fire({
+        //         icon: "error",
+        //         title: "Data Gagal Diubah",
+        //     });
+        // }
     }, [flash]);
     return (
         <Flowbite>

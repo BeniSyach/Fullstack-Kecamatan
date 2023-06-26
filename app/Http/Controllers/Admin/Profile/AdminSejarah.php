@@ -41,7 +41,7 @@ class AdminSejarah extends Controller
             'isi_sejarah' => $request->content
         ]);
 
-        return redirect()->back()->with('message','data berhasil diubah');
+        return redirect()->back()->with('message','Data Berhasil Diubah');
     }
 
 }

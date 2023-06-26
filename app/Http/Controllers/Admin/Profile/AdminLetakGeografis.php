@@ -40,6 +40,6 @@ class AdminLetakGeografis extends Controller
 
         ]);
 
-        return redirect()->back()->with('message','data berhasil diubah');
+        return redirect()->back()->with('message','Data Berhasil Diubah');
     }
 }

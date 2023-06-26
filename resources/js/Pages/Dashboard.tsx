@@ -3,8 +3,42 @@ import { Head } from "@inertiajs/react";
 import { PageProps } from "@/types";
 import React, { useEffect } from "react";
 import { Flowbite } from "flowbite-react";
+import Swal from "sweetalert2";
 
-export default function Dashboard({ auth }: PageProps) {
+interface Props {
+    flash: {
+        message?: string;
+        // Add more flash message types if needed
+    };
+}
+
+const Dashboard: React.FC<PageProps & Props> = ({ auth, flash }) => {
+    useEffect(() => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "dark",
+            customClass: {
+                popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+        });
+        if (flash && flash.message) {
+            Toast.fire({
+                icon: "success",
+                title: flash.message,
+            });
+        }
+        // else if (flash && flash.error) {
+        //     Toast.fire({
+        //         icon: "error",
+        //         title: "Data Gagal Diubah",
+        //     });
+        // }
+    }, [flash]);
+
     return (
         <Flowbite>
             <Head title="Dashboard" />
@@ -38,4 +72,5 @@ export default function Dashboard({ auth }: PageProps) {
             </div>
         </Flowbite>
     );
-}
+};
+export default Dashboard;

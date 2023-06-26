@@ -2,8 +2,9 @@ import { PageProps } from "@/types";
 import { Head, useForm } from "@inertiajs/react";
 import { Button, Flowbite, Label, TextInput } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CKEditorComponen from "@/Components/CKEditorComponen";
+import Swal from "sweetalert2";
 
 interface Props {
     getPrestasi: {
@@ -11,6 +12,10 @@ interface Props {
         judul_prestasi: string;
         deskripsi_prestasi: string;
         isi_prestasi: any;
+    };
+    flash: {
+        message?: string;
+        // Add more flash message types if needed
     };
 }
 
@@ -21,7 +26,11 @@ interface CustomFormData {
     isi_prestasi: any;
 }
 
-const AdminPrestasi: React.FC<PageProps & Props> = ({ auth, getPrestasi }) => {
+const AdminPrestasi: React.FC<PageProps & Props> = ({
+    auth,
+    getPrestasi,
+    flash,
+}) => {
     const [EditorContent, SetEditorContent] = useState(
         getPrestasi.isi_prestasi
     );
@@ -40,6 +49,33 @@ const AdminPrestasi: React.FC<PageProps & Props> = ({ auth, getPrestasi }) => {
         e.preventDefault();
         put(route("updatePrestasi", { id: getPrestasi.idPrestasi }));
     };
+
+    useEffect(() => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "dark",
+            customClass: {
+                popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+        });
+        if (flash && flash.message) {
+            Toast.fire({
+                icon: "success",
+                title: flash.message,
+            });
+        }
+        // else if (flash && flash.error) {
+        //     Toast.fire({
+        //         icon: "error",
+        //         title: "Data Gagal Diubah",
+        //     });
+        // }
+    }, [flash]);
+
     return (
         <Flowbite>
             <Head title="Setting Prestasi" />

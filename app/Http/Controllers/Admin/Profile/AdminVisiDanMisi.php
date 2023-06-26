@@ -39,6 +39,6 @@ class AdminVisiDanMisi extends Controller
         'isi_Visi'=>$request->isi_Visi,
         'isi_Misi'=>$request->isi_Misi
         ]);
-        return redirect()->back()->with('message','data berhasil diubah');
+        return redirect()->back()->with('message','Data Berhasil Diubah');
     }
 }

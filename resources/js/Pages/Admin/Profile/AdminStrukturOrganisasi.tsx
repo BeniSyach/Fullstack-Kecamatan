@@ -2,8 +2,9 @@ import { PageProps } from "@/types";
 import { Head, useForm } from "@inertiajs/react";
 import { Button, Flowbite, Label, TextInput } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CKEditorComponen from "@/Components/CKEditorComponen";
+import Swal from "sweetalert2";
 
 interface Props {
     getStrukturOrganisasi: {
@@ -11,6 +12,10 @@ interface Props {
         judul_struktur_organisasi: string;
         deskripsi_struktur_organisasi: string;
         isi_struktur_organisasi: any;
+    };
+    flash: {
+        message?: string;
+        // Add more flash message types if needed
     };
 }
 
@@ -24,6 +29,7 @@ interface CustomFormData {
 const AdminStrukturOrganisasi: React.FC<PageProps & Props> = ({
     auth,
     getStrukturOrganisasi,
+    flash,
 }) => {
     const [EditorContent, SetEditorContent] = useState(
         getStrukturOrganisasi.isi_struktur_organisasi
@@ -49,6 +55,32 @@ const AdminStrukturOrganisasi: React.FC<PageProps & Props> = ({
             })
         );
     };
+
+    useEffect(() => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "dark",
+            customClass: {
+                popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+        });
+        if (flash && flash.message) {
+            Toast.fire({
+                icon: "success",
+                title: flash.message,
+            });
+        }
+        // else if (flash && flash.error) {
+        //     Toast.fire({
+        //         icon: "error",
+        //         title: "Data Gagal Diubah",
+        //     });
+        // }
+    }, [flash]);
 
     return (
         <Flowbite>

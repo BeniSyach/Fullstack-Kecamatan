@@ -38,6 +38,6 @@ class AdminStrukturOrganisasi extends Controller
         'deskripsi_struktur_organisasi'=>$request->deskripsi_struktur_organisasi,
         'isi_struktur_organisasi'=>$request->isi_struktur_organisasi
         ]);
-        return redirect()->back()->with('message','data berhasil diubah');
+        return redirect()->back()->with('message','Data Berhasil Diubah');
     }
 }

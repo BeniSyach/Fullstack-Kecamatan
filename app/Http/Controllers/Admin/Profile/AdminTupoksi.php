@@ -39,6 +39,6 @@ class AdminTupoksi extends Controller
             'deskripsi_tupoksi' => $request->deskripsi_tupoksi,
             'isi_tupoksi' => $request->isi_tupoksi
         ]);
-        return redirect()->back()->with('message','data berhasil diubah');
+        return redirect()->back()->with('message','Data Berhasil Diubah');
     }
 }

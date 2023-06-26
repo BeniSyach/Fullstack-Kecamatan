@@ -38,6 +38,6 @@ class AdminPrestasi extends Controller
             'deskripsi_prestasi'=>$request->deskripsi_prestasi,
             'isi_prestasi' => $request->isi_prestasi
         ]);
-        return redirect()->back()->with('message','data berhasil diubah');
+        return redirect()->back()->with('message','Data Berhasil Diubah');
     }
 }

@@ -5,6 +5,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { useEffect, useState } from "react";
 import CKEditorComponen from "@/Components/CKEditorComponen";
 import InputError from "@/Components/InputError";
+import Swal from "sweetalert2";
 
 interface Props {
     sejarah: {
@@ -14,6 +15,10 @@ interface Props {
         penulis_sejarah: string;
         jabatan_penulis_sejarah: string;
         isi_sejarah: string;
+    };
+    flash: {
+        message?: string;
+        // Add more flash message types if needed
     };
 }
 
@@ -26,7 +31,7 @@ interface CustomFormData {
     content: any;
 }
 
-const Sejarah: React.FC<PageProps & Props> = ({ auth, sejarah }) => {
+const Sejarah: React.FC<PageProps & Props> = ({ auth, sejarah, flash }) => {
     const [EditorContent, SetEditorContent] = useState(sejarah.isi_sejarah);
     const handleEditorChange = (content: any) => {
         SetEditorContent(content);
@@ -54,6 +59,32 @@ const Sejarah: React.FC<PageProps & Props> = ({ auth, sejarah }) => {
         e.preventDefault();
         put(route("updateSejarah", { id: sejarah.idSejarah }));
     };
+
+    useEffect(() => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "dark",
+            customClass: {
+                popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+        });
+        if (flash && flash.message) {
+            Toast.fire({
+                icon: "success",
+                title: flash.message,
+            });
+        }
+        // else if (flash && flash.error) {
+        //     Toast.fire({
+        //         icon: "error",
+        //         title: "Data Gagal Diubah",
+        //     });
+        // }
+    }, [flash]);
 
     return (
         <Flowbite>

@@ -37,6 +37,6 @@ class AdminAdatDanBudaya extends Controller
             'deskripsi_adatDanBudaya'=>$request->deskripsi_adatDanBudaya,
             'isi_adatDanBudaya'=>$request->isi_adatDanBudaya
         ]);
-        return redirect()->back()->with('success','data berhasil diubah');
+        return redirect()->back()->with('message','Data Berhasil Diubah');
     }
 }

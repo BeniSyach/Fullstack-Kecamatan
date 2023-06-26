@@ -2,8 +2,9 @@ import { PageProps } from "@/types";
 import { Head, useForm } from "@inertiajs/react";
 import { Button, Flowbite, Label, TextInput } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CKEditorComponen from "@/Components/CKEditorComponen";
+import Swal from "sweetalert2";
 
 interface Props {
     getVisiDanMisi: {
@@ -12,6 +13,10 @@ interface Props {
         deskripsi_VisiDanMisi: string;
         isi_Visi: any;
         isi_Misi: any;
+    };
+    flash: {
+        message?: string;
+        // Add more flash message types if needed
     };
 }
 
@@ -23,7 +28,11 @@ interface CustomFormData {
     isi_Misi: any;
 }
 
-const VisiDanMisi: React.FC<PageProps & Props> = ({ auth, getVisiDanMisi }) => {
+const VisiDanMisi: React.FC<PageProps & Props> = ({
+    auth,
+    getVisiDanMisi,
+    flash,
+}) => {
     const [EditorContentVisi, SetEditorContentVisi] = useState(
         getVisiDanMisi.isi_Visi
     );
@@ -51,6 +60,32 @@ const VisiDanMisi: React.FC<PageProps & Props> = ({ auth, getVisiDanMisi }) => {
         e.preventDefault();
         put(route("updateVisiMisi", { id: getVisiDanMisi.id_VisiDanMisi }));
     };
+
+    useEffect(() => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "dark",
+            customClass: {
+                popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+        });
+        if (flash && flash.message) {
+            Toast.fire({
+                icon: "success",
+                title: flash.message,
+            });
+        }
+        // else if (flash && flash.error) {
+        //     Toast.fire({
+        //         icon: "error",
+        //         title: "Data Gagal Diubah",
+        //     });
+        // }
+    }, [flash]);
 
     return (
         <Flowbite>
