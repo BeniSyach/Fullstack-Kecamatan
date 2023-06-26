@@ -13,4 +13,10 @@ class LetakGeografis_Model extends Model
     protected $primaryKey = 'idLetakGeografis';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
+
+    protected $fillable = [
+        'judul_letak_geografis',
+        'Deskripsi_letak_geografis',
+        'isi_letak_geografis',
+    ];
 }
