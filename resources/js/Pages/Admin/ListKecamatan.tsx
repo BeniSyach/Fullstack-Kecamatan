@@ -4,6 +4,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
 import TambahDataKecamatan from "@/Components/TambahDataKecamatan";
 import { useState } from "react";
+import Paginator from "@/Components/Paginator";
 
 interface myKecamatan {
     id: number;
@@ -16,7 +17,12 @@ interface Props {
     domain: {
         judul_website: string;
     };
-    getAllKecamatan: myKecamatan[];
+    getAllKecamatan: {
+        data: myKecamatan[];
+        current_page: number;
+        total: number;
+        links: any;
+    };
 }
 
 const ListKecamatan: React.FC<PageProps & Props> = ({
@@ -24,8 +30,11 @@ const ListKecamatan: React.FC<PageProps & Props> = ({
     domain,
     getAllKecamatan,
 }) => {
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(
+        getAllKecamatan.current_page
+    );
     const onPageChange = (page: number) => setCurrentPage(page);
+    console.log(getAllKecamatan);
     return (
         <Flowbite>
             <Head title="Data Kecamatan" />
@@ -45,9 +54,9 @@ const ListKecamatan: React.FC<PageProps & Props> = ({
                         </Table.HeadCell>
                     </Table.Head>
 
-                    {getAllKecamatan && getAllKecamatan.length > 0 ? (
+                    {getAllKecamatan.data && getAllKecamatan.data.length > 0 ? (
                         <Table.Body className="divide-y">
-                            {getAllKecamatan.map(
+                            {getAllKecamatan.data.map(
                                 (kecamatan: myKecamatan, k: number) => (
                                     <Table.Row
                                         key={k}
@@ -82,16 +91,8 @@ const ListKecamatan: React.FC<PageProps & Props> = ({
                         <p> tidak ada Kecamatan </p>
                     )}
                 </Table>
-                <div className="flex items-center justify-center text-center">
-                    <Pagination
-                        currentPage={2}
-                        layout="table"
-                        onPageChange={(page) => {
-                            setCurrentPage(page);
-                        }}
-                        showIcons
-                        totalPages={1000}
-                    />
+                <div className="flex items-center justify-center text-center mt-10">
+                    <Paginator meta={getAllKecamatan} />
                 </div>
             </AuthenticatedLayout>
         </Flowbite>

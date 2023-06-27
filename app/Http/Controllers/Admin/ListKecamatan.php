@@ -18,7 +18,7 @@ class ListKecamatan extends Controller
         $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
         // get kode Kecamatan
         $get_kd_kecamatan = $domain['kode_kecamatan'];
-        $get_all_kecamatan = Kecamatan::all();
+        $get_all_kecamatan = Kecamatan::paginate(10);
 
         
         return Inertia::render('Admin/ListKecamatan',[
