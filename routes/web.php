@@ -89,9 +89,19 @@ Route::middleware('auth')->group(function () {
 
     // list Kecamatan
     Route::get('/admin/list_kecamatan',[ListKecamatan::class,'index'])->name('listKecamatan');
+    Route::get('/admin/list_kecamatan/create',[ListKecamatan::class,'create'])->name('createKecamatan');
+    Route::post('/admin/list_kecamatan/tambah',[ListKecamatan::class,'store'])->name('tambahDataKecamatan');
+    Route::get('/admin/list_kecamatan/edit/{id}',[ListKecamatan::class,'edit'])->name('EditDataKecamatan');
+    Route::put('/admin/list_kecamatan/update/{id}',[ListKecamatan::class,'update'])->name('updateDataKecamatan');
+    Route::delete('/admin/list_kecamatan/hapus/{id}',[ListKecamatan::class,'hapus'])->name('HapusDataKecamatan');
 
     // list User
     Route::get('/admin/list_user', [UsersController::class,'index'])->name('listUser');
+    Route::get('/admin/list_user/create',[UsersController::class,'create'])->name('createUsers');
+    Route::post('/admin/list_user/tambah',[UsersController::class,'store'])->name('tambahUsers');
+    Route::get('/admin/list_user/edit/{id}',[UsersController::class,'edit'])->name('editUsers');
+    Route::put('/admin/list_user/update/{id}',[UsersController::class,'edit'])->name('updateUsers');
+    Route::delete('/admin/list_user/hapus/{id}',[UsersController::class,'hapus'])->name('hapusUsers');
 
     // list Slider
     Route::get('/admin/slider',[SliderController::class,'index'])->name('listSlider');
