@@ -1,13 +1,14 @@
 import { PageProps } from "@/types";
-import { Flowbite, Pagination, Table } from "flowbite-react";
+import { Badge, Button, Flowbite, Table } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link } from "@inertiajs/react";
-import TambahDataKecamatan from "@/Components/TambahDataKecamatan";
-import { useState } from "react";
+import { Head, Link, useForm } from "@inertiajs/react";
+import { useState, useEffect, FormEventHandler } from "react";
 import Paginator from "@/Components/Paginator";
+import Swal from "sweetalert2";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
 interface myKecamatan {
-    id: number;
+    idDomain: number;
     domain_kecamatan: string;
     kode_kecamatan: number;
     judul_website: string;
@@ -23,18 +24,44 @@ interface Props {
         total: number;
         links: any;
     };
+    flash: {
+        message?: string;
+        // Add more flash message types if needed
+    };
 }
 
 const ListKecamatan: React.FC<PageProps & Props> = ({
     auth,
     domain,
     getAllKecamatan,
+    flash,
 }) => {
-    const [currentPage, setCurrentPage] = useState(
-        getAllKecamatan.current_page
-    );
-    const onPageChange = (page: number) => setCurrentPage(page);
-    console.log(getAllKecamatan);
+    useEffect(() => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "dark",
+            customClass: {
+                popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+        });
+        if (flash && flash.message) {
+            Toast.fire({
+                icon: "success",
+                title: flash.message,
+            });
+        }
+        // else if (flash && flash.error) {
+        //     Toast.fire({
+        //         icon: "error",
+        //         title: "Data Gagal Diubah",
+        //     });
+        // }
+    }, [flash]);
+
     return (
         <Flowbite>
             <Head title="Data Kecamatan" />
@@ -42,13 +69,16 @@ const ListKecamatan: React.FC<PageProps & Props> = ({
                 user={auth.user}
                 header={<h4>Data Kecamatan</h4>}
             >
-                <TambahDataKecamatan />
+                <Link href={route("createKecamatan")} as="div">
+                    <Button className="my-3">Tambah Data Kecamatan</Button>
+                </Link>
                 <Table hoverable className="mt-5">
                     <Table.Head>
                         <Table.HeadCell>No</Table.HeadCell>
                         <Table.HeadCell>Nama Kecamatan</Table.HeadCell>
                         <Table.HeadCell>Domain Kecamatan</Table.HeadCell>
                         <Table.HeadCell>Kode Kecamatan</Table.HeadCell>
+                        <Table.HeadCell>Aksi</Table.HeadCell>
                         <Table.HeadCell>
                             <span className="sr-only">Edit</span>
                         </Table.HeadCell>
@@ -76,12 +106,38 @@ const ListKecamatan: React.FC<PageProps & Props> = ({
                                             {kecamatan.kode_kecamatan}{" "}
                                         </Table.Cell>
                                         <Table.Cell>
-                                            <p className="text-blue-500">
-                                                edit
-                                            </p>
-                                            <p className="text-red-500">
-                                                hapus
-                                            </p>
+                                            <Link
+                                                href={route(
+                                                    "EditDataKecamatan",
+                                                    { id: kecamatan.idDomain }
+                                                )}
+                                                as="button"
+                                                method="get"
+                                            >
+                                                <Badge
+                                                    icon={FaEdit}
+                                                    color="info"
+                                                    className="mx-3"
+                                                >
+                                                    edit
+                                                </Badge>
+                                            </Link>
+                                            <Link
+                                                href={route(
+                                                    "HapusDataKecamatan",
+                                                    { id: kecamatan.idDomain }
+                                                )}
+                                                as="button"
+                                                method="delete"
+                                            >
+                                                <Badge
+                                                    icon={FaTrashAlt}
+                                                    color="failure"
+                                                    className="mx-3"
+                                                >
+                                                    Hapus
+                                                </Badge>
+                                            </Link>
                                         </Table.Cell>
                                     </Table.Row>
                                 )
