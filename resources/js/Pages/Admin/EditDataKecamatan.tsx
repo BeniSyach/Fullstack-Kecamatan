@@ -30,10 +30,10 @@ const EditDataKecamatan: React.FC<PageProps & Props> = ({
 
     return (
         <Flowbite>
-            <Head title="Tambah Data Kecamatan" />
+            <Head title="Edit Data Kecamatan" />
             <AuthenticatedLayout
                 user={auth.user}
-                header={<h4> Tambah Data Kecamatan</h4>}
+                header={<h4> Edit Data Kecamatan</h4>}
             >
                 <div className="space-y-6 w-1/2 ml-5">
                     <form onSubmit={submit}>
@@ -97,7 +97,7 @@ const EditDataKecamatan: React.FC<PageProps & Props> = ({
                                 type="submit"
                                 disabled={processing}
                             >
-                                Tambah
+                                Ubah
                             </Button>
                         </div>
                     </form>

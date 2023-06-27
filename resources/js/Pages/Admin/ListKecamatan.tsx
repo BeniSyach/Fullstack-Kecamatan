@@ -69,7 +69,7 @@ const ListKecamatan: React.FC<PageProps & Props> = ({
                 user={auth.user}
                 header={<h4>Data Kecamatan</h4>}
             >
-                <Link href={route("createKecamatan")} as="div">
+                <Link href={route("createKecamatan")} as="button">
                     <Button className="my-3">Tambah Data Kecamatan</Button>
                 </Link>
                 <Table hoverable className="mt-5">

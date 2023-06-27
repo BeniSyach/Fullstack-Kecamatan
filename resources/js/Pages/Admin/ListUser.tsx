@@ -1,7 +1,10 @@
 import { Head, Link } from "@inertiajs/react";
-import { Flowbite, Table } from "flowbite-react";
+import { Button, Flowbite, Table, Badge } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 interface myUser {
     id: number;
@@ -15,17 +18,50 @@ interface Props {
         judul_website: string;
     };
     getAllUser: myUser[];
+    flash: {
+        message?: string;
+        // Add more flash message types if needed
+    };
 }
 
 const ListUser: React.FC<Props & PageProps> = ({
     auth,
     domain,
     getAllUser,
+    flash,
 }) => {
+    useEffect(() => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "dark",
+            customClass: {
+                popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+        });
+        if (flash && flash.message) {
+            Toast.fire({
+                icon: "success",
+                title: flash.message,
+            });
+        }
+        // else if (flash && flash.error) {
+        //     Toast.fire({
+        //         icon: "error",
+        //         title: "Data Gagal Diubah",
+        //     });
+        // }
+    }, [flash]);
     return (
         <Flowbite>
             <Head title="List User" />
             <AuthenticatedLayout user={auth.user} header={<h4>List User</h4>}>
+                <Link href={route("createUsers")} as="button">
+                    <Button className="my-3">Tambah Data Users</Button>
+                </Link>
                 <Table hoverable>
                     <Table.Head>
                         <Table.HeadCell>No</Table.HeadCell>
@@ -47,12 +83,34 @@ const ListUser: React.FC<Props & PageProps> = ({
                                     <Table.Cell> {user.created_at} </Table.Cell>
                                     <Table.Cell>
                                         <Link
-                                            className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                                            href={route("dashboard", {
+                                            href={route("editUsers", {
                                                 id: user.id,
                                             })}
+                                            as="button"
+                                            method="get"
                                         >
-                                            <p>Edit</p>
+                                            <Badge
+                                                icon={FaEdit}
+                                                color="info"
+                                                className="mx-3"
+                                            >
+                                                edit
+                                            </Badge>
+                                        </Link>
+                                        <Link
+                                            href={route("hapusUsers", {
+                                                id: user.id,
+                                            })}
+                                            as="button"
+                                            method="delete"
+                                        >
+                                            <Badge
+                                                icon={FaTrashAlt}
+                                                color="failure"
+                                                className="mx-3"
+                                            >
+                                                Hapus
+                                            </Badge>
                                         </Link>
                                     </Table.Cell>
                                 </Table.Row>

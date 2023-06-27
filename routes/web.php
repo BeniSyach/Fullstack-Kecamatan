@@ -100,7 +100,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/list_user/create',[UsersController::class,'create'])->name('createUsers');
     Route::post('/admin/list_user/tambah',[UsersController::class,'store'])->name('tambahUsers');
     Route::get('/admin/list_user/edit/{id}',[UsersController::class,'edit'])->name('editUsers');
-    Route::put('/admin/list_user/update/{id}',[UsersController::class,'edit'])->name('updateUsers');
+    Route::put('/admin/list_user/update/{id}',[UsersController::class,'update'])->name('updateUsers');
     Route::delete('/admin/list_user/hapus/{id}',[UsersController::class,'hapus'])->name('hapusUsers');
 
     // list Slider
@@ -108,6 +108,7 @@ Route::middleware('auth')->group(function () {
 
     // Kata Sambutan
     Route::get('/admin/kata_sambutan',[AdminKataSambutan::class,'index'])->name('AdminKataSambutan');
+    Route::put('/admin/kata_sambutan/{id}',[AdminKataSambutan::class,'update'])->name('UpdateKataSambutan');
 
     // Profile admin
     // sejarah
