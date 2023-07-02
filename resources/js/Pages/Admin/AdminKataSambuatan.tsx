@@ -1,16 +1,42 @@
 import CKEditorComponen from "@/Components/CKEditorComponen";
 import { PageProps } from "@/types";
-import { Head } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import { Button, FileInput, Flowbite, Label, TextInput } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { useState } from "react";
+import { useState, FormEventHandler } from "react";
 
-interface Props {}
+interface Props {
+    getKataSambutan: {
+        idKataSambutan: string;
+        nama_kepala_camat: string;
+        gambar_camat: string;
+        judul_kataSambutan: string;
+        isi_kataSambutan: any;
+    };
+}
 
-const AdminKataSambuatan: React.FC<PageProps & Props> = ({ auth }) => {
-    const [EditorContent, SetEditorContent] = useState("");
-    const handleEditorChange = (content: string) => {
+const AdminKataSambuatan: React.FC<PageProps & Props> = ({
+    auth,
+    getKataSambutan,
+}) => {
+    const [EditorContent, SetEditorContent] = useState(
+        getKataSambutan.isi_kataSambutan
+    );
+    const handleEditorChange = (content: any) => {
         SetEditorContent(content);
+        setData("isi_kataSambutan", EditorContent);
+    };
+    const { data, setData, put, errors, processing } = useForm({
+        nama_kepala_camat: getKataSambutan.nama_kepala_camat,
+        gambar_camat: getKataSambutan.gambar_camat,
+        judul_kataSambutan: getKataSambutan.judul_kataSambutan,
+        isi_kataSambutan: getKataSambutan.isi_kataSambutan,
+    });
+    const submit: FormEventHandler = (e) => {
+        e.preventDefault();
+        put(
+            route("UpdateKataSambutan", { id: getKataSambutan.idKataSambutan })
+        );
     };
     return (
         <Flowbite>
@@ -19,8 +45,8 @@ const AdminKataSambuatan: React.FC<PageProps & Props> = ({ auth }) => {
                 user={auth.user}
                 header={<h4>Form Kata Sambutan</h4>}
             >
-                <form action="#" className="mx-5">
-                    <div className="flex max-w-4xl flex-col gap-4">
+                <form onSubmit={submit} className="mx-5">
+                    <div className="flex max-w-2xl flex-col gap-4 ml-3">
                         <div>
                             <div className="mb-2 block">
                                 <Label
@@ -29,16 +55,12 @@ const AdminKataSambuatan: React.FC<PageProps & Props> = ({ auth }) => {
                                 />
                             </div>
                             <TextInput
-                                // helperText={
-                                //     <>
-                                //         <span className="font-medium">
-                                //             Alright!
-                                //         </span>
-                                //         Username available!
-                                //     </>
-                                // }
                                 id="nama_kepala_camat"
                                 name="nama_kepala_camat"
+                                value={data.nama_kepala_camat}
+                                onChange={(e) =>
+                                    setData("nama_kepala_camat", e.target.value)
+                                }
                                 placeholder="Nama Kepala Camat"
                                 required
                             />
@@ -50,6 +72,11 @@ const AdminKataSambuatan: React.FC<PageProps & Props> = ({ auth }) => {
                                     value="Gambar Camat"
                                 />
                             </div>
+                            <img
+                                src={data.gambar_camat}
+                                alt="Foto Camat"
+                                className="w-1/3"
+                            />
                             <FileInput
                                 helperText="Ukuran Gambar Tidak Lebih dari 2 Mb"
                                 id="gambar_camat"
@@ -65,16 +92,15 @@ const AdminKataSambuatan: React.FC<PageProps & Props> = ({ auth }) => {
                                 />
                             </div>
                             <TextInput
-                                // helperText={
-                                //     <>
-                                //         <span className="font-medium">
-                                //             Alright!
-                                //         </span>
-                                //         Username available!
-                                //     </>
-                                // }
                                 id="judul_kataSambutan"
                                 name="judul_kataSambutan"
+                                value={data.judul_kataSambutan}
+                                onChange={(e) =>
+                                    setData(
+                                        "judul_kataSambutan",
+                                        e.target.value
+                                    )
+                                }
                                 placeholder="Judul Kata Sambutan"
                                 required
                             />
@@ -93,7 +119,12 @@ const AdminKataSambuatan: React.FC<PageProps & Props> = ({ auth }) => {
                             />
                         </div>
                     </div>
-                    <Button className="my-5" color="success">
+                    <Button
+                        className="my-5"
+                        color="success"
+                        type="submit"
+                        disabled={processing}
+                    >
                         Ubah
                     </Button>
                 </form>
