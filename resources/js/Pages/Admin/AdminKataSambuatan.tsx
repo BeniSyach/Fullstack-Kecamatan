@@ -81,6 +81,9 @@ const AdminKataSambuatan: React.FC<PageProps & Props> = ({
                                 helperText="Ukuran Gambar Tidak Lebih dari 2 Mb"
                                 id="gambar_camat"
                                 name="gambar_camat"
+                                onChange={(e) =>
+                                    setData("gambar_camat", e.target.value)
+                                }
                             />
                         </div>
 

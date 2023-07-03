@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateKataSambuatanRequest;
 use App\Models\KataSambutan_Model;
 use App\Models\Kecamatan;
 use Illuminate\Http\Request;
@@ -27,5 +28,16 @@ class AdminKataSambutan extends Controller
             'status' => session('status'),
             'getKataSambutan' => $get_kataSambutan
         ]);
+    }
+
+    public function update(UpdateKataSambuatanRequest $request, KataSambutan_Model $kata_sambutan)
+    {
+        $kata_sambutan::find(request()->segment(4))->update([
+            'nama_kepala_camat'=> $request->nama_kepala_camat,
+            'gambar_camat'=> $request->gambar_camat,
+            'judul_kataSambutan'=> $request->judul_kataSambutan,
+            'isi_kataSambutan'=> $request->isi_kataSambutan,
+        ]);
+        return redirect(route('listKecamatan'))->with('message','Data Berhasil Di Ubah');
     }
 }
