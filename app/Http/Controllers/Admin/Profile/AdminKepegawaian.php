@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin\Profile;
 
 use App\Http\Controllers\Controller;
-use App\Models\Adat_dan_budaya_Model;
+use App\Http\Requests\StorePegawaiRequest;
+use App\Http\Requests\UpdatePegawaiRequest;
 use App\Models\Kecamatan;
 use App\Models\Kepegawaian_Model;
 use Illuminate\Http\Request;
@@ -29,5 +30,29 @@ class AdminKepegawaian extends Controller
             'status' => session('status'),
             'getKepegawaian' => $get_kepegawaian
         ]);
+    }
+
+    public function create()
+    {
+        return Inertia::render('Admin/Profile/TambahDataPegawai');
+    }
+
+    public function store(StorePegawaiRequest $request)
+    {
+
+    }
+
+    public function edit($id)
+    {
+
+    }
+
+    public function update(UpdatePegawaiRequest $request, Kepegawaian_Model $pegawai)
+    {
+
+    }
+
+    public function hapus($id)
+    {
     }
 }

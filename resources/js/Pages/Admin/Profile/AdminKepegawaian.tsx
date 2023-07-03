@@ -1,10 +1,11 @@
 import { Head, Link } from "@inertiajs/react";
-import { Flowbite, Table } from "flowbite-react";
+import { Badge, Button, Flowbite, Table } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
 interface myUser {
-    id: number;
+    idKepegawaian: number;
     nama_pegawai: string;
     gambar_pegawai: string;
     jabatan_pegawai: string;
@@ -34,6 +35,9 @@ const AdminKepegawaian: React.FC<Props & PageProps> = ({
                 user={auth.user}
                 header={<h4>List Pegawai</h4>}
             >
+                <Link href={route("createPegawai")} as="button">
+                    <Button className="my-3">Tambah Data Pegawai</Button>
+                </Link>
                 <Table hoverable>
                     <Table.Head>
                         <Table.HeadCell>No</Table.HeadCell>
@@ -89,12 +93,34 @@ const AdminKepegawaian: React.FC<Props & PageProps> = ({
                                         </Table.Cell>
                                         <Table.Cell>
                                             <Link
-                                                className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                                                href={route("dashboard", {
-                                                    id: pegawai.id,
+                                                href={route("editPegawai", {
+                                                    id: pegawai.idKepegawaian,
                                                 })}
+                                                as="button"
+                                                method="get"
                                             >
-                                                <p>Edit</p>
+                                                <Badge
+                                                    icon={FaEdit}
+                                                    color="info"
+                                                    className="mx-3"
+                                                >
+                                                    edit
+                                                </Badge>
+                                            </Link>
+                                            <Link
+                                                href={route("hapusPegawai", {
+                                                    id: pegawai.idKepegawaian,
+                                                })}
+                                                as="button"
+                                                method="delete"
+                                            >
+                                                <Badge
+                                                    icon={FaTrashAlt}
+                                                    color="failure"
+                                                    className="mx-3"
+                                                >
+                                                    Hapus
+                                                </Badge>
                                             </Link>
                                         </Table.Cell>
                                     </Table.Row>

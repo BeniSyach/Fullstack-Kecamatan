@@ -151,11 +151,23 @@ Route::middleware('auth')->group(function () {
     
     // Kepegawaian
     Route::get('/admin/kepegawaian',[AdminKepegawaian::class,'index'])->name('AdminKepegawaian');
+    Route::get('/admin/kepegawaian/create',[AdminKepegawaian::class,'create'])->name('createPegawai');
+    Route::post('/admin/kepegawaian/tambah',[AdminKepegawaian::class,'store'])->name('tambahPegawai');
+    Route::get('/admin/kepegawaian/edit/{id}',[AdminKepegawaian::class,'edit'])->name('editPegawai');
+    Route::put('/admin/kepegawaian/update/{id}',[AdminKepegawaian::class,'update'])->name('updatePegawai');
+    Route::delete('/admin/kepegawaian/hapus/{id}',[AdminKepegawaian::class,'hapus'])->name('hapusPegawai');
 
     // Publikasi Admin
+    // Berita
     Route::get('/admin/berita',[AdminBerita::class,'index'])->name('AdminBerita');
+
+    // Video Kegiatan
     Route::get('/admin/video_kegiatan',[AdminVideoKegiatan::class,'index'])->name('AdminVideoKegiatan');
+
+    // Foto Kegiatan
     Route::get('/admin/foto_kegiatan',[AdminFotoKegiatan::class,'index'])->name('AdminFotoKegiatan');
+
+    // Wisata
     Route::get('/admin/wisata',[AdminWisata::class,'index'])->name('AdminWisata');
 });
 
