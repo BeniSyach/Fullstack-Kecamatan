@@ -160,15 +160,38 @@ Route::middleware('auth')->group(function () {
     // Publikasi Admin
     // Berita
     Route::get('/admin/berita',[AdminBerita::class,'index'])->name('AdminBerita');
+    Route::get('/admin/berita/create',[AdminBerita::class,'create'])->name('createBerita');
+    Route::post('/admin/berita/tambah',[AdminBerita::class,'store'])->name('tambahBerita');
+    Route::get('/admin/berita/edit/{id}',[AdminBerita::class,'edit'])->name('editBerita');
+    Route::put('/admin/berita/update/{id}',[AdminBerita::class,'update'])->name('updateBerita');
+    Route::delete('/admin/berita/hapus/{id}',[AdminBerita::class,'hapus'])->name('hapusBerita');
 
     // Video Kegiatan
     Route::get('/admin/video_kegiatan',[AdminVideoKegiatan::class,'index'])->name('AdminVideoKegiatan');
+    Route::get('/admin/video_kegiatan/create',[AdminVideoKegiatan::class,'create'])->name('createVideoKegiatan');
+    Route::post('/admin/video_kegiatan/tambah',[AdminVideoKegiatan::class,'store'])->name('tambahVideoKegiatan');
+    Route::get('/admin/video_kegiatan/edit/{id}',[AdminVideoKegiatan::class,'edit'])->name('editVideoKegiatan');
+    Route::put('/admin/video_kegiatan/update/{id}',[AdminVideoKegiatan::class,'update'])->name('updateVideoKegiatan');
+    Route::delete('/admin/video_kegiatan/hapus/{id}',[AdminVideoKegiatan::class,'hapus'])->name('hapusVideoKegiatan');
 
     // Foto Kegiatan
     Route::get('/admin/foto_kegiatan',[AdminFotoKegiatan::class,'index'])->name('AdminFotoKegiatan');
+    Route::get('/admin/foto_kegiatan/create',[AdminFotoKegiatan::class,'create'])->name('createFotoAdminFotoKegiatan');
+    Route::post('/admin/foto_kegiatan/tambah',[AdminFotoKegiatan::class,'store'])->name('tambahFotoAdminFotoKegiatan');
+    Route::get('/admin/foto_kegiatan/edit/{id}',[AdminFotoKegiatan::class,'edit'])->name('editFotoAdminFotoKegiatan');
+    Route::put('/admin/foto_kegiatan/update/{id}',[AdminFotoKegiatan::class,'update'])->name('updateFotoAdminFotoKegiatan');
+    Route::delete('/admin/foto_kegiatan/hapus/{id}',[AdminFotoKegiatan::class,'hapus'])->name('hapusFotoAdminFotoKegiatan');
 
     // Wisata
     Route::get('/admin/wisata',[AdminWisata::class,'index'])->name('AdminWisata');
+    Route::get('/admin/wisata/create',[AdminWisata::class,'create'])->name('createWisata');
+    Route::post('/admin/wisata/tambah',[AdminWisata::class,'store'])->name('tambahWisata');
+    Route::get('/admin/wisata/edit/{id}',[AdminWisata::class,'edit'])->name('editWisata');
+    Route::put('/admin/wisata/update/{id}',[AdminWisata::class,'update'])->name('updateWisata');
+    Route::delete('/admin/wisata/hapus/{id}',[AdminWisata::class,'hapus'])->name('hapusWisata');
+
+    // Agenda
+    
 });
 
 require __DIR__.'/auth.php';

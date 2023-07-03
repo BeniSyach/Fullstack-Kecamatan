@@ -34,7 +34,7 @@ const TambahDataSlider: React.FC<PageProps> = ({ auth }) => {
                             <div className="mt-2 block">
                                 <Label
                                     htmlFor="gambar_slider"
-                                    value="Nama Slider"
+                                    value="Gambar Slider"
                                 />
                             </div>
                             <FileInput
