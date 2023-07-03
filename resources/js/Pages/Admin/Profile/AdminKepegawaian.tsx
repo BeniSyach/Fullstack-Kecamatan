@@ -3,6 +3,9 @@ import { Badge, Button, Flowbite, Table } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
+import Paginator from "@/Components/Paginator";
 
 interface myUser {
     idKepegawaian: number;
@@ -20,14 +23,49 @@ interface Props {
     domain: {
         judul_website: string;
     };
-    getKepegawaian: myUser[];
+    getKepegawaian: {
+        data: myUser[];
+        current_page: number;
+        total: number;
+        links: any;
+    };
+    flash: {
+        message?: string;
+        // Add more flash message types if needed
+    };
 }
 
 const AdminKepegawaian: React.FC<Props & PageProps> = ({
     auth,
     domain,
     getKepegawaian,
+    flash,
 }) => {
+    useEffect(() => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "dark",
+            customClass: {
+                popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+        });
+        if (flash && flash.message) {
+            Toast.fire({
+                icon: "success",
+                title: flash.message,
+            });
+        }
+        // else if (flash && flash.error) {
+        //     Toast.fire({
+        //         icon: "error",
+        //         title: "Data Gagal Diubah",
+        //     });
+        // }
+    }, [flash]);
     return (
         <Flowbite>
             <Head title="List Kepegawaian" />
@@ -54,11 +92,14 @@ const AdminKepegawaian: React.FC<Props & PageProps> = ({
                         </Table.HeadCell>
                     </Table.Head>
 
-                    {getKepegawaian && getKepegawaian.length > 0 ? (
+                    {getKepegawaian && getKepegawaian.data.length > 0 ? (
                         <Table.Body className="divide-y">
-                            {getKepegawaian.map(
+                            {getKepegawaian.data.map(
                                 (pegawai: myUser, k: number) => (
-                                    <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                                    <Table.Row
+                                        key={k}
+                                        className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                                    >
                                         <Table.Cell>{k + 1}</Table.Cell>
                                         <Table.Cell>
                                             {" "}
@@ -131,6 +172,9 @@ const AdminKepegawaian: React.FC<Props & PageProps> = ({
                         <p> tidak ada Pegawai </p>
                     )}
                 </Table>
+                <div className="flex items-center justify-center text-center mt-10">
+                    <Paginator meta={getKepegawaian} />
+                </div>
             </AuthenticatedLayout>
         </Flowbite>
     );
