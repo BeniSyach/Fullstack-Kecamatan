@@ -38,21 +38,26 @@ class AdminVideoKegiatan extends Controller
 
     public function store(StoreVideoRequest $request)
     {
-
+        return redirect(route('AdminVideoKegiatan'))->with('message','Data Berhasil Di Tambah');
     }
 
     public function edit($id)
     {
-
+        $data = Video_Model::where('idVideo',$id)->first();
+        return Inertia::render('Admin/Publikasi/EditDataVideo',[
+            'video' => $data,
+        ]);
     }
 
     public function update(UpdateVideoRequest $request, Video_Model $video)
     {
-
+        return redirect(route('AdminVideoKegiatan'))->with('message','Data Berhasil Di Ubah');
     }
 
     public function hapus($id)
     {
-        
+        $video =Video_Model::find($id);
+        $video->delete();
+        return redirect(route('AdminVideoKegiatan'))->with('message','Data Berhasil Di Hapus');
     }
 }

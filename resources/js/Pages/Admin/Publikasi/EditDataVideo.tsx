@@ -6,20 +6,22 @@ import { PageProps } from "@/types";
 import CKEditorComponen from "@/Components/CKEditorComponen";
 
 interface Props {
-    judul_video_kegiatan: string;
-    video: string;
+    video: {
+        judul_video_kegiatan: string;
+        video: string;
+    };
 }
 
-const TambahDataVideo: React.FC<PageProps & Props> = ({ auth }) => {
-    const [EditorContent, SetEditorContent] = useState("");
+const EditDataVideo: React.FC<PageProps & Props> = ({ auth, video }) => {
+    const [EditorContent, SetEditorContent] = useState(video.video);
     const handleEditorChange = (content: any) => {
         SetEditorContent(content);
         setData("video", EditorContent);
     };
 
     const { data, setData, post, errors, processing } = useForm({
-        judul_video_kegiatan: "",
-        video: "",
+        judul_video_kegiatan: video.judul_video_kegiatan,
+        video: video.video,
     });
 
     const submit: FormEventHandler = (e) => {
@@ -29,11 +31,8 @@ const TambahDataVideo: React.FC<PageProps & Props> = ({ auth }) => {
 
     return (
         <Flowbite>
-            <Head title="Tambah Video" />
-            <AuthenticatedLayout
-                user={auth.user}
-                header={<h4> Tambah Video</h4>}
-            >
+            <Head title="Edit Video" />
+            <AuthenticatedLayout user={auth.user} header={<h4> Edit Video</h4>}>
                 <div className="space-y-6 ml-5">
                     <form onSubmit={submit}>
                         <div className="max-w-xl">
@@ -76,7 +75,7 @@ const TambahDataVideo: React.FC<PageProps & Props> = ({ auth }) => {
                                 type="submit"
                                 disabled={processing}
                             >
-                                Tambah
+                                Ubah
                             </Button>
                         </div>
                     </form>
@@ -85,4 +84,4 @@ const TambahDataVideo: React.FC<PageProps & Props> = ({ auth }) => {
         </Flowbite>
     );
 };
-export default TambahDataVideo;
+export default EditDataVideo;
