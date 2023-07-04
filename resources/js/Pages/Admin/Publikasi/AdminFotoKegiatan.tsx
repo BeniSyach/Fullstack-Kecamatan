@@ -1,22 +1,37 @@
 import { PageProps } from "@/types";
-import { Flowbite, Table } from "flowbite-react";
+import { Button, Flowbite, Table, Badge } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
-interface myFoto {}
+interface childProps {
+    idFoto: number;
+    judul_foto_kegiatan: string;
+    foto: string;
+    created_at: string;
+}
 
 interface Props {
     domain: {
         judul_website: string;
     };
-    // getVideo: myVideo[];
+    foto: {
+        data: childProps[];
+    };
 }
 
-const AdminFotoKegiatan: React.FC<PageProps & Props> = ({ auth, domain }) => {
+const AdminFotoKegiatan: React.FC<PageProps & Props> = ({
+    auth,
+    domain,
+    foto,
+}) => {
     return (
         <Flowbite>
             <Head title="List Foto" />
             <AuthenticatedLayout user={auth.user} header={<h4>List Foto</h4>}>
+                <Link href={route("createFotoAdminFotoKegiatan")} as="button">
+                    <Button className="my-3">Tambah Foto</Button>
+                </Link>
                 <Table hoverable>
                     <Table.Head>
                         <Table.HeadCell>No</Table.HeadCell>
@@ -27,9 +42,9 @@ const AdminFotoKegiatan: React.FC<PageProps & Props> = ({ auth, domain }) => {
                         </Table.HeadCell>
                     </Table.Head>
 
-                    {/* {getBerita && getBerita.length > 0 ? (
+                    {foto && foto.data.length > 0 ? (
                         <Table.Body className="divide-y">
-                            {getBerita.map((berita: myBerita, k: number) => (
+                            {foto.data.map((ft: childProps, k: number) => (
                                 <Table.Row
                                     key={k}
                                     className="bg-white dark:border-gray-700 dark:bg-gray-800"
@@ -37,28 +52,51 @@ const AdminFotoKegiatan: React.FC<PageProps & Props> = ({ auth, domain }) => {
                                     <Table.Cell>{k + 1}</Table.Cell>
                                     <Table.Cell>
                                         {" "}
-                                        {berita.judul_berita}{" "}
+                                        {ft.judul_foto_kegiatan}{" "}
                                     </Table.Cell>
                                     <Table.Cell>
                                         <img
-                                            src={berita.gambar_berita}
+                                            src={ft.foto}
                                             alt="Gambar Berita"
                                             className="w-1/4"
                                         />
                                     </Table.Cell>
                                     <Table.Cell>
-                                        {" "}
-                                        {berita.jenis_kategori_berita}{" "}
-                                    </Table.Cell>
-                                    <Table.Cell> {berita.name} </Table.Cell>
-                                    <Table.Cell>
                                         <Link
-                                            className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                                            href={route("dashboard", {
-                                                id: berita.idBerita,
-                                            })}
+                                            href={route(
+                                                "editFotoAdminFotoKegiatan",
+                                                {
+                                                    id: ft.idFoto,
+                                                }
+                                            )}
+                                            as="button"
+                                            method="get"
                                         >
-                                            <p>Edit</p>
+                                            <Badge
+                                                icon={FaEdit}
+                                                color="info"
+                                                className="mx-3 my-3"
+                                            >
+                                                edit
+                                            </Badge>
+                                        </Link>
+                                        <Link
+                                            href={route(
+                                                "hapusFotoAdminFotoKegiatan",
+                                                {
+                                                    id: ft.idFoto,
+                                                }
+                                            )}
+                                            as="button"
+                                            method="delete"
+                                        >
+                                            <Badge
+                                                icon={FaTrashAlt}
+                                                color="failure"
+                                                className="mx-3 my-3"
+                                            >
+                                                Hapus
+                                            </Badge>
                                         </Link>
                                     </Table.Cell>
                                 </Table.Row>
@@ -66,7 +104,7 @@ const AdminFotoKegiatan: React.FC<PageProps & Props> = ({ auth, domain }) => {
                         </Table.Body>
                     ) : (
                         <p> tidak ada Foto Kegiatan </p>
-                    )} */}
+                    )}
                 </Table>
             </AuthenticatedLayout>
         </Flowbite>

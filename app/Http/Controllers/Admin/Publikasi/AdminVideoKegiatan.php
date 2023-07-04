@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin\Publikasi;
 
 use App\Http\Controllers\Controller;
-use App\Models\Berita_Model;
 use App\Models\Kecamatan;
+use App\Models\Video_Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Inertia\Inertia;
@@ -20,11 +20,12 @@ class AdminVideoKegiatan extends Controller
         // get kode Kecamatan
         $get_kd_kecamatan = $domain['kode_kecamatan'];
 
-        
+        $video = Video_Model::where('kode_kecamatan',$get_kd_kecamatan)->latest()->paginate(10);
         
         return Inertia::render('Admin/Publikasi/AdminVideoKegiatan',[
             'domain' => $domain,
-            'status' => session('status')
+            'status' => session('status'),
+            'video' => $video
         ]);
     }
 }

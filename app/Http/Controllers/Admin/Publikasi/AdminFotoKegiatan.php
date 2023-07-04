@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Publikasi;
 
 use App\Http\Controllers\Controller;
+use App\Models\Foto_Model;
 use App\Models\Kecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as FacadesRequest;
@@ -18,12 +19,14 @@ class AdminFotoKegiatan extends Controller
         $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
         // get kode Kecamatan
         $get_kd_kecamatan = $domain['kode_kecamatan'];
-
+        // get data foto dengan kode kecamatan
+        $foto = Foto_Model::where('kode_kecamatan',$get_kd_kecamatan)->latest()->paginate(10);
 
         
         return Inertia::render('Admin/Publikasi/AdminFotoKegiatan',[
             'domain' => $domain,
-            'status' => session('status')
+            'status' => session('status'),
+            'foto' => $foto
         ]);
     }
 }

@@ -1,22 +1,36 @@
 import { PageProps } from "@/types";
-import { Flowbite, Table } from "flowbite-react";
+import { Badge, Button, Flowbite, Table } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
-interface myVideo {}
+interface myVideo {
+    idVideo: number;
+    judul_video_kegiatan: string;
+    video: string;
+}
 
 interface Props {
     domain: {
         judul_website: string;
     };
-    // getVideo: myVideo[];
+    video: {
+        data: myVideo[];
+    };
 }
 
-const AdminVideoKegiatan: React.FC<PageProps & Props> = ({ auth, domain }) => {
+const AdminVideoKegiatan: React.FC<PageProps & Props> = ({
+    auth,
+    domain,
+    video,
+}) => {
     return (
         <Flowbite>
             <Head title="List Video" />
             <AuthenticatedLayout user={auth.user} header={<h4>List Video</h4>}>
+                <Link href={route("createVideoKegiatan")} as="button">
+                    <Button className="my-3">Tambah Video</Button>
+                </Link>
                 <Table hoverable>
                     <Table.Head>
                         <Table.HeadCell>No</Table.HeadCell>
@@ -27,9 +41,9 @@ const AdminVideoKegiatan: React.FC<PageProps & Props> = ({ auth, domain }) => {
                         </Table.HeadCell>
                     </Table.Head>
 
-                    {/* {getBerita && getBerita.length > 0 ? (
+                    {video && video.data.length > 0 ? (
                         <Table.Body className="divide-y">
-                            {getBerita.map((berita: myBerita, k: number) => (
+                            {video.data.map((vd: myVideo, k: number) => (
                                 <Table.Row
                                     key={k}
                                     className="bg-white dark:border-gray-700 dark:bg-gray-800"
@@ -37,28 +51,43 @@ const AdminVideoKegiatan: React.FC<PageProps & Props> = ({ auth, domain }) => {
                                     <Table.Cell>{k + 1}</Table.Cell>
                                     <Table.Cell>
                                         {" "}
-                                        {berita.judul_berita}{" "}
+                                        {vd.judul_video_kegiatan}{" "}
                                     </Table.Cell>
-                                    <Table.Cell>
-                                        <img
-                                            src={berita.gambar_berita}
-                                            alt="Gambar Berita"
-                                            className="w-1/4"
-                                        />
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        {" "}
-                                        {berita.jenis_kategori_berita}{" "}
-                                    </Table.Cell>
-                                    <Table.Cell> {berita.name} </Table.Cell>
+                                    <div
+                                        dangerouslySetInnerHTML={{
+                                            __html: vd.video,
+                                        }}
+                                    />
                                     <Table.Cell>
                                         <Link
-                                            className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
-                                            href={route("dashboard", {
-                                                id: berita.idBerita,
+                                            href={route("editVideoKegiatan", {
+                                                id: vd.idVideo,
                                             })}
+                                            as="button"
+                                            method="get"
                                         >
-                                            <p>Edit</p>
+                                            <Badge
+                                                icon={FaEdit}
+                                                color="info"
+                                                className="mx-3 my-3"
+                                            >
+                                                edit
+                                            </Badge>
+                                        </Link>
+                                        <Link
+                                            href={route("hapusVideoKegiatan", {
+                                                id: vd.idVideo,
+                                            })}
+                                            as="button"
+                                            method="delete"
+                                        >
+                                            <Badge
+                                                icon={FaTrashAlt}
+                                                color="failure"
+                                                className="mx-3 my-3"
+                                            >
+                                                Hapus
+                                            </Badge>
                                         </Link>
                                     </Table.Cell>
                                 </Table.Row>
@@ -66,7 +95,7 @@ const AdminVideoKegiatan: React.FC<PageProps & Props> = ({ auth, domain }) => {
                         </Table.Body>
                     ) : (
                         <p> tidak ada Video Kegiatan </p>
-                    )} */}
+                    )}
                 </Table>
             </AuthenticatedLayout>
         </Flowbite>
