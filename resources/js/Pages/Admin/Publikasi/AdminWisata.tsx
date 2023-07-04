@@ -27,7 +27,7 @@ const AdminWisata: React.FC<PageProps & Props> = ({ auth, domain }) => {
                         </Table.HeadCell>
                     </Table.Head>
 
-                    {/* {getBerita && getBerita.length > 0 ? (
+                    {getBerita && getBerita.length > 0 ? (
                         <Table.Body className="divide-y">
                             {getBerita.map((berita: myBerita, k: number) => (
                                 <Table.Row
@@ -65,8 +65,8 @@ const AdminWisata: React.FC<PageProps & Props> = ({ auth, domain }) => {
                             ))}
                         </Table.Body>
                     ) : (
-                        <p> tidak ada Video Kegiatan </p>
-                    )} */}
+                        <p> Tidak Ada Wisata </p>
+                    )}
                 </Table>
             </AuthenticatedLayout>
         </Flowbite>
