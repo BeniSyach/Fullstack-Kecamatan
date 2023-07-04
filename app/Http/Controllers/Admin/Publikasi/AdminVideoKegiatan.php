@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Publikasi;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreVideoRequest;
+use App\Http\Requests\UpdateVideoRequest;
 use App\Models\Kecamatan;
 use App\Models\Video_Model;
 use Illuminate\Http\Request;
@@ -27,5 +29,30 @@ class AdminVideoKegiatan extends Controller
             'status' => session('status'),
             'video' => $video
         ]);
+    }
+
+    public function create()
+    {
+        return Inertia::render('Admin/Publikasi/AdminVideoKegiatan');
+    }
+
+    public function store(StoreVideoRequest $request)
+    {
+
+    }
+
+    public function edit($id)
+    {
+
+    }
+
+    public function update(UpdateVideoRequest $request, Video_Model $video)
+    {
+
+    }
+
+    public function hapus($id)
+    {
+        
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Publikasi;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreFotoRequest;
+use App\Http\Requests\UpdateFotoRequest;
 use App\Models\Foto_Model;
 use App\Models\Kecamatan;
 use Illuminate\Http\Request;
@@ -28,5 +30,30 @@ class AdminFotoKegiatan extends Controller
             'status' => session('status'),
             'foto' => $foto
         ]);
+    }
+
+    public function create()
+    {
+        return Inertia::render('Admin/Publikasi/AdminVideoKegiatan');
+    }
+
+    public function store(StoreFotoRequest $request)
+    {
+
+    }
+
+    public function edit($id)
+    {
+
+    }
+
+    public function update(UpdateFotoRequest $request, Foto_Model $foto)
+    {
+
+    }
+
+    public function hapus($id)
+    {
+        
     }
 }
