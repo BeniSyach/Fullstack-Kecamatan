@@ -3,7 +3,12 @@ import Navbar from "@/Components/Navbar";
 import { Head, Link } from "@inertiajs/react";
 import { Flowbite, Carousel, Badge } from "flowbite-react";
 import FooterLandingPage from "../Components/FooterLandingPage";
-import { FaTachometerAlt } from "react-icons/fa";
+import {
+    FaDatabase,
+    FaEarlybirds,
+    FaLandmark,
+    FaTachometerAlt,
+} from "react-icons/fa";
 import Kerjasama from "@/Components/KerjaSama";
 import { format, parseISO } from "date-fns";
 import { id } from "date-fns/locale";
@@ -104,9 +109,9 @@ const Home: React.FC<Props> = ({
                     className="cursor-pointer"
                 >
                     <div className="flex flex-row flex-wrap justify-center items-center m-2 text-center  max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <FaTachometerAlt size={50} color="#FF0000" />
+                        <FaLandmark size={50} color="#FF0000" />
 
-                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        <h5 className="my-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             Data Profil Kecamatan {domain.judul_website}
                         </h5>
                         <p className=" font-normal text-gray-700 dark:text-gray-400">
@@ -116,9 +121,9 @@ const Home: React.FC<Props> = ({
                 </Link>
                 <Link href="" as="div" className="cursor-pointer">
                     <div className="flex flex-row flex-wrap justify-center items-center m-2 text-center  max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <FaTachometerAlt size={50} color="#FF0000" />
+                        <FaDatabase size={50} color="#FF0000" />
 
-                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        <h5 className="my-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             Data Statistik Kecamatan {domain.judul_website}
                         </h5>
                         <p className=" font-normal text-gray-700 dark:text-gray-400">
@@ -133,9 +138,9 @@ const Home: React.FC<Props> = ({
                     className="cursor-pointer"
                 >
                     <div className="flex flex-row flex-wrap justify-center items-center m-2 text-center  max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                        <FaTachometerAlt size={50} color="#FF0000" />
+                        <FaEarlybirds size={50} color="#FF0000" />
 
-                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        <h5 className="my-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                             Info Wisata di Kecamatan {domain.judul_website}
                         </h5>
                         <p className=" font-normal text-gray-700 dark:text-gray-400">

@@ -20,7 +20,7 @@ class AdminVideoKegiatan extends Controller
         // get kode Kecamatan
         $get_kd_kecamatan = $domain['kode_kecamatan'];
 
-
+        
         
         return Inertia::render('Admin/Publikasi/AdminVideoKegiatan',[
             'domain' => $domain,
