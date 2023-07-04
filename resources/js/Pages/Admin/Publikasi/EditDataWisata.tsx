@@ -14,24 +14,30 @@ import { PageProps } from "@/types";
 import CKEditorComponen from "@/Components/CKEditorComponen";
 
 interface Props {
-    judul_wisata: string;
-    foto_wisata: string;
-    deskripsi_wisata: string;
-    konten_wisata: string;
+    wisata: {
+        judul_wisata: string;
+        foto_wisata: string;
+        deskripsi_wisata: string;
+        konten_wisata: string;
+    };
 }
 
-const TambahDataWisata: React.FC<PageProps & Props> = ({ auth }) => {
-    const [EditorContent, SetEditorContent] = useState("");
+const EditDataWisata: React.FC<PageProps & Props> = ({
+    auth,
+    kategori_berita,
+    wisata,
+}) => {
+    const [EditorContent, SetEditorContent] = useState(wisata.konten_wisata);
     const handleEditorChange = (content: any) => {
         SetEditorContent(content);
         setData("konten_wisata", EditorContent);
     };
 
     const { data, setData, post, errors, processing } = useForm({
-        judul_wisata: "",
-        foto_wisata: "",
-        deskripsi_wisata: "",
-        konten_wisata: "",
+        judul_wisata: wisata.judul_wisata,
+        foto_wisata: wisata.foto_wisata,
+        deskripsi_wisata: wisata.deskripsi_wisata,
+        konten_wisata: wisata.konten_wisata,
     });
 
     const submit: FormEventHandler = (e) => {
@@ -41,10 +47,10 @@ const TambahDataWisata: React.FC<PageProps & Props> = ({ auth }) => {
 
     return (
         <Flowbite>
-            <Head title="Tambah Wisata" />
+            <Head title="Edit Wisata" />
             <AuthenticatedLayout
                 user={auth.user}
-                header={<h4> Tambah Wisata</h4>}
+                header={<h4> Edit Wisata</h4>}
             >
                 <div className="space-y-6 ml-5">
                     <form onSubmit={submit}>
@@ -73,6 +79,11 @@ const TambahDataWisata: React.FC<PageProps & Props> = ({ auth }) => {
                                     value="Foto Wisata"
                                 />
                             </div>
+                            <img
+                                src={data.foto_wisata}
+                                alt="Foto Berita"
+                                className="w-1/3 mb-3"
+                            />
                             <FileInput
                                 helperText="Ukuran Gambar Tidak Lebih dari 2 Mb"
                                 id="foto_wisata"
@@ -127,4 +138,4 @@ const TambahDataWisata: React.FC<PageProps & Props> = ({ auth }) => {
         </Flowbite>
     );
 };
-export default TambahDataWisata;
+export default EditDataWisata;

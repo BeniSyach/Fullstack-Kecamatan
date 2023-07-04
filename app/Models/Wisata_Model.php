@@ -13,4 +13,12 @@ class Wisata_Model extends Model
     protected $primaryKey = 'idWisata';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
+
+    protected $fillable = [
+        'judul_wisata',
+        'foto_wisata',
+        'deskripsi_wisata',
+        'konten_wisata',
+    ];
+
 }

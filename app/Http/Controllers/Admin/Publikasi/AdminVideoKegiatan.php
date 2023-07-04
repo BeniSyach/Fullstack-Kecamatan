@@ -33,7 +33,7 @@ class AdminVideoKegiatan extends Controller
 
     public function create()
     {
-        return Inertia::render('Admin/Publikasi/AdminVideoKegiatan');
+        return Inertia::render('Admin/Publikasi/TambahDataVideo');
     }
 
     public function store(StoreVideoRequest $request)

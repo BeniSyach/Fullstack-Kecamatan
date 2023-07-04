@@ -4,6 +4,8 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
 import Wisata from "@/Pages/Publikasi/Wisata";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 interface myWisata {}
 
@@ -12,9 +14,42 @@ interface Props {
         judul_website: string;
     };
     wisata: any;
+    flash: {
+        message?: string;
+    };
 }
 
-const AdminWisata: React.FC<PageProps & Props> = ({ auth, domain, wisata }) => {
+const AdminWisata: React.FC<PageProps & Props> = ({
+    auth,
+    domain,
+    wisata,
+    flash,
+}) => {
+    useEffect(() => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "dark",
+            customClass: {
+                popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+        });
+        if (flash && flash.message) {
+            Toast.fire({
+                icon: "success",
+                title: flash.message,
+            });
+        }
+        // else if (flash && flash.error) {
+        //     Toast.fire({
+        //         icon: "error",
+        //         title: "Data Gagal Diubah",
+        //     });
+        // }
+    }, [flash]);
     return (
         <Flowbite>
             <Head title="List Wisata" />
@@ -52,7 +87,7 @@ const AdminWisata: React.FC<PageProps & Props> = ({ auth, domain, wisata }) => {
                                     </Table.Cell>
                                     <Table.Cell>
                                         <Link
-                                            href={route("editVideoKegiatan", {
+                                            href={route("editWisata", {
                                                 id: ws.idWisata,
                                             })}
                                             as="button"
@@ -67,7 +102,7 @@ const AdminWisata: React.FC<PageProps & Props> = ({ auth, domain, wisata }) => {
                                             </Badge>
                                         </Link>
                                         <Link
-                                            href={route("hapusVideoKegiatan", {
+                                            href={route("hapusWisata", {
                                                 id: ws.idWisata,
                                             })}
                                             as="button"
