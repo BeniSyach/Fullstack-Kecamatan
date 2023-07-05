@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminKataSambutan;
+use App\Http\Controllers\Admin\AdminPelayanan;
+use App\Http\Controllers\Admin\AdminPotensi;
+use App\Http\Controllers\Admin\AdminUnduhan;
 use App\Http\Controllers\KataSambutan;
 use App\Http\Controllers\Admin\ListKecamatan;
 use App\Http\Controllers\Admin\Profile\AdminAdatDanBudaya;
@@ -74,6 +77,14 @@ Route::get('/publikasi/foto_kegiatan',[FotoKegiatan::class,'index'])->name('foto
 Route::get('/publikasi/wisata',[Wisata::class,'index'])->name('wisata');
 Route::get('/publikasi/wisata/{slug}',[Wisata::class,'detailWisata'])->name('detailWisata');
 Route::get('/publikasi/agenda',[Agenda::class,'index'])->name('agenda');
+
+// potensi
+
+// Pelayanan
+
+// Statistik
+
+// Unduhan
 
 // Kontak Kami
 Route::get('/kontak_kami',[Kontak_Kami::class,'index'])->name('kontak_kami');
@@ -192,6 +203,32 @@ Route::middleware('auth')->group(function () {
 
     // Agenda
     
+
+    // Potensi
+    Route::get('/admin/potensi',[AdminPotensi::class,'index'])->name('AdminPotensi');
+    Route::get('/admin/potensi/create',[AdminPotensi::class,'create'])->name('createPotensi');
+    Route::post('/admin/potensi/tambah',[AdminPotensi::class,'store'])->name('tambahPotensi');
+    Route::get('/admin/potensi/edit/{id}',[AdminPotensi::class,'edit'])->name('editPotensi');
+    Route::put('/admin/potensi/update/{id}',[AdminPotensi::class,'update'])->name('updatePotensi');
+    Route::delete('/admin/potensi/hapus/{id}',[AdminPotensi::class,'hapus'])->name('hapusPotensi');
+
+    // Pelayanan
+    Route::get('/admin/pelayanan',[AdminPelayanan::class,'index'])->name('AdminPelayanan');
+    Route::get('/admin/pelayanan/create',[AdminPelayanan::class,'create'])->name('createPelayanan');
+    Route::post('/admin/pelayanan/tambah',[AdminPelayanan::class,'store'])->name('tambahPelayanan');
+    Route::get('/admin/pelayanan/edit/{id}',[AdminPelayanan::class,'edit'])->name('editPelayanan');
+    Route::put('/admin/pelayanan/update/{id}',[AdminPelayanan::class,'update'])->name('updatePelayanan');
+    Route::delete('/admin/pelayanan/hapus/{id}',[AdminPelayanan::class,'hapus'])->name('hapusPelayanan');
+
+    // Statistik
+
+    // Unduhan
+    Route::get('/admin/unduhan',[AdminUnduhan::class,'index'])->name('AdminUnduhan');
+    Route::get('/admin/unduhan/create',[AdminUnduhan::class,'create'])->name('createUnduhan');
+    Route::post('/admin/unduhan/tambah',[AdminUnduhan::class,'store'])->name('tambahUnduhan');
+    Route::get('/admin/unduhan/edit/{id}',[AdminUnduhan::class,'edit'])->name('editUnduhan');
+    Route::put('/admin/unduhan/update/{id}',[AdminUnduhan::class,'update'])->name('updateUnduhan');
+    Route::delete('/admin/unduhan/hapus/{id}',[AdminUnduhan::class,'hapus'])->name('hapusUnduhan');
 });
 
 require __DIR__.'/auth.php';
