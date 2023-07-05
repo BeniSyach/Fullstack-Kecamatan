@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tb_detail_pelayanan', function (Blueprint $table) {
-            $table->id('idDetailPelayanan');
+        Schema::create('tb_detail_unduhan', function (Blueprint $table) {
+            $table->id('idDetailUnduhan');
             $table->string('kode_kecamatan');
             $table->foreign('kode_kecamatan')->references('kode_kecamatan')->on('tb_domain_kecamatan');
-            $table->integer('pelayanan_id')->unique();
-            $table->foreign('pelayanan_id')->references('idPelayanan')->on('tb_pelayanan');
-            $table->string('gambar_pelayanan');
-            $table->text('konten_pelayanan');
+            $table->integer('unduhan_id')->unique();
+            $table->foreign('unduhan_id')->references('idUnduhan')->on('tb_list_unduhan');
+            $table->string('dokumen');
+            $table->integer('jumlah_unduhan');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tb_detail_pelayanan');
+        Schema::dropIfExists('tb_detail_unduhan');
     }
 };
