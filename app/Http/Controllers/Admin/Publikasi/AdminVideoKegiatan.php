@@ -38,6 +38,17 @@ class AdminVideoKegiatan extends Controller
 
     public function store(StoreVideoRequest $request)
     {
+        // ambil url domain
+        $GetDomain = FacadesRequest::getHost();
+        $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
+        // get kode Kecamatan
+        $get_kd_kecamatan = $domain['kode_kecamatan'];
+
+        $video = new Video_Model();
+        $video->kode_kecamatan = $get_kd_kecamatan;
+        $video->judul_video_kegiatan = $request->judul_video_kegiatan;
+        $video->video = $request->video;
+        $video->save();      
         return redirect(route('AdminVideoKegiatan'))->with('message','Data Berhasil Di Tambah');
     }
 
@@ -51,6 +62,17 @@ class AdminVideoKegiatan extends Controller
 
     public function update(UpdateVideoRequest $request, Video_Model $video)
     {
+        // ambil url domain
+        $GetDomain = FacadesRequest::getHost();
+        $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
+        // get kode Kecamatan
+        $get_kd_kecamatan = $domain['kode_kecamatan'];      
+
+        $video::find(request()->segment(4))->update([
+            'kode_kecamatan' => $get_kd_kecamatan,
+            'judul_video_kegiatan' => $request->judul_video_kegiatan,
+            'video' => $request->video,
+        ]);
         return redirect(route('AdminVideoKegiatan'))->with('message','Data Berhasil Di Ubah');
     }
 

@@ -3,6 +3,8 @@ import { Button, Flowbite, Table, Badge } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 interface childProps {
     idFoto: number;
@@ -18,13 +20,42 @@ interface Props {
     foto: {
         data: childProps[];
     };
+    flash: {
+        message?: string;
+    };
 }
 
 const AdminFotoKegiatan: React.FC<PageProps & Props> = ({
     auth,
     domain,
     foto,
+    flash,
 }) => {
+    useEffect(() => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "dark",
+            customClass: {
+                popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+        });
+        if (flash && flash.message) {
+            Toast.fire({
+                icon: "success",
+                title: flash.message,
+            });
+        }
+        // else if (flash && flash.error) {
+        //     Toast.fire({
+        //         icon: "error",
+        //         title: "Data Gagal Diubah",
+        //     });
+        // }
+    }, [flash]);
     return (
         <Flowbite>
             <Head title="List Foto" />

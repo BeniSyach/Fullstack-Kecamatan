@@ -34,26 +34,31 @@ class AdminFotoKegiatan extends Controller
 
     public function create()
     {
-        return Inertia::render('Admin/Publikasi/AdminVideoKegiatan');
+        return Inertia::render('Admin/Publikasi/TambahFotoKegiatan');
     }
 
     public function store(StoreFotoRequest $request)
     {
-
+        return redirect(route('AdminFotoKegiatan'))->with('message','Data Berhasil Di Tambah');
     }
 
     public function edit($id)
     {
-
+        $data = Foto_Model::where('idFoto',$id)->first();
+        return Inertia::render('Admin/Publikasi/EditFotoKegiatan',[
+            'foto' => $data,
+        ]);
     }
 
     public function update(UpdateFotoRequest $request, Foto_Model $foto)
     {
-
+        return redirect(route('AdminFotoKegiatan'))->with('message','Data Berhasil Di Ubah');
     }
 
     public function hapus($id)
     {
-        
+        $foto =Foto_Model::find($id);
+        $foto->delete();
+        return redirect(route('AdminFotoKegiatan'))->with('message','Data Berhasil Di Hapus');
     }
 }
