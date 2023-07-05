@@ -39,6 +39,17 @@ class AdminFotoKegiatan extends Controller
 
     public function store(StoreFotoRequest $request)
     {
+        // ambil url domain
+        $GetDomain = FacadesRequest::getHost();
+        $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
+        // get kode Kecamatan
+        $get_kd_kecamatan = $domain['kode_kecamatan'];
+
+        $foto = new Foto_Model();
+        $foto->kode_kecamatan = $get_kd_kecamatan;
+        $foto->judul_foto_kegiatan = $request->judul_foto_kegiatan;
+        $foto->foto = $request->foto;
+        $foto->save();
         return redirect(route('AdminFotoKegiatan'))->with('message','Data Berhasil Di Tambah');
     }
 
@@ -52,6 +63,17 @@ class AdminFotoKegiatan extends Controller
 
     public function update(UpdateFotoRequest $request, Foto_Model $foto)
     {
+        // ambil url domain
+        $GetDomain = FacadesRequest::getHost();
+        $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
+        // get kode Kecamatan
+        $get_kd_kecamatan = $domain['kode_kecamatan'];      
+
+        $foto::find(request()->segment(4))->update([
+            'kode_kecamatan' => $get_kd_kecamatan,
+            'judul_foto_kegiatan' => $request->judul_foto_kegiatan,
+            'foto' => $request->foto,
+        ]);
         return redirect(route('AdminFotoKegiatan'))->with('message','Data Berhasil Di Ubah');
     }
 

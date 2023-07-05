@@ -30,8 +30,8 @@ class DatabaseSeeder extends Seeder
             data_foto::class,
             data_video::class,
             data_wisata::class,
-            data_agenda::class
-
+            data_agenda::class,
+            data_potensi::class
         ]);
     }
 }
