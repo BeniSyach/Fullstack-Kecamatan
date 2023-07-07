@@ -211,6 +211,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/potensi/edit/{id}',[AdminPotensi::class,'edit'])->name('editPotensi');
     Route::put('/admin/potensi/update/{id}',[AdminPotensi::class,'update'])->name('updatePotensi');
     Route::delete('/admin/potensi/hapus/{id}',[AdminPotensi::class,'hapus'])->name('hapusPotensi');
+    Route::get('/admin/potensi/detail_edit/{id}',[AdminPotensi::class,'detail_edit'])->name('editDetailPotensi');
+    Route::post('/admin/potensi/update_detail/{id}',[AdminPotensi::class,'update_detail'])->name('updateDetailPotensi');
 
     // Pelayanan
     Route::get('/admin/pelayanan',[AdminPelayanan::class,'index'])->name('AdminPelayanan');

@@ -231,9 +231,15 @@ const SideBar: React.FC<Props> = () => {
                         </Sidebar.Item>
                     </Sidebar.Collapse>
                     <Sidebar.Collapse label="Potensi" icon={FaTree}>
-                        <Sidebar.Item icon={FaImages} href="#">
-                            List Potensi
-                        </Sidebar.Item>
+                        <Link
+                            href={route("AdminPotensi")}
+                            as="div"
+                            className="cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaImages} href="#">
+                                List Potensi
+                            </Sidebar.Item>
+                        </Link>
                     </Sidebar.Collapse>
                     <Sidebar.Collapse label="Pelayanan" icon={FaServicestack}>
                         <Sidebar.Item icon={FaImages} href="#">
@@ -246,9 +252,15 @@ const SideBar: React.FC<Props> = () => {
                         </Sidebar.Item>
                     </Sidebar.Collapse>
                     <Sidebar.Collapse label="Unduhan" icon={FaCloudDownloadAlt}>
-                        <Sidebar.Item icon={FaDownload} href="#">
-                            List Unduhan
-                        </Sidebar.Item>
+                        <Link
+                            href={route("AdminUnduhan")}
+                            as="div"
+                            className="cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaDownload} href="#">
+                                List Unduhan
+                            </Sidebar.Item>
+                        </Link>
                     </Sidebar.Collapse>
                     <Link
                         href={route("logout")}
