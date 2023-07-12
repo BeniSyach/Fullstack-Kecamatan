@@ -8,9 +8,7 @@ import FooterLandingPage from "../../Components/FooterLandingPage";
 import SideBarAgendaDanBerita from "@/Components/SideBarAgendaDanBerita";
 
 interface Props {
-    domain: {
-        judul_website: string;
-    };
+    domain: any;
     struktur_organisasi: {
         judul_struktur_organisasi: string;
         deskripsi_struktur_organisasi: string;
@@ -31,7 +29,7 @@ const StrukturOrganisasi: React.FC<Props> = ({
     return (
         <Flowbite>
             <Head title="Letak Geografis" />
-            <Navbar data={domain.judul_website} />
+            <Navbar data={domain} />
             <Jumbroton
                 judul={struktur_organisasi.judul_struktur_organisasi}
                 Deskripsi={struktur_organisasi.deskripsi_struktur_organisasi}

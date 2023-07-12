@@ -13,9 +13,7 @@ interface childProps {
 }
 
 interface Props {
-    domain: {
-        judul_website: string;
-    };
+    domain: any;
     agenda: {
         data: childProps[];
     };
@@ -25,7 +23,7 @@ const Agenda: React.FC<Props> = ({ domain, agenda }) => {
     return (
         <Flowbite>
             <Head title="Agenda" />
-            <NavbarLandingPage data={domain.judul_website} />
+            <NavbarLandingPage data={domain} />
             <section className="bg-white dark:bg-gray-900 antialiased">
                 <div className="max-w-screen-xl px-4 py-8 mx-auto lg:px-6 sm:py-16 lg:py-24">
                     <div className="max-w-3xl mx-auto text-center">

@@ -18,9 +18,7 @@ interface MyInterface {
 }
 
 interface Props {
-    domain: {
-        judul_website: string;
-    };
+    domain: any;
     pegawai: MyInterface[];
     // pegawai: {
     //     nama_pegawai: string;
@@ -47,7 +45,7 @@ const Kepegawaian: React.FC<Props> = ({
     return (
         <Flowbite>
             <Head title={judul} />
-            <Navbar data={domain.judul_website} />
+            <Navbar data={domain} />
             <Jumbroton judul={judul} Deskripsi={Deskripsi} />
 
             <section className="bg-white dark:bg-gray-900">

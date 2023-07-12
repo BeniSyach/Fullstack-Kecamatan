@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\Kontak_Kami;
+use App\Http\Controllers\PotensiController;
 use App\Http\Controllers\Profile\AdatDanBudaya;
 use App\Http\Controllers\Profile\Kepegawaian;
 use App\Http\Controllers\Profile\Kependudukan;
@@ -80,6 +81,8 @@ Route::get('/publikasi/agenda',[Agenda::class,'index'])->name('agenda');
 
 
 // potensi
+Route::get('/api/potensi/{id}',[PotensiController::class,'GetAllApi'])->name('apigetAllPotensi');
+Route::get('/potensi/detail/{slug}',[PotensiController::class,'detail'])->name('detailPotensi');
 
 // Pelayanan
 

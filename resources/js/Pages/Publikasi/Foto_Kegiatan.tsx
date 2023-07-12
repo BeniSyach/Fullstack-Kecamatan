@@ -10,9 +10,7 @@ interface childProps {
 }
 
 interface Props {
-    domain: {
-        judul_website: string;
-    };
+    domain: any;
     foto: {
         data: childProps[];
     };
@@ -22,7 +20,7 @@ const FotoKegiatan: React.FC<Props> = ({ domain, foto }) => {
     return (
         <Flowbite>
             <Head title="Foto Kegiatan" />
-            <NavbarLandingPage data={domain.judul_website} />
+            <NavbarLandingPage data={domain} />
             <div className="flex flex-row flex-wrap justify-center items-center pt-11">
                 <div>
                     <h1 className="text-4xl font-bold text-center">

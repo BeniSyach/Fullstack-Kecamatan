@@ -11,9 +11,7 @@ import { id } from "date-fns/locale";
 import { format, parseISO } from "date-fns";
 
 interface Props {
-    domain: {
-        judul_website: string;
-    };
+    domain: any;
     sejarah: {
         judul_sejarah: string;
         Deskripsi_sejarah: string;
@@ -30,7 +28,7 @@ const Sejarah: React.FC<Props> = ({ domain, sejarah, agenda, berita }) => {
     const pathname = window.location.pathname;
     return (
         <Flowbite>
-            <Navbar data={domain.judul_website} />
+            <Navbar data={domain} />
             <Head title={sejarah.judul_sejarah} />
 
             <Jumbroton

@@ -8,9 +8,7 @@ import FooterLandingPage from "../../Components/FooterLandingPage";
 import SideBarAgendaDanBerita from "@/Components/SideBarAgendaDanBerita";
 
 interface Props {
-    domain: {
-        judul_website: string;
-    };
+    domain: any;
     getKataSambutan: {
         nama_kepala_camat: string;
         gambar_camat: string;
@@ -31,7 +29,7 @@ const KataSambutan: React.FC<Props> = ({
     return (
         <Flowbite>
             <Head title="Kata Sambutan" />
-            <Navbar data={domain.judul_website} />
+            <Navbar data={domain} />
             <Jumbroton judul="Kata Sambutan" Deskripsi="" />
 
             <div className="flex flex-row bg-white dark:bg-gray-900">

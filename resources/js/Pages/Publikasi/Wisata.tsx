@@ -5,9 +5,7 @@ import { Head } from "@inertiajs/react";
 import { Flowbite } from "flowbite-react";
 
 interface Props {
-    domain: {
-        judul_website: string;
-    };
+    domain: any;
     wisata: any;
 }
 
@@ -15,7 +13,7 @@ const Wisata: React.FC<Props> = ({ domain, wisata }) => {
     return (
         <Flowbite>
             <Head title="Wisata" />
-            <NavbarLandingPage data={domain.judul_website} />
+            <NavbarLandingPage data={domain} />
             <div className="flex flex-row flex-wrap justify-center items-center pt-11">
                 <div>
                     <h1 className="text-4xl font-bold text-center">Wisata</h1>

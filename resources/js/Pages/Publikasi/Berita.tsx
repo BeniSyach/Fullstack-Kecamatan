@@ -17,9 +17,7 @@ interface childPorps {
 }
 
 interface Props {
-    domain: {
-        judul_website: string;
-    };
+    domain: any;
     berita: any;
     kategori_berita: childPorps[];
 }
@@ -28,7 +26,7 @@ const Berita: React.FC<Props> = ({ domain, berita, kategori_berita }) => {
     return (
         <Flowbite>
             <Head title="Berita Kecamatan" />
-            <Navbar data={domain.judul_website} />
+            <Navbar data={domain} />
             <KategoriBerita data={kategori_berita} />
             <ReadArticle data={berita} />
             <Footer data={domain.judul_website} />

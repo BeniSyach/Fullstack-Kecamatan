@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 const baseURL =
     "https://desajatirejo.deliserdangkab.go.id/API/GetKodeDesaByKodeKecamatan";
 
+const domain = window.location.hostname;
+const baseUrlPotensi = `http://${domain}:8000/api/potensi`;
+
 interface ChildProps {
     data: {
         judul_website: string;
@@ -15,6 +18,7 @@ interface ChildProps {
 
 const NavbarLandingPage: React.FC<ChildProps> = (props) => {
     const [Desa, setDesa] = useState<any[]>([]);
+    const [Potensi, setPotensi] = useState<any[]>([]);
 
     useEffect(() => {
         axios
@@ -24,8 +28,13 @@ const NavbarLandingPage: React.FC<ChildProps> = (props) => {
             .then((response) => {
                 setDesa(response.data);
             });
-    }, []);
 
+        axios
+            .get(`${baseUrlPotensi}/${props.data.kode_kecamatan}`)
+            .then((response) => {
+                setPotensi(response.data);
+            });
+    }, []);
     return (
         <Navbar fluid>
             <Navbar.Brand href="/">
@@ -104,9 +113,11 @@ const NavbarLandingPage: React.FC<ChildProps> = (props) => {
                         {Desa && Desa.length > 0 ? (
                             <>
                                 {Desa.map((desa, k) => (
-                                    <Dropdown.Item>
-                                        {desa.namaDesa}
-                                    </Dropdown.Item>
+                                    <Link key={k} href={route("kependududkan")}>
+                                        <Dropdown.Item>
+                                            {desa.namaDesa}
+                                        </Dropdown.Item>
+                                    </Link>
                                 ))}
                             </>
                         ) : (
@@ -116,9 +127,24 @@ const NavbarLandingPage: React.FC<ChildProps> = (props) => {
                 </Dropdown>
                 <Dropdown inline label="Potensi">
                     <Link href={route("berita")}>
-                        <Dropdown.Item>
-                            berisikan potensi kecamatan
-                        </Dropdown.Item>
+                        {Potensi && Potensi.length > 0 ? (
+                            <>
+                                {Potensi.map((Potensi, k) => (
+                                    <Link
+                                        key={k}
+                                        href={route(`detailPotensi`, {
+                                            slug: Potensi.slug_potensi,
+                                        })}
+                                    >
+                                        <Dropdown.Item>
+                                            {Potensi.judul_potensi}
+                                        </Dropdown.Item>
+                                    </Link>
+                                ))}
+                            </>
+                        ) : (
+                            <Dropdown.Item>Tidak Ada Data</Dropdown.Item>
+                        )}
                     </Link>
                 </Dropdown>
                 <Dropdown inline label="Pelayanan">

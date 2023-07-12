@@ -18,9 +18,7 @@ interface childPorps {
 }
 
 interface Props {
-    domain: {
-        judul_website: string;
-    };
+    domain: any;
     wisata: {
         judul_wisata: string;
         slug_wisata: string;
@@ -43,7 +41,7 @@ const DetailWisata: React.FC<Props> = ({
     return (
         <Flowbite>
             <Head title="Detail Berita" />
-            <NavbarLandingPage data={domain.judul_website} />
+            <NavbarLandingPage data={domain} />
             <div className="flex flex-row bg-white dark:bg-gray-900">
                 <div className=" w-8/12">
                     <main className="pt-3 pb-16 lg:pt-3 lg:pb-24 ">

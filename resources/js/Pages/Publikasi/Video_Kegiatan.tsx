@@ -9,9 +9,7 @@ interface childProps {
 }
 
 interface Props {
-    domain: {
-        judul_website: string;
-    };
+    domain: any;
     video: {
         data: childProps[];
     };
@@ -21,7 +19,7 @@ const VideoKegiatan: React.FC<Props> = ({ domain, video }) => {
     return (
         <Flowbite>
             <Head title="Video Kegiatan" />
-            <NavbarLandingPage data={domain.judul_website} />
+            <NavbarLandingPage data={domain} />
             <div className="flex flex-row flex-wrap justify-center items-center pt-11">
                 <div>
                     <h1 className="text-4xl font-bold text-center">
