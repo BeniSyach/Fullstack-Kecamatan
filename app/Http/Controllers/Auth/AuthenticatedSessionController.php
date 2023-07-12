@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Kecamatan;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -30,14 +33,29 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+
+        $GetDomain = FacadesRequest::getHost();
+        $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
+        // get kode_kecamatan
+        $kode_kecamatan = $domain['kode_kecamatan'];
         $request->authenticate();
-
         $request->session()->regenerate();
-
+        $kode_user = $request->user()->kode_kecamatan;
         
+        if($kode_kecamatan == $kode_user){
+            
+            return redirect()->intended(RouteServiceProvider::HOME)->with('message', 'Anda Berhasil Login');
+        }else{
 
+            Auth::guard('web')->logout();
 
-        return redirect()->intended(RouteServiceProvider::HOME)->with('message', 'Anda Berhasil Login');
+            $request->session()->invalidate();
+    
+            $request->session()->regenerateToken();
+
+            return redirect('/');
+        }
+        
     }
 
     /**
