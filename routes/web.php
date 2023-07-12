@@ -221,6 +221,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/pelayanan/edit/{id}',[AdminPelayanan::class,'edit'])->name('editPelayanan');
     Route::put('/admin/pelayanan/update/{id}',[AdminPelayanan::class,'update'])->name('updatePelayanan');
     Route::delete('/admin/pelayanan/hapus/{id}',[AdminPelayanan::class,'hapus'])->name('hapusPelayanan');
+    Route::get('/admin/pelayanan/detail_edit/{id}',[AdminPelayanan::class,'detail_edit'])->name('editDetailPeyanan');
+    Route::post('/admin/pelayanan/update_detail/{id}',[AdminPelayanan::class,'update_detail'])->name('updateDetailPeyanan');
 
     // Statistik
 
@@ -231,6 +233,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/unduhan/edit/{id}',[AdminUnduhan::class,'edit'])->name('editUnduhan');
     Route::put('/admin/unduhan/update/{id}',[AdminUnduhan::class,'update'])->name('updateUnduhan');
     Route::delete('/admin/unduhan/hapus/{id}',[AdminUnduhan::class,'hapus'])->name('hapusUnduhan');
+    Route::get('/admin/unduhan/detail_edit/{id}',[AdminUnduhan::class,'detail_edit'])->name('editDetailUnduhan');
+    Route::post('/admin/unduhan/update_detail/{id}',[AdminUnduhan::class,'update_detail'])->name('updateDetailUnduhan');
 });
 
 require __DIR__.'/auth.php';

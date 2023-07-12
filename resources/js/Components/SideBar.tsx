@@ -242,9 +242,15 @@ const SideBar: React.FC<Props> = () => {
                         </Link>
                     </Sidebar.Collapse>
                     <Sidebar.Collapse label="Pelayanan" icon={FaServicestack}>
-                        <Sidebar.Item icon={FaImages} href="#">
-                            List Pelayanan
-                        </Sidebar.Item>
+                        <Link
+                            href={route("AdminPelayanan")}
+                            as="div"
+                            className="cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaImages}>
+                                List Pelayanan
+                            </Sidebar.Item>
+                        </Link>
                     </Sidebar.Collapse>
                     <Sidebar.Collapse label="Statistik" icon={FaHome}>
                         <Sidebar.Item icon={FaImages} href="#">
