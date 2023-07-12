@@ -1,11 +1,31 @@
 import { Link, router } from "@inertiajs/react";
+import axios from "axios";
 import { DarkThemeToggle, Navbar, Button, Dropdown } from "flowbite-react";
+import { useEffect, useState } from "react";
+
+const baseURL =
+    "https://desajatirejo.deliserdangkab.go.id/API/GetKodeDesaByKodeKecamatan";
 
 interface ChildProps {
-    data: string;
+    data: {
+        judul_website: string;
+        kode_kecamatan: string;
+    };
 }
 
 const NavbarLandingPage: React.FC<ChildProps> = (props) => {
+    const [Desa, setDesa] = useState<any[]>([]);
+
+    useEffect(() => {
+        axios
+            .post(baseURL, {
+                kodeKecamatan: props.data.kode_kecamatan,
+            })
+            .then((response) => {
+                setDesa(response.data);
+            });
+    }, []);
+
     return (
         <Navbar fluid>
             <Navbar.Brand href="/">
@@ -15,7 +35,7 @@ const NavbarLandingPage: React.FC<ChildProps> = (props) => {
                     src="/assets/image/logo/logo_kabupaten_deli_serdang.png"
                 />
                 <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-                    {props.data}
+                    {props.data.judul_website}
                 </span>
             </Navbar.Brand>
             <div className="flex md:order-2 ">
@@ -81,7 +101,17 @@ const NavbarLandingPage: React.FC<ChildProps> = (props) => {
                 </Dropdown>
                 <Dropdown inline label="Desa">
                     <Link href={route("berita")}>
-                        <Dropdown.Item>berisikan banyak Desa</Dropdown.Item>
+                        {Desa && Desa.length > 0 ? (
+                            <>
+                                {Desa.map((desa, k) => (
+                                    <Dropdown.Item>
+                                        {desa.namaDesa}
+                                    </Dropdown.Item>
+                                ))}
+                            </>
+                        ) : (
+                            <Dropdown.Item>Tidak Ada Data</Dropdown.Item>
+                        )}
                     </Link>
                 </Dropdown>
                 <Dropdown inline label="Potensi">

@@ -31,9 +31,7 @@ interface myPhoto {
 }
 
 interface Props {
-    domain: {
-        judul_website: string;
-    };
+    domain: any;
     slider: MyInterface[];
     get_berita: {
         data: MyInterface[];
@@ -69,7 +67,7 @@ const Home: React.FC<Props> = ({
     return (
         <Flowbite>
             <Head title={domain.judul_website} />
-            <Navbar data={domain.judul_website} />
+            <Navbar data={domain} />
             {/* carousel */}
             <div className="relative w-full z-0">
                 {slider && slider.length > 0 ? (

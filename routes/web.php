@@ -78,6 +78,7 @@ Route::get('/publikasi/wisata',[Wisata::class,'index'])->name('wisata');
 Route::get('/publikasi/wisata/{slug}',[Wisata::class,'detailWisata'])->name('detailWisata');
 Route::get('/publikasi/agenda',[Agenda::class,'index'])->name('agenda');
 
+
 // potensi
 
 // Pelayanan
