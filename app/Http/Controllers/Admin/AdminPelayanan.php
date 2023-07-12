@@ -36,7 +36,7 @@ class AdminPelayanan extends Controller
     }
 
     public function create(){
-        return Inertia::render('Admin/TambahListPotensi');
+        return Inertia::render('Admin/TambahListPelayanan');
     }
 
     public function store(StoreListPelayananRequest $request)
@@ -47,58 +47,58 @@ class AdminPelayanan extends Controller
         // get kode Kecamatan
         $get_kd_kecamatan = $domain['kode_kecamatan'];
 
-        $slug = Str::of($request->judul_potensi)->snake();  
+        $slug = Str::of($request->judul_pelayanan)->snake();  
 
-        $potensi = new Pelayanan_Model();
-        $potensi->kode_kecamatan = $get_kd_kecamatan;
-        $potensi->judul_potensi = $request->judul_potensi;
-        $potensi->slug_potensi = $slug;
-        $potensi->save();
+        $pelayanan = new Pelayanan_Model();
+        $pelayanan->kode_kecamatan = $get_kd_kecamatan;
+        $pelayanan->judul_pelayanan = $request->judul_pelayanan;
+        $pelayanan->slug_pelayanan = $slug;
+        $pelayanan->save();
 
         $get_id_latest = Pelayanan_Model::latest()->first();
-        $id_terakhir = $get_id_latest['idPotensi'];
+        $id_terakhir = $get_id_latest['idPelayanan'];
 
-        $detail_potensi = new Detail_Pelayanan_Model();
-        $detail_potensi->kode_kecamatan = $get_kd_kecamatan;
-        $detail_potensi->potensi_id = $id_terakhir;
-        $detail_potensi->gambar_potensi = "Belum Ada Konten/gambar";
-        $detail_potensi->konten_potensi = "Belum Ada Konten/gambar";
-        $detail_potensi->save();
+        $detail_pelayanan = new Detail_Pelayanan_Model();
+        $detail_pelayanan->kode_kecamatan = $get_kd_kecamatan;
+        $detail_pelayanan->pelayanan_id = $id_terakhir;
+        $detail_pelayanan->gambar_pelayanan = "Belum Ada Konten/gambar";
+        $detail_pelayanan->konten_pelayanan = "Belum Ada Konten/gambar";
+        $detail_pelayanan->save();
 
-        return redirect(route('AdminPotensi'))->with('message','Data Berhasil Di Tambah');
+        return redirect(route('AdminPelayanan'))->with('message','Data Berhasil Di Tambah');
     }
 
     public function edit($id)
     {
-        $data = Pelayanan_Model::where('idPotensi',$id)->first();
-        return Inertia::render('Admin/EditListPotensi',[
-            'ListPotensi' => $data
+        $data = Pelayanan_Model::where('idPelayanan',$id)->first();
+        return Inertia::render('Admin/EditListPelayanan',[
+            'ListPelayanan' => $data
         ]);
     }
 
-    public function update(UpdatePelayananRequest $request, Pelayanan_Model $potensi){
-        $slug = Str::of($request->judul_potensi)->snake();  
+    public function update(UpdatePelayananRequest $request, Pelayanan_Model $pelayanan){
+        $slug = Str::of($request->judul_pelayanan)->snake();  
 
-        $potensi::find(request()->segment(4))->update([
-            'judul_potensi' => $request->judul_potensi,
-            'slug_potensi' => $slug
+        $pelayanan::find(request()->segment(4))->update([
+            'judul_pelayanan' => $request->judul_pelayanan,
+            'slug_pelayanan' => $slug
         ]);
-        return redirect(route('AdminPotensi'))->with('message','Data Berhasil Di Ubah');
+        return redirect(route('AdminPelayanan'))->with('message','Data Berhasil Di Ubah');
     }
 
     public function hapus($id){
-        $detailPotensi = Detail_Pelayanan_Model::where('potensi_id',$id);
-        $detailPotensi->delete();
-        $potensi =Pelayanan_Model::find($id);
-        $potensi->delete();
-        return redirect(route('AdminPotensi'))->with('message','Data Berhasil Di Hapus');
+        $detailPelayanan = Detail_Pelayanan_Model::where('pelayanan_id',$id);
+        $detailPelayanan->delete();
+        $pelayanan =Pelayanan_Model::find($id);
+        $pelayanan->delete();
+        return redirect(route('AdminPelayanan'))->with('message','Data Berhasil Di Hapus');
     }
 
     public function detail_edit($id)
     {
-        $data = Detail_Pelayanan_Model::where('potensi_id',$id)->first();
-        return Inertia::render('Admin/EditDetailListPotensi',[
-            'ListDetailPotensi' => $data
+        $data = Detail_Pelayanan_Model::where('pelayanan_id',$id)->first();
+        return Inertia::render('Admin/EditDetailListPelayanan',[
+            'ListDetailPelayanan' => $data
         ]);
     }
 
@@ -110,11 +110,11 @@ class AdminPelayanan extends Controller
         // get kode Kecamatan
         $get_kd_kecamatan = $domain['kode_kecamatan'];
 
-        $detail_potensi = new Detail_Pelayanan_Model();
-        $detail_potensi->kode_kecamatan = $get_kd_kecamatan;
-        $detail_potensi->judul_potensi = $request->judul_potensi;
-        $detail_potensi->save();
+        $detail_pelayanan = new Detail_Pelayanan_Model();
+        $detail_pelayanan->kode_kecamatan = $get_kd_kecamatan;
+        $detail_pelayanan->judul_pelayanan = $request->judul_pelayanan;
+        $detail_pelayanan->save();
 
-        return redirect(route('AdminPotensi'))->with('message','Data Berhasil Di Ubah');
+        return redirect(route('AdminPelayanan'))->with('message','Data Berhasil Di Ubah');
     }
 }

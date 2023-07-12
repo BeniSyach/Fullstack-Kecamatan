@@ -16,7 +16,7 @@ class Pelayanan_Model extends Model
 
     protected $fillable = [
         'kode_kecamatan',
-        'judul_Pelayanan',
-        'slug_Pelayanan',
+        'judul_pelayanan',
+        'slug_pelayanan',
     ];
 }
