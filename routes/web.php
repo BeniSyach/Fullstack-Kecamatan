@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Home;
 use App\Http\Controllers\Kontak_Kami;
+use App\Http\Controllers\PelayananController;
 use App\Http\Controllers\PotensiController;
 use App\Http\Controllers\Profile\AdatDanBudaya;
 use App\Http\Controllers\Profile\Kepegawaian;
@@ -39,6 +40,7 @@ use App\Http\Controllers\Publikasi\Berita;
 use App\Http\Controllers\Publikasi\FotoKegiatan;
 use App\Http\Controllers\Publikasi\VideoKegiatan;
 use App\Http\Controllers\Publikasi\Wisata;
+use App\Http\Controllers\UnduhanController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -85,10 +87,14 @@ Route::get('/api/potensi/{id}',[PotensiController::class,'GetAllApi'])->name('ap
 Route::get('/potensi/detail/{slug}',[PotensiController::class,'detail'])->name('detailPotensi');
 
 // Pelayanan
+Route::get('/api/pelayanan/{id}',[PelayananController::class,'GetAllApi'])->name('apigetAllPelayanan');
+Route::get('/pelayanan/detail/{slug}',[PelayananController::class,'detail'])->name('detailPelayanan');
 
 // Statistik
 
 // Unduhan
+Route::get('/api/unduhan/{id}',[UnduhanController::class,'GetAllApi'])->name('apigetAllUnduhan');
+Route::get('/unduhan/detail/{slug}',[UnduhanController::class,'detail'])->name('detailUnduhan');
 
 // Kontak Kami
 Route::get('/kontak_kami',[Kontak_Kami::class,'index'])->name('kontak_kami');

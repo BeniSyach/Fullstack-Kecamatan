@@ -8,6 +8,8 @@ const baseURL =
 
 const domain = window.location.hostname;
 const baseUrlPotensi = `http://${domain}:8000/api/potensi`;
+const baseUrlPelayanan = `http://${domain}:8000/api/pelayanan`;
+const baseUrlUnduhan = `http://${domain}:8000/api/unduhan`;
 
 interface ChildProps {
     data: {
@@ -19,11 +21,14 @@ interface ChildProps {
 const NavbarLandingPage: React.FC<ChildProps> = (props) => {
     const [Desa, setDesa] = useState<any[]>([]);
     const [Potensi, setPotensi] = useState<any[]>([]);
+    const [Pelayanan, setPelayanan] = useState<any[]>([]);
+    const [Unduhan, setUnduhan] = useState<any[]>([]);
 
     useEffect(() => {
         axios
             .post(baseURL, {
-                kodeKecamatan: props.data.kode_kecamatan,
+                // kodeKecamatan: props.data.kode_kecamatan,
+                kodeKecamatan: "120701",
             })
             .then((response) => {
                 setDesa(response.data);
@@ -34,7 +39,19 @@ const NavbarLandingPage: React.FC<ChildProps> = (props) => {
             .then((response) => {
                 setPotensi(response.data);
             });
+        axios
+            .get(`${baseUrlPelayanan}/${props.data.kode_kecamatan}`)
+            .then((response) => {
+                setPelayanan(response.data);
+            });
+        axios
+            .get(`${baseUrlUnduhan}/${props.data.kode_kecamatan}`)
+            .then((response) => {
+                setUnduhan(response.data);
+            });
     }, []);
+
+    console.log(Unduhan);
     return (
         <Navbar fluid>
             <Navbar.Brand href="/">
@@ -109,50 +126,59 @@ const NavbarLandingPage: React.FC<ChildProps> = (props) => {
                     </Link>
                 </Dropdown>
                 <Dropdown inline label="Desa">
-                    <Link href={route("berita")}>
-                        {Desa && Desa.length > 0 ? (
-                            <>
-                                {Desa.map((desa, k) => (
-                                    <Link key={k} href={route("kependududkan")}>
-                                        <Dropdown.Item>
-                                            {desa.namaDesa}
-                                        </Dropdown.Item>
-                                    </Link>
-                                ))}
-                            </>
-                        ) : (
-                            <Dropdown.Item>Tidak Ada Data</Dropdown.Item>
-                        )}
-                    </Link>
+                    {Desa && Desa.length > 0 ? (
+                        <>
+                            {Desa.map((desa, k) => (
+                                <a key={k} href={desa.url} target="_blank">
+                                    <Dropdown.Item>
+                                        {desa.namaDesa}
+                                    </Dropdown.Item>
+                                </a>
+                            ))}
+                        </>
+                    ) : (
+                        <Dropdown.Item>Tidak Ada Data</Dropdown.Item>
+                    )}
                 </Dropdown>
                 <Dropdown inline label="Potensi">
-                    <Link href={route("berita")}>
-                        {Potensi && Potensi.length > 0 ? (
-                            <>
-                                {Potensi.map((Potensi, k) => (
-                                    <Link
-                                        key={k}
-                                        href={route(`detailPotensi`, {
-                                            slug: Potensi.slug_potensi,
-                                        })}
-                                    >
-                                        <Dropdown.Item>
-                                            {Potensi.judul_potensi}
-                                        </Dropdown.Item>
-                                    </Link>
-                                ))}
-                            </>
-                        ) : (
-                            <Dropdown.Item>Tidak Ada Data</Dropdown.Item>
-                        )}
-                    </Link>
+                    {Potensi && Potensi.length > 0 ? (
+                        <>
+                            {Potensi.map((Potensi, k) => (
+                                <Link
+                                    key={k}
+                                    href={route(`detailPotensi`, {
+                                        slug: Potensi.slug_potensi,
+                                    })}
+                                >
+                                    <Dropdown.Item>
+                                        {Potensi.judul_potensi}
+                                    </Dropdown.Item>
+                                </Link>
+                            ))}
+                        </>
+                    ) : (
+                        <Dropdown.Item>Tidak Ada Data</Dropdown.Item>
+                    )}
                 </Dropdown>
                 <Dropdown inline label="Pelayanan">
-                    <Link href={route("berita")}>
-                        <Dropdown.Item>
-                            berisikan pelayanan kecamatan
-                        </Dropdown.Item>
-                    </Link>
+                    {Pelayanan && Pelayanan.length > 0 ? (
+                        <>
+                            {Pelayanan.map((Pelayanan, k) => (
+                                <Link
+                                    key={k}
+                                    href={route(`detailPelayanan`, {
+                                        slug: Pelayanan.slug_pelayanan,
+                                    })}
+                                >
+                                    <Dropdown.Item>
+                                        {Pelayanan.judul_pelayanan}
+                                    </Dropdown.Item>
+                                </Link>
+                            ))}
+                        </>
+                    ) : (
+                        <Dropdown.Item>Tidak Ada Data</Dropdown.Item>
+                    )}
                 </Dropdown>
                 <Dropdown inline label="Statistik">
                     <Link href={route("berita")}>
@@ -162,11 +188,24 @@ const NavbarLandingPage: React.FC<ChildProps> = (props) => {
                     </Link>
                 </Dropdown>
                 <Dropdown inline label="Unduhan">
-                    <Link href={route("berita")}>
-                        <Dropdown.Item>
-                            berisikan data yang bisa diunduh pada kecamatan
-                        </Dropdown.Item>
-                    </Link>
+                    {Unduhan && Unduhan.length > 0 ? (
+                        <>
+                            {Unduhan.map((Unduhan, k) => (
+                                <Link
+                                    key={k}
+                                    href={route(`detailUnduhan`, {
+                                        slug: Unduhan.slug_unduhan,
+                                    })}
+                                >
+                                    <Dropdown.Item>
+                                        {Unduhan.judul_unduhan}
+                                    </Dropdown.Item>
+                                </Link>
+                            ))}
+                        </>
+                    ) : (
+                        <Dropdown.Item>Tidak Ada Data</Dropdown.Item>
+                    )}
                 </Dropdown>
                 <Link
                     href={route("kontak_kami")}
