@@ -13,4 +13,12 @@ class Agenda_Model extends Model
     protected $primaryKey = 'idAgenda';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
+
+    protected $fillable = [
+        'kode_kecamatan',
+        'judul_agenda',
+        'slug_agenda',
+        'tanggal_agenda',
+        'isi_agenda'
+    ];
 }

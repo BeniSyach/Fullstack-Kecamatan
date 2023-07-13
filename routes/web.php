@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\Profile\AdminSejarah;
 use App\Http\Controllers\Admin\Profile\AdminStrukturOrganisasi;
 use App\Http\Controllers\Admin\Profile\AdminTupoksi;
 use App\Http\Controllers\Admin\Profile\AdminVisiDanMisi;
+use App\Http\Controllers\Admin\Publikasi\AdminAgenda;
 use App\Http\Controllers\Admin\Publikasi\AdminBerita;
 use App\Http\Controllers\Admin\Publikasi\AdminFotoKegiatan;
 use App\Http\Controllers\Admin\Publikasi\AdminVideoKegiatan;
@@ -212,7 +213,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/admin/wisata/hapus/{id}',[AdminWisata::class,'hapus'])->name('hapusWisata');
 
     // Agenda
-    
+    Route::get('/admin/agenda',[AdminAgenda::class,'index'])->name('AdminAgenda');
+    Route::get('/admin/agenda/create',[AdminAgenda::class,'create'])->name('createAgenda');
+    Route::post('/admin/agenda/tambah',[AdminAgenda::class,'store'])->name('tambahAgenda');
+    Route::get('/admin/agenda/edit/{id}',[AdminAgenda::class,'edit'])->name('editAgenda');
+    Route::put('/admin/agenda/update/{id}',[AdminAgenda::class,'update'])->name('updateAgenda');
+    Route::delete('/admin/agenda/hapus/{id}',[AdminAgenda::class,'hapus'])->name('hapusAgenda');
 
     // Potensi
     Route::get('/admin/potensi',[AdminPotensi::class,'index'])->name('AdminPotensi');

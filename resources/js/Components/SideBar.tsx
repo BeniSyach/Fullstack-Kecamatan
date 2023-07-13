@@ -225,10 +225,15 @@ const SideBar: React.FC<Props> = () => {
                         >
                             <Sidebar.Item icon={FaImages}>Wisata</Sidebar.Item>
                         </Link>
-
-                        <Sidebar.Item icon={FaImages} href="#">
-                            Agenda
-                        </Sidebar.Item>
+                        <Link
+                            href={route("AdminAgenda")}
+                            as="div"
+                            className="cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaImages} h>
+                                Agenda
+                            </Sidebar.Item>
+                        </Link>
                     </Sidebar.Collapse>
                     <Sidebar.Collapse label="Potensi" icon={FaTree}>
                         <Link
