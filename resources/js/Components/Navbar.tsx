@@ -50,8 +50,6 @@ const NavbarLandingPage: React.FC<ChildProps> = (props) => {
                 setUnduhan(response.data);
             });
     }, []);
-
-    console.log(Unduhan);
     return (
         <Navbar fluid>
             <Navbar.Brand href="/">

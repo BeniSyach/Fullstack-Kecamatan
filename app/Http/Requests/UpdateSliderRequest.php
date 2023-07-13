@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Slider_Model;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateSliderRequest extends FormRequest
@@ -22,7 +23,24 @@ class UpdateSliderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'gambar_slider' => 'required|image|mimes:jpeg,jpg,png,gif|max:5000'
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'gambar_slider.required' => ':attribute Tidak Boleh Kosong',
+            'gambar_slider.image' => ':attribute harus foto/gambar',
+            'gambar_slider.mimes' => ':attribute File harus berektensi jpeg,jpg,png,gif',
+            'gambar_slider.max' => ':attribute tidak lebih dari 5 MB',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'gambar_slider' => 'Slider',
         ];
     }
 }

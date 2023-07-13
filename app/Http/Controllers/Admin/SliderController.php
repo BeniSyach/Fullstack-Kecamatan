@@ -40,15 +40,21 @@ class SliderController extends Controller
 
     public function store(StoreSliderRequest $request)
     {
+        $request->validated();
+
         // ambil url domain
         $GetDomain = FacadesRequest::getHost();
         $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
         // get kode Kecamatan
         $get_kd_kecamatan = $domain['kode_kecamatan'];
 
+        $imageName = time().'.'.$request->gambar_slider->extension();
+        $uploadedImage = $request->gambar_slider->move(public_path('images'), $imageName);
+        $imagePath = 'images/' . $imageName;
+
         $slider = new Slider_Model();
         $slider->kode_kecamatan = $get_kd_kecamatan;
-        $slider->gambar_slider = $request->gambar_slider;
+        $slider->gambar_slider = $imagePath;
         $slider->save();
         return redirect(route('listSlider'))->with('message','Data Berhasil Di Tambah');        
     }
@@ -62,15 +68,36 @@ class SliderController extends Controller
 
     public function update(UpdateSliderRequest $request, Slider_Model $slider)
     {
+        $request->validated();
+
+
+        // ambil url domain
+        $GetDomain = FacadesRequest::getHost();
+        $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
+        // get kode Kecamatan
+        $get_kd_kecamatan = $domain['kode_kecamatan'];
+
+        $hapus_slider=Slider_Model::find(request()->segment(4));
+        unlink($hapus_slider->gambar_slider);
+
+        $imageName = time().'.'.$request->gambar_slider->extension();
+        $uploadedImage = $request->gambar_slider->move(public_path('images'), $imageName);
+        $imagePath = 'images/' . $imageName;
+
         $slider::find(request()->segment(4))->update([
-            'kode_kecamatan' => $request->kode_kecamatan,
-            'gambar_slider' => $request->gambar_slider
+            'kode_kecamatan' => $get_kd_kecamatan,
+            'gambar_slider' => $imagePath
         ]);
+
+
+
         return redirect(route('listSlider'))->with('message','Data Berhasil Di Ubah');
     }
 
-    public function hapus($id){
+    public function hapus($id)
+    {
         $slider =Slider_Model::find($id);
+        unlink($slider->gambar_slider);
         $slider->delete();
         return redirect(route('listSlider'))->with('message','Data Berhasil Di Hapus');
     }

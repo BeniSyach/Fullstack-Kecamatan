@@ -10,22 +10,30 @@ import {
 import { FormEventHandler, useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
+import InputError from "@/Components/InputError";
+import { type } from "os";
 
 interface Props {
     slider: {
         idSlider: number;
-        gambar_slider: any;
+        gambar_slider: string;
     };
 }
 
+type data = {
+    gambar_slider: File | null;
+};
+
 const EditSlider: React.FC<PageProps & Props> = ({ auth, slider }) => {
-    const { data, setData, put, errors, processing } = useForm({
-        gambar_slider: slider.gambar_slider,
-    });
+    const { data, setData, post, errors, processing, progress } = useForm<data>(
+        {
+            gambar_slider: null,
+        }
+    );
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        put(route("updateSlider", { id: slider.idSlider }));
+        post(route("updateSlider", { id: slider.idSlider }));
     };
 
     return (
@@ -45,17 +53,25 @@ const EditSlider: React.FC<PageProps & Props> = ({ auth, slider }) => {
                                 />
                             </div>
                             <img
-                                src={data.gambar_slider}
+                                src={`/${slider.gambar_slider}`}
                                 alt="Foto Camat"
                                 className="w-1/3 mb-10"
                             />
                             <FileInput
-                                helperText="Ukuran Gambar Tidak Lebih dari 2 Mb"
                                 id="gambar_slider"
                                 name="gambar_slider"
-                                onChange={(e) =>
-                                    setData("gambar_slider", e.target.value)
-                                }
+                                onChange={(e) => {
+                                    if (e.target.files && e.target.files[0]) {
+                                        setData(
+                                            "gambar_slider",
+                                            e.target.files[0]
+                                        );
+                                    }
+                                }}
+                            />
+                            <InputError
+                                message={errors.gambar_slider}
+                                className="mt-2"
                             />
                         </div>
 
@@ -68,6 +84,11 @@ const EditSlider: React.FC<PageProps & Props> = ({ auth, slider }) => {
                                 Ubah
                             </Button>
                         </div>
+                        {progress && (
+                            <progress value={progress.percentage} max="100">
+                                {progress.percentage}%
+                            </progress>
+                        )}
                     </form>
                 </div>
             </AuthenticatedLayout>

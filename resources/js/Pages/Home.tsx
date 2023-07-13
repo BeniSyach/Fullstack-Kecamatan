@@ -76,7 +76,7 @@ const Home: React.FC<Props> = ({
                             <img
                                 key={k}
                                 alt="..."
-                                src={slider.gambar_slider}
+                                src={`/${slider.gambar_slider}`}
                                 className="img-responsive"
                             />
                         ))}

@@ -131,7 +131,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/tambah_slider',[SliderController::class,'create'])->name('createSlider');
     Route::post('/admin/slider/tambah',[SliderController::class,'store'])->name('tambahSlider');
     Route::get('/admin/slider/edit/{id}',[SliderController::class,'edit'])->name('editSlider');
-    Route::put('/admin/slider/update/{id}',[SliderController::class,'update'])->name('updateSlider');
+    Route::post('/admin/slider/update/{id}',[SliderController::class,'update'])->name('updateSlider');
     Route::delete('/admin/slider/hapus/{id}',[SliderController::class,'hapus'])->name('hapusSlider');
 
     // Kata Sambutan

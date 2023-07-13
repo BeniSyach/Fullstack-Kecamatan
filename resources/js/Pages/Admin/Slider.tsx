@@ -53,6 +53,8 @@ const Slider: React.FC<Props & PageProps> = ({
         //     });
         // }
     }, [flash]);
+
+    const url = window.location.hostname;
     return (
         <Flowbite>
             <Head title="List Slider" />
@@ -80,7 +82,7 @@ const Slider: React.FC<Props & PageProps> = ({
                                     <Table.Cell>
                                         {" "}
                                         <img
-                                            src={slider.gambar_slider}
+                                            src={`/${slider.gambar_slider}`}
                                             alt=""
                                             className="w-1/4"
                                         />
