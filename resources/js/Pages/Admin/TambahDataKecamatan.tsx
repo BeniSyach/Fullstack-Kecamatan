@@ -3,6 +3,7 @@ import { Button, Flowbite, Label, Modal, TextInput } from "flowbite-react";
 import { FormEventHandler, useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
+import InputError from "@/Components/InputError";
 
 const TambahDataKecamatan: React.FC<PageProps> = ({ auth }) => {
     const { data, setData, post, errors, processing } = useForm({
@@ -42,6 +43,10 @@ const TambahDataKecamatan: React.FC<PageProps> = ({ auth }) => {
                                 placeholder="Nama Kecamatan"
                                 required
                             />
+                            <InputError
+                                message={errors.judul_website}
+                                className="mt-2"
+                            />
                         </div>
                         <div>
                             <div className="mt-2 block">
@@ -60,6 +65,10 @@ const TambahDataKecamatan: React.FC<PageProps> = ({ auth }) => {
                                 placeholder="Domain Kecamatan"
                                 required
                             />
+                            <InputError
+                                message={errors.domain_kecamatan}
+                                className="mt-2"
+                            />
                         </div>
                         <div>
                             <div className="mt-2 block">
@@ -77,6 +86,10 @@ const TambahDataKecamatan: React.FC<PageProps> = ({ auth }) => {
                                 }
                                 placeholder="Kode Kecamatan"
                                 required
+                            />
+                            <InputError
+                                message={errors.kode_kecamatan}
+                                className="mt-2"
                             />
                         </div>
                         <div className="w-full">

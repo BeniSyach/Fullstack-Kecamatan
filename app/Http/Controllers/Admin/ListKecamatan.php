@@ -34,7 +34,9 @@ class ListKecamatan extends Controller
         return Inertia::render('Admin/TambahDataKecamatan');
     }
 
-    public function store(StoreListKecamatanRequest $request){
+    public function store(StoreListKecamatanRequest $request)
+    {
+        $request->validated();
 
         $kecamatan = new Kecamatan();
         $kecamatan->judul_website = $request->judul_website;
@@ -51,7 +53,10 @@ class ListKecamatan extends Controller
         ]);
     }
 
-    public function update(UpdateKecamatanRequest $request, Kecamatan $kecamatan){
+    public function update(UpdateKecamatanRequest $request, Kecamatan $kecamatan)
+    {
+        $request->validated();
+
         $kecamatan::find(request()->segment(4))->update([
             'domain_kecamatan' => $request->domain_kecamatan,
             'kode_kecamatan' => $request->kode_kecamatan,
