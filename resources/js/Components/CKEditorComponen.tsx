@@ -1,5 +1,6 @@
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
+import axios from "axios";
 
 interface CKEditorProps {
     value: string;
@@ -19,9 +20,7 @@ const CKEditorComponen: React.FC<CKEditorProps> = ({ value, onchange }) => {
             onChange={HandleEditorChange}
             config={{
                 ckfinder: {
-                    uploadUrl: route("uploadFoto", {
-                        _token: (window as any).csrf,
-                    }),
+                    uploadUrl: route("uploadFoto"),
                 },
             }}
         />

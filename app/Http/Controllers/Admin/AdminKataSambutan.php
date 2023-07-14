@@ -22,6 +22,7 @@ class AdminKataSambutan extends Controller
         $get_kd_kecamatan = $domain['kode_kecamatan'];
         $get_kataSambutan = KataSambutan_Model::where('kode_kecamatan',$get_kd_kecamatan)->first();
 
+     
         
         return Inertia::render('Admin/AdminKataSambuatan',[
             'domain' => $domain,
@@ -52,16 +53,20 @@ class AdminKataSambutan extends Controller
 
     public function storeImage(Request $request)
     {
-        if ($request->hasFile('upload')) {
-            $originName = $request->file('upload')->getClientOriginalName();
-            $fileName = pathinfo($originName, PATHINFO_FILENAME);
-            $extension = $request->file('upload')->getClientOriginalExtension();
-            $fileName = $fileName . '_' . time() . '.' . $extension;
+        if ($request->file('upload')) {
+            $GetDomain = FacadesRequest::getHost();
+            $imageName = time().'.'.$request->file('upload')->extension();
+            $uploadedImage = $request->file('upload')->move(public_path('images'), $imageName);
+            $imagePath ='http://'.$GetDomain. ':8000/images/' . $imageName;
     
-            $request->file('upload')->move(public_path('images'), $fileName);
-    
-            $url = asset('images/' . $fileName);
-            return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => $url]);
+            return response()->json(['fileName' =>  $imageName, 'uploaded'=> 1, 'url' => $imagePath]);
         }
+        return response()->json(['message' => 'File upload failed'], 400);    
+    }
+
+    public function getTokenCSRF()
+    {
+        $csrfToken = csrf_token();
+
     }
 }

@@ -137,7 +137,8 @@ Route::middleware('auth')->group(function () {
     // Kata Sambutan
     Route::get('/admin/kata_sambutan',[AdminKataSambutan::class,'index'])->name('AdminKataSambutan');
     Route::post('/admin/kata_sambutan/{id}',[AdminKataSambutan::class,'update'])->name('UpdateKataSambutan');
-    Route::post('/admin/kata_sambutan/uploadFoto',[AdminKataSambutan::class,'storeImage'])->name('uploadFoto');
+   
+ 
 
     // Profile admin
     // sejarah
