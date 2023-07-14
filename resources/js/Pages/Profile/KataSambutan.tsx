@@ -55,7 +55,7 @@ const KataSambutan: React.FC<Props> = ({
                                     </h1>
                                 </header>
                                 <img
-                                    src={getKataSambutan.gambar_camat}
+                                    src={`/${getKataSambutan.gambar_camat}`}
                                     alt="Foto Camat"
                                 />
                                 <div

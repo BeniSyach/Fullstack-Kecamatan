@@ -3,6 +3,7 @@ import { Button, Flowbite, Label, Modal, TextInput } from "flowbite-react";
 import { FormEventHandler, useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
+import InputError from "@/Components/InputError";
 
 interface Props {
     kecamatan: {
@@ -54,6 +55,10 @@ const EditDataKecamatan: React.FC<PageProps & Props> = ({
                                 placeholder="Nama Kecamatan"
                                 required
                             />
+                            <InputError
+                                message={errors.judul_website}
+                                className="mt-2"
+                            />
                         </div>
                         <div>
                             <div className="mt-2 block">
@@ -72,6 +77,10 @@ const EditDataKecamatan: React.FC<PageProps & Props> = ({
                                 placeholder="Domain Kecamatan"
                                 required
                             />
+                            <InputError
+                                message={errors.domain_kecamatan}
+                                className="mt-2"
+                            />
                         </div>
                         <div>
                             <div className="mt-2 block">
@@ -89,6 +98,10 @@ const EditDataKecamatan: React.FC<PageProps & Props> = ({
                                 }
                                 placeholder="Kode Kecamatan"
                                 required
+                            />
+                            <InputError
+                                message={errors.kode_kecamatan}
+                                className="mt-2"
                             />
                         </div>
                         <div className="w-full">

@@ -13,4 +13,11 @@ class KataSambutan_Model extends Model
     protected $primaryKey = 'idKataSambutan';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
+
+    protected $fillable = [
+        'nama_kepala_camat',
+        'gambar_camat',
+        'judul_kataSambutan',
+        'isi_kataSambutan',
+    ];
 }

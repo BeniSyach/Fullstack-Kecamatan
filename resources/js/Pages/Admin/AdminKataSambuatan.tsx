@@ -4,12 +4,13 @@ import { Head, useForm } from "@inertiajs/react";
 import { Button, FileInput, Flowbite, Label, TextInput } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { useState, FormEventHandler } from "react";
+import InputError from "@/Components/InputError";
 
 interface Props {
     getKataSambutan: {
         idKataSambutan: string;
         nama_kepala_camat: string;
-        gambar_camat: string;
+        gambar_camat: File | null;
         judul_kataSambutan: string;
         isi_kataSambutan: any;
     };
@@ -26,15 +27,15 @@ const AdminKataSambuatan: React.FC<PageProps & Props> = ({
         SetEditorContent(content);
         setData("isi_kataSambutan", EditorContent);
     };
-    const { data, setData, put, errors, processing } = useForm({
+    const { data, setData, post, errors, processing } = useForm({
         nama_kepala_camat: getKataSambutan.nama_kepala_camat,
-        gambar_camat: getKataSambutan.gambar_camat,
+        gambar_camat: null,
         judul_kataSambutan: getKataSambutan.judul_kataSambutan,
         isi_kataSambutan: getKataSambutan.isi_kataSambutan,
     });
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        put(
+        post(
             route("UpdateKataSambutan", { id: getKataSambutan.idKataSambutan })
         );
     };
@@ -64,6 +65,10 @@ const AdminKataSambuatan: React.FC<PageProps & Props> = ({
                                 placeholder="Nama Kepala Camat"
                                 required
                             />
+                            <InputError
+                                message={errors.nama_kepala_camat}
+                                className="mt-2"
+                            />
                         </div>
                         <div>
                             <div className="mb-2 block">
@@ -73,17 +78,20 @@ const AdminKataSambuatan: React.FC<PageProps & Props> = ({
                                 />
                             </div>
                             <img
-                                src={data.gambar_camat}
+                                src={`/${getKataSambutan.gambar_camat}`}
                                 alt="Foto Camat"
                                 className="w-1/3"
                             />
                             <FileInput
-                                helperText="Ukuran Gambar Tidak Lebih dari 2 Mb"
                                 id="gambar_camat"
                                 name="gambar_camat"
-                                onChange={(e) =>
-                                    setData("gambar_camat", e.target.value)
+                                onChange={(e: any) =>
+                                    setData("gambar_camat", e.target.files[0])
                                 }
+                            />
+                            <InputError
+                                message={errors.gambar_camat}
+                                className="mt-2"
                             />
                         </div>
 
@@ -107,6 +115,10 @@ const AdminKataSambuatan: React.FC<PageProps & Props> = ({
                                 placeholder="Judul Kata Sambutan"
                                 required
                             />
+                            <InputError
+                                message={errors.judul_kataSambutan}
+                                className="mt-2"
+                            />
                         </div>
 
                         <div className="sm:col-span-2">
@@ -119,6 +131,10 @@ const AdminKataSambuatan: React.FC<PageProps & Props> = ({
                             <CKEditorComponen
                                 value={EditorContent}
                                 onchange={handleEditorChange}
+                            />
+                            <InputError
+                                message={errors.isi_kataSambutan}
+                                className="mt-2"
                             />
                         </div>
                     </div>

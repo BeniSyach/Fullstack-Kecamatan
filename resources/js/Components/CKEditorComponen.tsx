@@ -11,6 +11,7 @@ const CKEditorComponen: React.FC<CKEditorProps> = ({ value, onchange }) => {
         const data = editor.getData();
         onchange(data);
     };
+
     return (
         <CKEditor
             editor={ClassicEditor}
@@ -18,7 +19,9 @@ const CKEditorComponen: React.FC<CKEditorProps> = ({ value, onchange }) => {
             onChange={HandleEditorChange}
             config={{
                 ckfinder: {
-                    uploadUrl: "",
+                    uploadUrl: route("uploadFoto", {
+                        _token: (window as any).csrf,
+                    }),
                 },
             }}
         />

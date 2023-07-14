@@ -36,6 +36,7 @@ class ListKecamatan extends Controller
 
     public function store(StoreListKecamatanRequest $request)
     {
+
         $request->validated();
 
         $kecamatan = new Kecamatan();
@@ -56,6 +57,7 @@ class ListKecamatan extends Controller
     public function update(UpdateKecamatanRequest $request, Kecamatan $kecamatan)
     {
         $request->validated();
+
 
         $kecamatan::find(request()->segment(4))->update([
             'domain_kecamatan' => $request->domain_kecamatan,
