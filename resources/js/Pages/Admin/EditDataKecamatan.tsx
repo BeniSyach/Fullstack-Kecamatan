@@ -90,6 +90,7 @@ const EditDataKecamatan: React.FC<PageProps & Props> = ({
                                 />
                             </div>
                             <TextInput
+                                type="number"
                                 id="kode_kecamatan"
                                 name="kode_kecamatan"
                                 value={data.kode_kecamatan}

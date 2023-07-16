@@ -78,6 +78,7 @@ const TambahDataKecamatan: React.FC<PageProps> = ({ auth }) => {
                                 />
                             </div>
                             <TextInput
+                                type="number"
                                 id="kode_kecamatan"
                                 name="kode_kecamatan"
                                 value={data.kode_kecamatan}

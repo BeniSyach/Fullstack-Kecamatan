@@ -25,7 +25,7 @@ class StoreListKecamatanRequest extends FormRequest
         return [
             'judul_website' => 'required|string|max:100',
             'domain_kecamatan' => 'required|string|max:50|unique:'.Kecamatan::class,
-            'kode_kecamatan' => 'required|numeric|max:10|unique:'.Kecamatan::class,
+            'kode_kecamatan' => 'required|numeric|max:130000|unique:'.Kecamatan::class,
         ];
     }
 
@@ -39,12 +39,12 @@ class StoreListKecamatanRequest extends FormRequest
             // Domain Website
             'domain_kecamatan.required' => ':attribute Tidak Boleh Kosong',
             'domain_kecamatan.string' => ':attribute Harus Text',
-            'domain_kecamatan.max' => ':attribute text maximal 100 digit',
+            'domain_kecamatan.max' => ':attribute maximal 100 digit',
             'domain_kecamatan.unique' => ':attribute tidak boleh sama',
             // kode Kecamatan
             'kode_kecamatan.required' => ':attribute Tidak Boleh Kosong',
             'kode_kecamatan.numeric' => ':attribute Harus angka',
-            'kode_kecamatan.max' => ':attribute text maximal 10 digit',
+            'kode_kecamatan.max' => ':attribute maximal dibawah 130.000',
             'kode_kecamatan.unique' => ':attribute tidak boleh sama',
         ];
     }

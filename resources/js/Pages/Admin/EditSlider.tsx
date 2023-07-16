@@ -53,7 +53,7 @@ const EditSlider: React.FC<PageProps & Props> = ({ auth, slider }) => {
                                 />
                             </div>
                             <img
-                                src={`/${slider.gambar_slider}`}
+                                src={`${route("home")}/${slider.gambar_slider}`}
                                 alt="Foto Camat"
                                 className="w-1/3 mb-10"
                             />

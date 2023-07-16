@@ -82,7 +82,9 @@ const Slider: React.FC<Props & PageProps> = ({
                                     <Table.Cell>
                                         {" "}
                                         <img
-                                            src={`http://${url}:8000/${slider.gambar_slider}`}
+                                            src={`${route("home")}/${
+                                                slider.gambar_slider
+                                            }`}
                                             alt=""
                                             className="w-1/4"
                                         />
