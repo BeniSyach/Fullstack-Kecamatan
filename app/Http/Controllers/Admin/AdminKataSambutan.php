@@ -20,9 +20,8 @@ class AdminKataSambutan extends Controller
         $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
         // get kode Kecamatan
         $get_kd_kecamatan = $domain['kode_kecamatan'];
-        $get_kataSambutan = KataSambutan_Model::where('kode_kecamatan',$get_kd_kecamatan)->first();
 
-     
+        $get_kataSambutan = KataSambutan_Model::where('kode_kecamatan',$get_kd_kecamatan)->first();
         
         return Inertia::render('Admin/AdminKataSambuatan',[
             'domain' => $domain,
@@ -53,11 +52,17 @@ class AdminKataSambutan extends Controller
 
     public function storeImage(Request $request)
     {
+        $request->validate([
+            'file' => 'image|mimes:jpeg,jpg,png,gif|max:5000'
+        ]);
+
         if ($request->file('upload')) {
-            $GetDomain = FacadesRequest::getHost();
             $imageName = time().'.'.$request->file('upload')->extension();
             $uploadedImage = $request->file('upload')->move(public_path('images'), $imageName);
-            $imagePath ='http://'.$GetDomain. ':8000/images/' . $imageName;
+
+            $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]";
+            
+            $imagePath =$actual_link. '/images/' . $imageName;
     
             return response()->json(['fileName' =>  $imageName, 'uploaded'=> 1, 'url' => $imagePath]);
         }

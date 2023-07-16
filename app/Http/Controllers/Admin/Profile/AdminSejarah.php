@@ -31,14 +31,17 @@ class AdminSejarah extends Controller
         ]);
     }
 
-    public function updateSejarah(StoreSejarahRequest $request, Sejarah_Model $sejarah){
+    public function updateSejarah(StoreSejarahRequest $request, Sejarah_Model $sejarah)
+    {
+
+        $request->validated();
 
         $sejarah::find(request()->segment(4))->update([
             'judul_sejarah'=>$request->judul_sejarah,
             'Deskripsi_sejarah'=>$request->Deskripsi_sejarah,
             'penulis_sejarah'=>$request->penulis_sejarah,
             'jabatan_penulis_sejarah' => $request->jabatan_penulis_sejarah,
-            'isi_sejarah' => $request->content
+            'isi_sejarah' => $request->isi_sejarah
         ]);
 
         return redirect()->back()->with('message','Data Berhasil Diubah');

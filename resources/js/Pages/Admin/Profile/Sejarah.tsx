@@ -28,14 +28,14 @@ interface CustomFormData {
     Deskripsi_sejarah: string;
     penulis_sejarah: string;
     jabatan_penulis_sejarah: string;
-    content: any;
+    isi_sejarah: any;
 }
 
 const Sejarah: React.FC<PageProps & Props> = ({ auth, sejarah, flash }) => {
     const [EditorContent, SetEditorContent] = useState(sejarah.isi_sejarah);
     const handleEditorChange = (content: any) => {
         SetEditorContent(content);
-        setData("content", EditorContent);
+        setData("isi_sejarah", EditorContent);
     };
 
     const { mySejarah } = usePage().props;
@@ -45,7 +45,7 @@ const Sejarah: React.FC<PageProps & Props> = ({ auth, sejarah, flash }) => {
         Deskripsi_sejarah: sejarah.Deskripsi_sejarah,
         penulis_sejarah: sejarah.penulis_sejarah,
         jabatan_penulis_sejarah: sejarah.jabatan_penulis_sejarah,
-        content: EditorContent,
+        isi_sejarah: EditorContent,
     });
 
     useEffect(() => {
@@ -93,28 +93,6 @@ const Sejarah: React.FC<PageProps & Props> = ({ auth, sejarah, flash }) => {
                 user={auth.user}
                 header={<h4>Form Sejarah</h4>}
             >
-                {/* <div>
-                    {flash.message && (
-                        <div className="alert alert-info shadow-lg">
-                            <div>
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    className="stroke-current flex-shrink-0 w-6 h-6"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                    ></path>
-                                </svg>
-                                <span>{flash.message}.</span>
-                            </div>
-                        </div>
-                    )}
-                </div> */}
                 <form onSubmit={submit} className="mx-5">
                     <div className="flex max-w-4xl flex-col gap-4">
                         <div>
@@ -156,6 +134,10 @@ const Sejarah: React.FC<PageProps & Props> = ({ auth, sejarah, flash }) => {
                                 placeholder="Deskripsi Singkat Sejarah"
                                 required
                             />
+                            <InputError
+                                message={errors.Deskripsi_sejarah}
+                                className="mt-2"
+                            />
                         </div>
                         <div>
                             <div className="mb-2 block">
@@ -173,6 +155,10 @@ const Sejarah: React.FC<PageProps & Props> = ({ auth, sejarah, flash }) => {
                                 }
                                 placeholder="Penulis Sejarah"
                                 required
+                            />
+                            <InputError
+                                message={errors.penulis_sejarah}
+                                className="mt-2"
                             />
                         </div>
                         <div>
@@ -195,6 +181,10 @@ const Sejarah: React.FC<PageProps & Props> = ({ auth, sejarah, flash }) => {
                                 placeholder="Jabatan Penulis"
                                 required
                             />
+                            <InputError
+                                message={errors.jabatan_penulis_sejarah}
+                                className="mt-2"
+                            />
                         </div>
                         <div className="sm:col-span-2">
                             <Label
@@ -206,6 +196,10 @@ const Sejarah: React.FC<PageProps & Props> = ({ auth, sejarah, flash }) => {
                             <CKEditorComponen
                                 value={EditorContent}
                                 onchange={handleEditorChange}
+                            />
+                            <InputError
+                                message={errors.isi_sejarah}
+                                className="mt-2"
                             />
                         </div>
                     </div>

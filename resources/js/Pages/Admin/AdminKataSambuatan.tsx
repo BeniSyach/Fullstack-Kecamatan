@@ -3,8 +3,9 @@ import { PageProps } from "@/types";
 import { Head, useForm } from "@inertiajs/react";
 import { Button, FileInput, Flowbite, Label, TextInput } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { useState, FormEventHandler } from "react";
+import { useState, FormEventHandler, useEffect } from "react";
 import InputError from "@/Components/InputError";
+import Swal from "sweetalert2";
 
 interface Props {
     getKataSambutan: {
@@ -14,11 +15,16 @@ interface Props {
         judul_kataSambutan: string;
         isi_kataSambutan: any;
     };
+    flash: {
+        message?: string;
+        // Add more flash message types if needed
+    };
 }
 
 const AdminKataSambuatan: React.FC<PageProps & Props> = ({
     auth,
     getKataSambutan,
+    flash,
 }) => {
     const [EditorContent, SetEditorContent] = useState(
         getKataSambutan.isi_kataSambutan
@@ -39,6 +45,32 @@ const AdminKataSambuatan: React.FC<PageProps & Props> = ({
             route("UpdateKataSambutan", { id: getKataSambutan.idKataSambutan })
         );
     };
+
+    useEffect(() => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "dark",
+            customClass: {
+                popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+        });
+        if (flash && flash.message) {
+            Toast.fire({
+                icon: "success",
+                title: flash.message,
+            });
+        }
+        // else if (flash && flash.error) {
+        //     Toast.fire({
+        //         icon: "error",
+        //         title: "Data Gagal Diubah",
+        //     });
+        // }
+    }, [flash]);
     return (
         <Flowbite>
             <Head title="Setting Kata Sambutan" />
