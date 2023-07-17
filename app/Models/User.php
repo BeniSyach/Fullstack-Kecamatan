@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'kode_kecamatan',
+        'role_user',
         'password',
     ];
 

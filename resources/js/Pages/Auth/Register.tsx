@@ -11,6 +11,7 @@ export default function Register() {
         name: "",
         email: "",
         kode_kecamatan: "",
+        role_user: "",
         password: "",
         password_confirmation: "",
     });
@@ -82,7 +83,26 @@ export default function Register() {
                         required
                     />
 
-                    <InputError message={errors.email} className="mt-2" />
+                    <InputError
+                        message={errors.kode_kecamatan}
+                        className="mt-2"
+                    />
+                </div>
+                <div className="mt-4">
+                    <InputLabel htmlFor="text" value="Role User" />
+
+                    <TextInput
+                        id="role_user"
+                        type="text"
+                        name="role_user"
+                        value={data.role_user}
+                        className="mt-1 block w-full"
+                        autoComplete="username"
+                        onChange={(e) => setData("role_user", e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.role_user} className="mt-2" />
                 </div>
 
                 <div className="mt-4">

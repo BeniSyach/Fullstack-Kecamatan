@@ -55,10 +55,10 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 
+
                 Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');
             
-            Route::post('register', [RegisteredUserController::class, 'store']);
-
+                Route::post('register', [RegisteredUserController::class, 'store']);
 
 });

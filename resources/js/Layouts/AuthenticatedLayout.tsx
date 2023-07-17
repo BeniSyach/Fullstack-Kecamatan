@@ -139,7 +139,7 @@ export default function Authenticated({
                 </div>
             </nav>
 
-            <SideBar />
+            <SideBar data={user} />
 
             <main className="p-4 md:ml-64 h-auto pt-16">
                 {header && (
