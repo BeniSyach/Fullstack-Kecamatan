@@ -4,6 +4,7 @@ import { FormEventHandler, useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import CKEditorComponen from "@/Components/CKEditorComponen";
+import InputError from "@/Components/InputError";
 
 interface Props {
     ListDetailPotensi: {
@@ -27,7 +28,7 @@ const EditDetailListPotensi: React.FC<PageProps & Props> = ({
 
     const { data, setData, post, errors, processing } = useForm({
         gambar_potensi: ListDetailPotensi.gambar_potensi,
-        konten_potensi: ListDetailPotensi.konten_potensi,
+        konten_potensi: null,
     });
 
     const submit: FormEventHandler = (e) => {
@@ -56,7 +57,9 @@ const EditDetailListPotensi: React.FC<PageProps & Props> = ({
                                 />
                             </div>
                             <img
-                                src={data.gambar_potensi}
+                                src={`${route("home")}/${
+                                    ListDetailPotensi.gambar_potensi
+                                }`}
                                 alt="Foto Potensi"
                                 className="w-1/3 mb-10"
                             />
@@ -64,9 +67,13 @@ const EditDetailListPotensi: React.FC<PageProps & Props> = ({
                                 helperText="Ukuran Gambar Tidak Lebih dari 2 Mb"
                                 id="gambar_potensi"
                                 name="gambar_potensi"
-                                onChange={(e) =>
-                                    setData("gambar_potensi", e.target.value)
+                                onChange={(e: any) =>
+                                    setData("gambar_potensi", e.target.files[0])
                                 }
+                            />
+                            <InputError
+                                message={errors.gambar_potensi}
+                                className="mt-2"
                             />
                         </div>
                         <div className="max-w-full sm:col-span-2">
@@ -79,6 +86,10 @@ const EditDetailListPotensi: React.FC<PageProps & Props> = ({
                             <CKEditorComponen
                                 value={EditorContent}
                                 onchange={handleEditorChange}
+                            />
+                            <InputError
+                                message={errors.konten_potensi}
+                                className="mt-2"
                             />
                         </div>
                         <div className="w-full">

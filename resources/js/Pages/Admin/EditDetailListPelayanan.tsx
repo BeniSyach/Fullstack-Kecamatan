@@ -4,6 +4,7 @@ import { FormEventHandler, useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import CKEditorComponen from "@/Components/CKEditorComponen";
+import InputError from "@/Components/InputError";
 
 interface Props {
     ListDetailPelayanan: {
@@ -26,14 +27,14 @@ const EditDetailListPelayanan: React.FC<PageProps & Props> = ({
     };
 
     const { data, setData, post, errors, processing } = useForm({
-        gambar_pelayanan: ListDetailPelayanan.gambar_pelayanan,
+        gambar_pelayanan: null,
         konten_pelayanan: ListDetailPelayanan.konten_pelayanan,
     });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         post(
-            route("updateDetailPelayanan", {
+            route("updateDetailPeyanan", {
                 id: ListDetailPelayanan.idDetailPelayanan,
             })
         );
@@ -56,7 +57,9 @@ const EditDetailListPelayanan: React.FC<PageProps & Props> = ({
                                 />
                             </div>
                             <img
-                                src={data.gambar_pelayanan}
+                                src={`${route("home")}/${
+                                    ListDetailPelayanan.gambar_pelayanan
+                                }`}
                                 alt="Foto Pelayanan"
                                 className="w-1/3 mb-10"
                             />
@@ -64,9 +67,16 @@ const EditDetailListPelayanan: React.FC<PageProps & Props> = ({
                                 helperText="Ukuran Gambar Tidak Lebih dari 2 Mb"
                                 id="gambar_pelayanan"
                                 name="gambar_pelayanan"
-                                onChange={(e) =>
-                                    setData("gambar_pelayanan", e.target.value)
+                                onChange={(e: any) =>
+                                    setData(
+                                        "gambar_pelayanan",
+                                        e.target.files[0]
+                                    )
                                 }
+                            />
+                            <InputError
+                                message={errors.gambar_pelayanan}
+                                className="mt-2"
                             />
                         </div>
                         <div className="max-w-full sm:col-span-2">
@@ -79,6 +89,10 @@ const EditDetailListPelayanan: React.FC<PageProps & Props> = ({
                             <CKEditorComponen
                                 value={EditorContent}
                                 onchange={handleEditorChange}
+                            />
+                            <InputError
+                                message={errors.konten_pelayanan}
+                                className="mt-2"
                             />
                         </div>
                         <div className="w-full">

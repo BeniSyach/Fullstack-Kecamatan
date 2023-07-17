@@ -4,6 +4,7 @@ import { FormEventHandler, useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import CKEditorComponen from "@/Components/CKEditorComponen";
+import InputError from "@/Components/InputError";
 
 interface Props {
     ListDetailunduhan: {
@@ -17,7 +18,7 @@ const EditDetailListPotensi: React.FC<PageProps & Props> = ({
     ListDetailunduhan,
 }) => {
     const { data, setData, post, errors, processing } = useForm({
-        dokumen: ListDetailunduhan.dokumen,
+        dokumen: null,
     });
 
     const submit: FormEventHandler = (e) => {
@@ -46,9 +47,13 @@ const EditDetailListPotensi: React.FC<PageProps & Props> = ({
                                 helperText="Ukuran dokumen Tidak Lebih dari 5 Mb"
                                 id="dokumen"
                                 name="dokumen"
-                                onChange={(e) =>
-                                    setData("dokumen", e.target.value)
+                                onChange={(e: any) =>
+                                    setData("dokumen", e.target.files[0])
                                 }
+                            />
+                            <InputError
+                                message={errors.dokumen}
+                                className="mt-2"
                             />
                         </div>
                         <div className="w-full">

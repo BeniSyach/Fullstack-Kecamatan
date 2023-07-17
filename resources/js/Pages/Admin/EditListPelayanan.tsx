@@ -3,6 +3,7 @@ import { Button, Flowbite, Label, TextInput } from "flowbite-react";
 import { FormEventHandler, useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
+import InputError from "@/Components/InputError";
 
 interface Props {
     ListPelayanan: {
@@ -49,6 +50,10 @@ const EditListPelayanan: React.FC<PageProps & Props> = ({
                                 }
                                 placeholder="Judul Pelayanan"
                                 required
+                            />
+                            <InputError
+                                message={errors.judul_pelayanan}
+                                className="mt-2"
                             />
                         </div>
                         <div className="w-full">

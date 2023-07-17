@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreListUnduhanRequest;
+use App\Http\Requests\UpdateDetailUnduhanRequest;
 use App\Http\Requests\UpdateUnduhanRequest;
 use App\Models\Detail_Unduhan_Model;
 use App\Models\Kecamatan;
@@ -39,6 +40,7 @@ class AdminUnduhan extends Controller
 
     public function store(StoreListUnduhanRequest $request)
     {
+        $request->validated();
         // ambil url domain
         $GetDomain = FacadesRequest::getHost();
         $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
@@ -75,6 +77,7 @@ class AdminUnduhan extends Controller
     }
 
     public function update(UpdateUnduhanRequest $request, Unduhan_Model $unduhan){
+        $request->validated();
         $slug = Str::of($request->judul_unduhan)->snake();  
 
         $unduhan::find(request()->segment(4))->update([
@@ -100,18 +103,17 @@ class AdminUnduhan extends Controller
         ]);
     }
 
-    public function update_detail(UpdateUnduhanRequest $request)
+    public function update_detail(UpdateDetailUnduhanRequest $request, Detail_Unduhan_Model $detail_unduhan)
     {
-        // ambil url domain
-        $GetDomain = FacadesRequest::getHost();
-        $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
-        // get kode Kecamatan
-        $get_kd_kecamatan = $domain['kode_kecamatan'];
+        $request->validated();
 
-        $detail_unduhan = new Detail_Unduhan_Model();
-        $detail_unduhan->kode_kecamatan = $get_kd_kecamatan;
-        $detail_unduhan->judul_unduhan = $request->judul_unduhan;
-        $detail_unduhan->save();
+        $imageName = time().'.'.$request->dokumen->extension();
+        $uploadedImage = $request->dokumen->move(public_path('images/unduhan/'), $imageName);
+        $imagePath = 'images/unduhan/' . $imageName;
+
+        $detail_unduhan::find(request()->segment(4))->update([
+            'dokumen' =>$imagePath,
+        ]);
 
         return redirect(route('AdminUnduhan'))->with('message','Data Berhasil Di Ubah');
     }

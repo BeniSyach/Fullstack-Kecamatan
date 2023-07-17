@@ -22,7 +22,24 @@ class UpdatePotensiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'judul_potensi' => 'required|string|max:200',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            // judul Foto
+            'judul_potensi.required' => ':attribute Tidak Boleh Kosong',
+            'judul_potensi.string' => ':attribute Harus Text',
+            'judul_potensi.max' => ':attribute text maximal 200 digit',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'judul_potensi' => 'Judul Potensi'
         ];
     }
 }

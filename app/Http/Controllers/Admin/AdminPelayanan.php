@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreListKecamatanRequest;
 use App\Http\Requests\StoreListPelayananRequest;
+use App\Http\Requests\UpdateDetailPelayananRequest;
 use App\Http\Requests\UpdateKecamatanRequest;
 use App\Http\Requests\UpdatePelayananRequest;
 use App\Models\Detail_Pelayanan_Model;
@@ -102,18 +103,18 @@ class AdminPelayanan extends Controller
         ]);
     }
 
-    public function update_detail(UpdatePelayananRequest $request)
+    public function update_detail(UpdateDetailPelayananRequest $request, Detail_Pelayanan_Model $detail_pelayanan)
     {
-        // ambil url domain
-        $GetDomain = FacadesRequest::getHost();
-        $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
-        // get kode Kecamatan
-        $get_kd_kecamatan = $domain['kode_kecamatan'];
+        $request->validated();
 
-        $detail_pelayanan = new Detail_Pelayanan_Model();
-        $detail_pelayanan->kode_kecamatan = $get_kd_kecamatan;
-        $detail_pelayanan->judul_pelayanan = $request->judul_pelayanan;
-        $detail_pelayanan->save();
+        $imageName = time().'.'.$request->gambar_pelayanan->extension();
+        $uploadedImage = $request->gambar_pelayanan->move(public_path('images/pelayanan/'), $imageName);
+        $imagePath = 'images/pelayanan/' . $imageName;
+
+        $detail_pelayanan::find(request()->segment(4))->update([
+            'gambar_pelayanan' =>$imagePath,
+            'konten_pelayanan' => $request->konten_pelayanan,
+        ]);
 
         return redirect(route('AdminPelayanan'))->with('message','Data Berhasil Di Ubah');
     }
