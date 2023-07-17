@@ -22,7 +22,24 @@ class StoreListUnduhanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'judul_unduhan' => 'required|string|max:200',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            // judul Foto
+            'judul_unduhan.required' => ':attribute Tidak Boleh Kosong',
+            'judul_unduhan.string' => ':attribute Harus Text',
+            'judul_unduhan.max' => ':attribute text maximal 200 digit',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'judul_unduhan' => 'Judul Potensi'
         ];
     }
 }

@@ -22,7 +22,24 @@ class StoreListPelayananRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'judul_pelayanan' => 'required|string|max:200',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            // judul Foto
+            'judul_pelayanan.required' => ':attribute Tidak Boleh Kosong',
+            'judul_pelayanan.string' => ':attribute Harus Text',
+            'judul_pelayanan.max' => ':attribute text maximal 200 digit',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'judul_pelayanan' => 'Judul pelayanan'
         ];
     }
 }

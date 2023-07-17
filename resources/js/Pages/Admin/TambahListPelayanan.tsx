@@ -3,6 +3,7 @@ import { Button, Flowbite, Label, TextInput } from "flowbite-react";
 import { FormEventHandler, useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
+import InputError from "@/Components/InputError";
 
 const TambahListPelayanan: React.FC<PageProps> = ({ auth }) => {
     const { data, setData, post, errors, processing } = useForm({
@@ -39,6 +40,10 @@ const TambahListPelayanan: React.FC<PageProps> = ({ auth }) => {
                                 }
                                 placeholder="Judul Pelayanan"
                                 required
+                            />
+                            <InputError
+                                message={errors.judul_pelayanan}
+                                className="mt-2"
                             />
                         </div>
                         <div className="w-full">

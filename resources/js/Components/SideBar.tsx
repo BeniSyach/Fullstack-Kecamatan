@@ -22,9 +22,11 @@ import {
 } from "react-icons/fa";
 import { Link } from "@inertiajs/react";
 
-type Props = {};
+interface Props {
+    data: any;
+}
 
-const SideBar: React.FC<Props> = () => {
+const SideBar: React.FC<Props> = (data) => {
     return (
         <Sidebar
             aria-label="Sidebar with multi-level dropdown example"
@@ -70,24 +72,31 @@ const SideBar: React.FC<Props> = () => {
                             <p>Dashboard</p>
                         </Sidebar.Item>
                     </Link>
-                    <Link
-                        href={route("listKecamatan")}
-                        as="div"
-                        className=" cursor-pointer"
-                    >
-                        <Sidebar.Item icon={FaSafari}>
-                            <p>Kecamatan & Desa</p>
-                        </Sidebar.Item>
-                    </Link>
-                    <Link
-                        href={route("listUser")}
-                        as="div"
-                        className=" cursor-pointer"
-                    >
-                        <Sidebar.Item icon={FaAddressBook}>
-                            <p>List User</p>
-                        </Sidebar.Item>
-                    </Link>
+                    {data.data.role_user === "1" ? (
+                        <>
+                            <Link
+                                href={route("listKecamatan")}
+                                as="div"
+                                className=" cursor-pointer"
+                            >
+                                <Sidebar.Item icon={FaSafari}>
+                                    <p>Kecamatan & Desa</p>
+                                </Sidebar.Item>
+                            </Link>
+                            <Link
+                                href={route("listUser")}
+                                as="div"
+                                className=" cursor-pointer"
+                            >
+                                <Sidebar.Item icon={FaAddressBook}>
+                                    <p>List User</p>
+                                </Sidebar.Item>
+                            </Link>
+                        </>
+                    ) : (
+                        ""
+                    )}
+
                     <Sidebar.Collapse label="Halaman Depan" icon={FaRegEdit}>
                         <Link
                             href={route("listSlider")}
