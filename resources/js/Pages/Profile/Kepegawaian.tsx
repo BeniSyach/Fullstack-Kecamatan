@@ -59,8 +59,10 @@ const Kepegawaian: React.FC<Props> = ({
                                 >
                                     <a href="#">
                                         <img
-                                            className="w-full rounded-lg sm:rounded-none sm:rounded-l-lg"
-                                            src={pegawai.gambar_pegawai}
+                                            className="w-1/2 m-5 rounded-lg sm:rounded-none sm:rounded-l-lg"
+                                            src={`${route("home")}/${
+                                                pegawai.gambar_pegawai
+                                            }`}
                                             alt="Gambar Pegawai"
                                         />
                                     </a>

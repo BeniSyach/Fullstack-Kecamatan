@@ -38,7 +38,7 @@ const FotoKegiatan: React.FC<Props> = ({ domain, foto }) => {
                             <div key={k}>
                                 <img
                                     className="h-auto max-w-full rounded-lg"
-                                    src={data_foto.foto}
+                                    src={`${route("home")}/${data_foto.foto}`}
                                     alt="Foto Wisata"
                                 />
                             </div>
