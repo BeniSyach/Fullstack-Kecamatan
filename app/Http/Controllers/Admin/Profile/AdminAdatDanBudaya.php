@@ -32,6 +32,7 @@ class AdminAdatDanBudaya extends Controller
     }
 
     public function updateAdatDanBudaya(StoreAdatDanBudaya $request,Adat_dan_budaya_Model $budaya){
+        $request->validated();
         $budaya::find(request()->segment(4))->update([
             'judul_adatDanBudaya'=>$request->judul_adatDanBudaya,
             'deskripsi_adatDanBudaya'=>$request->deskripsi_adatDanBudaya,

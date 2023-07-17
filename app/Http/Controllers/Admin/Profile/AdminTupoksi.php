@@ -34,6 +34,7 @@ class AdminTupoksi extends Controller
 
     public function updateTupoksi(StoreTupoksiRequest $request,Tupoksi_Model $tupoksi)
     {
+        $request->validated();
         $tupoksi::find(request()->segment(4))->update([
             'judul_tupoksi' => $request->judul_tupoksi,
             'deskripsi_tupoksi' => $request->deskripsi_tupoksi,

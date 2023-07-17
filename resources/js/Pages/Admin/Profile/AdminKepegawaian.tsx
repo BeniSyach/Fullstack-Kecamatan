@@ -107,9 +107,11 @@ const AdminKepegawaian: React.FC<Props & PageProps> = ({
                                         </Table.Cell>
                                         <Table.Cell>
                                             <img
-                                                src={pegawai.gambar_pegawai}
+                                                src={`${route("home")}/${
+                                                    pegawai.gambar_pegawai
+                                                }`}
                                                 alt=""
-                                                className="w-1/5"
+                                                className="w-1/3"
                                             />
                                         </Table.Cell>
                                         <Table.Cell>

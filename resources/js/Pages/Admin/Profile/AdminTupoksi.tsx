@@ -5,6 +5,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { useEffect, useState } from "react";
 import CKEditorComponen from "@/Components/CKEditorComponen";
 import Swal from "sweetalert2";
+import InputError from "@/Components/InputError";
 
 interface Props {
     getTupoksi: {
@@ -100,6 +101,10 @@ const AdminTupoksi: React.FC<PageProps & Props> = ({
                                 placeholder="Judul Tupoksi"
                                 required
                             />
+                            <InputError
+                                message={errors.judul_tupoksi}
+                                className="mt-2"
+                            />
                         </div>
                         <div>
                             <div className="mb-2 block">
@@ -118,6 +123,10 @@ const AdminTupoksi: React.FC<PageProps & Props> = ({
                                 placeholder="Deskripsi Singkat Tupoksi"
                                 required
                             />
+                            <InputError
+                                message={errors.deskripsi_tupoksi}
+                                className="mt-2"
+                            />
                         </div>
 
                         <div className="sm:col-span-2">
@@ -130,6 +139,10 @@ const AdminTupoksi: React.FC<PageProps & Props> = ({
                             <CKEditorComponen
                                 value={EditorContent}
                                 onchange={handleEditorChange}
+                            />
+                            <InputError
+                                message={errors.isi_tupoksi}
+                                className="mt-2"
                             />
                         </div>
                     </div>

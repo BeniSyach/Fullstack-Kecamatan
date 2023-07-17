@@ -39,16 +39,21 @@ class AdminKepegawaian extends Controller
 
     public function store(StorePegawaiRequest $request)
     {
+        $request->validated();
         // ambil url domain
         $GetDomain = FacadesRequest::getHost();
         $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
         // get kode Kecamatan
         $get_kd_kecamatan = $domain['kode_kecamatan'];
 
+        $imageName = time().'.'.$request->gambar_pegawai->extension();
+        $uploadedImage = $request->gambar_pegawai->move(public_path('images/pegawai/'), $imageName);
+        $imagePath = 'images/pegawai/' . $imageName;
+
         $pegawai = new Kepegawaian_Model();
         $pegawai->kode_kecamatan = $get_kd_kecamatan;
         $pegawai->nama_pegawai=  $request->nama_pegawai;
-        $pegawai->gambar_pegawai = $request->gambar_pegawai;
+        $pegawai->gambar_pegawai = $imagePath;
         $pegawai->jabatan_pegawai=  $request->jabatan_pegawai;
         $pegawai->motivasi_pegawai=  $request->motivasi_pegawai;
         $pegawai->link_facebook=  $request->link_facebook;
@@ -68,9 +73,18 @@ class AdminKepegawaian extends Controller
 
     public function update(UpdatePegawaiRequest $request, Kepegawaian_Model $pegawai)
     {
+        $request->validated();
+        // Hapus Gambar Sebelumnya
+        $hapus_gambar=Kepegawaian_Model::find(request()->segment(4));
+        unlink($hapus_gambar->gambar_pegawai);
+        // Ambil Gambar Baru
+        $imageName = time().'.'.$request->gambar_pegawai->extension();
+        $uploadedImage = $request->gambar_pegawai->move(public_path('images/pegawai/'), $imageName);
+        $imagePath = 'images/pegawai/' . $imageName;
+
         $pegawai::find(request()->segment(4))->update([
             'nama_pegawai'=>  $request->nama_pegawai,
-            'gambar_pegawai' => $request->gambar_pegawai,
+            'gambar_pegawai' => $imagePath,
             'jabatan_pegawai'=>  $request->jabatan_pegawai,
             'motivasi_pegawai'=>  $request->motivasi_pegawai,
             'link_facebook'=>  $request->link_facebook,
@@ -82,8 +96,9 @@ class AdminKepegawaian extends Controller
 
     public function hapus($id)
     {
-        $kecamatan =Kepegawaian_Model::find($id);
-        $kecamatan->delete();
+        $pegawai =Kepegawaian_Model::find($id);
+        unlink($pegawai->gambar_pegawai);
+        $pegawai->delete();
         return redirect(route('AdminKepegawaian'))->with('message','Data Berhasil Di Hapus');
     }
 }

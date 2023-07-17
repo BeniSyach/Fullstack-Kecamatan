@@ -5,6 +5,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { useEffect, useState } from "react";
 import CKEditorComponen from "@/Components/CKEditorComponen";
 import Swal from "sweetalert2";
+import InputError from "@/Components/InputError";
 
 interface Props {
     getStrukturOrganisasi: {
@@ -111,6 +112,10 @@ const AdminStrukturOrganisasi: React.FC<PageProps & Props> = ({
                                 placeholder="Judul Struktur Organisasi"
                                 required
                             />
+                            <InputError
+                                message={errors.judul_struktur_organisasi}
+                                className="mt-2"
+                            />
                         </div>
                         <div>
                             <div className="mb-2 block">
@@ -132,6 +137,10 @@ const AdminStrukturOrganisasi: React.FC<PageProps & Props> = ({
                                 placeholder="Deskripsi Singkat Struktur Organisasi"
                                 required
                             />
+                            <InputError
+                                message={errors.deskripsi_struktur_organisasi}
+                                className="mt-2"
+                            />
                         </div>
 
                         <div className="sm:col-span-2">
@@ -144,6 +153,10 @@ const AdminStrukturOrganisasi: React.FC<PageProps & Props> = ({
                             <CKEditorComponen
                                 value={EditorContent}
                                 onchange={handleEditorChange}
+                            />
+                            <InputError
+                                message={errors.isi_struktur_organisasi}
+                                className="mt-2"
                             />
                         </div>
                     </div>

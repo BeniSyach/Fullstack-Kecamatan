@@ -5,6 +5,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React, { useEffect, useState } from "react";
 import CKEditorComponen from "@/Components/CKEditorComponen";
 import Swal from "sweetalert2";
+import InputError from "@/Components/InputError";
 
 interface Props {
     getVisiDanMisi: {
@@ -113,6 +114,10 @@ const VisiDanMisi: React.FC<PageProps & Props> = ({
                                 placeholder="Judul Visi Dan Misi"
                                 required
                             />
+                            <InputError
+                                message={errors.judul_VisiDanMisi}
+                                className="mt-2"
+                            />
                         </div>
                         <div>
                             <div className="mb-2 block">
@@ -134,6 +139,10 @@ const VisiDanMisi: React.FC<PageProps & Props> = ({
                                 placeholder="Deskripsi Singkat Visi Dan Misi"
                                 required
                             />
+                            <InputError
+                                message={errors.deskripsi_VisiDanMisi}
+                                className="mt-2"
+                            />
                         </div>
 
                         <div className="sm:col-span-2">
@@ -147,6 +156,10 @@ const VisiDanMisi: React.FC<PageProps & Props> = ({
                                 value={EditorContentVisi}
                                 onchange={handleEditorChangeVisi}
                             />
+                            <InputError
+                                message={errors.isi_Visi}
+                                className="mt-2"
+                            />
                         </div>
 
                         <div className="sm:col-span-2">
@@ -159,6 +172,10 @@ const VisiDanMisi: React.FC<PageProps & Props> = ({
                             <CKEditorComponen
                                 value={EditorContentMisi}
                                 onchange={handleEditorChangeMisi}
+                            />
+                            <InputError
+                                message={errors.isi_Misi}
+                                className="mt-2"
                             />
                         </div>
                     </div>

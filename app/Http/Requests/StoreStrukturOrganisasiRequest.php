@@ -22,7 +22,34 @@ class StoreStrukturOrganisasiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'judul_struktur_organisasi' => 'required|string|max:200',
+            'deskripsi_struktur_organisasi' => 'required|string|max:200',
+            'isi_struktur_organisasi' => 'required',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            // judul Struktur Organisasi
+            'judul_struktur_organisasi.required' => ':attribute Tidak Boleh Kosong',
+            'judul_struktur_organisasi.string' => ':attribute Harus Text',
+            'judul_struktur_organisasi.max' => ':attribute text maximal 200 digit',
+            // Deskripsi Struktur Organisasi
+            'deskripsi_struktur_organisasi.required' => ':attribute Tidak Boleh Kosong',
+            'deskripsi_struktur_organisasi.string' => ':attribute Harus Text',
+            'deskripsi_struktur_organisasi.max' => ':attribute text maximal 200 digit',
+            // Isi Struktur Organisasi
+            'isi_struktur_organisasi.required' => ':attribute Tidak Boleh Kosong',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'judul_struktur_organisasi' => 'Judul Struktur Organisasi',
+            'deskripsi_struktur_organisasi' => 'Deksripsi Struktur Organisasi',
+            'isi_struktur_organisasi' => 'Konten Struktur Organisasi',
         ];
     }
 }

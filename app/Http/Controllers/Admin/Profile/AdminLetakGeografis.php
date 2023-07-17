@@ -31,7 +31,9 @@ class AdminLetakGeografis extends Controller
         ]);
     }
 
-    public function updateLetakGeografis(StoreLetakGeografisRequest $request, LetakGeografis_Model $geografis){
+    public function updateLetakGeografis(StoreLetakGeografisRequest $request, LetakGeografis_Model $geografis)
+    {
+        $request->validated();
 
         $geografis::find(request()->segment(4))->update([
             'judul_letak_geografis'=>$request->judul_letak_geografis,

@@ -5,6 +5,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { useEffect, useState } from "react";
 import CKEditorComponen from "@/Components/CKEditorComponen";
 import Swal from "sweetalert2";
+import InputError from "@/Components/InputError";
 
 interface Props {
     getAdatDanBudaya: {
@@ -109,6 +110,10 @@ const AdatDanBudaya: React.FC<PageProps & Props> = ({
                                 placeholder="Judul Adat Dan Budaya"
                                 required
                             />
+                            <InputError
+                                message={errors.judul_adatDanBudaya}
+                                className="mt-2"
+                            />
                         </div>
                         <div>
                             <div className="mb-2 block">
@@ -130,6 +135,10 @@ const AdatDanBudaya: React.FC<PageProps & Props> = ({
                                 placeholder="Deskripsi Singkat Adat Dan Budaya"
                                 required
                             />
+                            <InputError
+                                message={errors.deskripsi_adatDanBudaya}
+                                className="mt-2"
+                            />
                         </div>
 
                         <div className="sm:col-span-2">
@@ -142,6 +151,10 @@ const AdatDanBudaya: React.FC<PageProps & Props> = ({
                             <CKEditorComponen
                                 value={EditorContent}
                                 onchange={handleEditorChange}
+                            />
+                            <InputError
+                                message={errors.isi_adatDanBudaya}
+                                className="mt-2"
                             />
                         </div>
                     </div>

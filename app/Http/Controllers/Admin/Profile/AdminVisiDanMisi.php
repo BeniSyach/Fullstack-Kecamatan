@@ -31,7 +31,10 @@ class AdminVisiDanMisi extends Controller
         ]);
     }
 
-    public function updateVisiMisi(StoreVisiMisiRequest $request,VisiDanMisi_Model $visiMisi){
+    public function updateVisiMisi(StoreVisiMisiRequest $request,VisiDanMisi_Model $visiMisi)
+    {
+
+        $request->validated();
 
         $visiMisi::find(request()->segment(4))->update([
         'judul_VisiDanMisi'=>$request->judul_VisiDanMisi,

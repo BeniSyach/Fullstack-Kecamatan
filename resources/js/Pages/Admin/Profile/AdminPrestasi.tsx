@@ -5,6 +5,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { useEffect, useState } from "react";
 import CKEditorComponen from "@/Components/CKEditorComponen";
 import Swal from "sweetalert2";
+import InputError from "@/Components/InputError";
 
 interface Props {
     getPrestasi: {
@@ -102,6 +103,10 @@ const AdminPrestasi: React.FC<PageProps & Props> = ({
                                 placeholder="Judul Prestasi"
                                 required
                             />
+                            <InputError
+                                message={errors.judul_prestasi}
+                                className="mt-2"
+                            />
                         </div>
                         <div>
                             <div className="mb-2 block">
@@ -123,6 +128,10 @@ const AdminPrestasi: React.FC<PageProps & Props> = ({
                                 placeholder="Deskripsi Singkat Prestasi"
                                 required
                             />
+                            <InputError
+                                message={errors.deskripsi_prestasi}
+                                className="mt-2"
+                            />
                         </div>
 
                         <div className="sm:col-span-2">
@@ -135,6 +144,10 @@ const AdminPrestasi: React.FC<PageProps & Props> = ({
                             <CKEditorComponen
                                 value={EditorContent}
                                 onchange={handleEditorChange}
+                            />
+                            <InputError
+                                message={errors.isi_prestasi}
+                                className="mt-2"
                             />
                         </div>
                     </div>

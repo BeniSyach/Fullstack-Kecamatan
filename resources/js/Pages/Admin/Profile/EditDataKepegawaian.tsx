@@ -3,6 +3,7 @@ import { Button, FileInput, Flowbite, Label, TextInput } from "flowbite-react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import { FormEventHandler } from "react";
+import InputError from "@/Components/InputError";
 
 interface myUser {
     pegawai: {
@@ -20,7 +21,7 @@ interface myUser {
 const TambahPegawai: React.FC<PageProps & myUser> = ({ auth, pegawai }) => {
     const { data, setData, post, errors, processing } = useForm({
         nama_pegawai: pegawai.nama_pegawai,
-        gambar_pegawai: pegawai.gambar_pegawai,
+        gambar_pegawai: null,
         jabatan_pegawai: pegawai.jabatan_pegawai,
         motivasi_pegawai: pegawai.motivasi_pegawai,
         link_facebook: pegawai.link_facebook,
@@ -30,7 +31,7 @@ const TambahPegawai: React.FC<PageProps & myUser> = ({ auth, pegawai }) => {
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route("tambahPegawai"));
+        post(route("updatePegawai", { id: pegawai.idKepegawaian }));
     };
     return (
         <Flowbite>
@@ -58,6 +59,10 @@ const TambahPegawai: React.FC<PageProps & myUser> = ({ auth, pegawai }) => {
                                 placeholder="Nama Pegawai"
                                 required
                             />
+                            <InputError
+                                message={errors.nama_pegawai}
+                                className="mt-2"
+                            />
                         </div>
                         <div>
                             <div className="mt-2 block">
@@ -67,7 +72,9 @@ const TambahPegawai: React.FC<PageProps & myUser> = ({ auth, pegawai }) => {
                                 />
                             </div>
                             <img
-                                src={data.gambar_pegawai}
+                                src={`${route("home")}/${
+                                    pegawai.gambar_pegawai
+                                }`}
                                 alt="Foto Pegawai"
                                 className="w-1/3 mb-10"
                             />
@@ -75,9 +82,13 @@ const TambahPegawai: React.FC<PageProps & myUser> = ({ auth, pegawai }) => {
                                 helperText="Ukuran Gambar Tidak Lebih dari 2 Mb"
                                 id="gambar_pegawai"
                                 name="gambar_pegawai"
-                                onChange={(e) =>
-                                    setData("gambar_pegawai", e.target.value)
+                                onChange={(e: any) =>
+                                    setData("gambar_pegawai", e.target.files[0])
                                 }
+                            />
+                            <InputError
+                                message={errors.gambar_pegawai}
+                                className="mt-2"
                             />
                         </div>
                         <div>
@@ -97,6 +108,10 @@ const TambahPegawai: React.FC<PageProps & myUser> = ({ auth, pegawai }) => {
                                 placeholder="jabatan pegawai"
                                 required
                             />
+                            <InputError
+                                message={errors.jabatan_pegawai}
+                                className="mt-2"
+                            />
                         </div>
                         <div>
                             <div className="mt-2 block">
@@ -114,6 +129,10 @@ const TambahPegawai: React.FC<PageProps & myUser> = ({ auth, pegawai }) => {
                                 }
                                 placeholder="Motivasi Pegawai"
                                 required
+                            />
+                            <InputError
+                                message={errors.motivasi_pegawai}
+                                className="mt-2"
                             />
                         </div>
                         <div>
@@ -133,6 +152,10 @@ const TambahPegawai: React.FC<PageProps & myUser> = ({ auth, pegawai }) => {
                                 placeholder="Link Facebook"
                                 required
                             />
+                            <InputError
+                                message={errors.link_facebook}
+                                className="mt-2"
+                            />
                         </div>
                         <div>
                             <div className="mt-2 block">
@@ -151,6 +174,10 @@ const TambahPegawai: React.FC<PageProps & myUser> = ({ auth, pegawai }) => {
                                 placeholder="Link Instagram"
                                 required
                             />
+                            <InputError
+                                message={errors.link_instagram}
+                                className="mt-2"
+                            />
                         </div>
                         <div>
                             <div className="mt-2 block">
@@ -168,6 +195,10 @@ const TambahPegawai: React.FC<PageProps & myUser> = ({ auth, pegawai }) => {
                                 }
                                 placeholder="Link Twitter"
                                 required
+                            />
+                            <InputError
+                                message={errors.link_twitter}
+                                className="mt-2"
                             />
                         </div>
 

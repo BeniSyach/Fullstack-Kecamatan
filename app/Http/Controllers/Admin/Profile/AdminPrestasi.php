@@ -33,6 +33,7 @@ class AdminPrestasi extends Controller
     }
 
     public function updatePrestasi(StorePrestasiRequest $request, Prestasi_Model $prestasi){
+        $request->validated();
         $prestasi::find(request()->segment(4))->update([
             'judul_prestasi' => $request->judul_prestasi,
             'deskripsi_prestasi'=>$request->deskripsi_prestasi,

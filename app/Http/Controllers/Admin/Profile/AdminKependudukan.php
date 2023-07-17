@@ -33,7 +33,9 @@ class AdminKependudukan extends Controller
         ]);
     }
 
-    public function updateKependudukan(StoreKependudukanRequest $request, Kependudukan_Model $penduduk){
+    public function updateKependudukan(StoreKependudukanRequest $request, Kependudukan_Model $penduduk)
+    {
+        $request->validated();
         
         $penduduk::find(request()->segment(4))->update([
             'judul_kependudukan'=>$request->judul_kependudukan,

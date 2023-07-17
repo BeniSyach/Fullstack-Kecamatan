@@ -5,6 +5,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { useEffect, useState } from "react";
 import CKEditorComponen from "@/Components/CKEditorComponen";
 import Swal from "sweetalert2";
+import InputError from "@/Components/InputError";
 
 interface CustomFormData {
     [key: string]: unknown;
@@ -109,6 +110,10 @@ const Penduduk: React.FC<PageProps & Props & FlashProps> = ({
                                 placeholder="Judul Kependudukan"
                                 required
                             />
+                            <InputError
+                                message={errors.judul_kependudukan}
+                                className="mt-2"
+                            />
                         </div>
                         <div>
                             <div className="mb-2 block">
@@ -130,6 +135,10 @@ const Penduduk: React.FC<PageProps & Props & FlashProps> = ({
                                 placeholder="Deskripsi Singkat Kependudukan"
                                 required
                             />
+                            <InputError
+                                message={errors.deskripsi_kependudukan}
+                                className="mt-2"
+                            />
                         </div>
 
                         <div className="sm:col-span-2">
@@ -142,6 +151,10 @@ const Penduduk: React.FC<PageProps & Props & FlashProps> = ({
                             <CKEditorComponen
                                 value={EditorContent}
                                 onchange={handleEditorChange}
+                            />
+                            <InputError
+                                message={errors.isi_kependudukan}
+                                className="mt-2"
                             />
                         </div>
                     </div>

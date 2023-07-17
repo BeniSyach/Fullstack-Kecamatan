@@ -32,7 +32,11 @@ class AdminStrukturOrganisasi extends Controller
         ]);
     }
 
-    public function updateStrukturOrganisasi(StoreStrukturOrganisasiRequest $request,StrukturOrganisasi_Model $strukturOrganisasi){
+    public function updateStrukturOrganisasi(StoreStrukturOrganisasiRequest $request,StrukturOrganisasi_Model $strukturOrganisasi)
+    {
+
+        $request->validated();
+
         $strukturOrganisasi::find(request()->segment(4))->update([
         'judul_struktur_organisasi'=>$request->judul_struktur_organisasi,
         'deskripsi_struktur_organisasi'=>$request->deskripsi_struktur_organisasi,

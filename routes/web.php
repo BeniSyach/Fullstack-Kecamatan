@@ -178,7 +178,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/kepegawaian/create',[AdminKepegawaian::class,'create'])->name('createPegawai');
     Route::post('/admin/kepegawaian/tambah',[AdminKepegawaian::class,'store'])->name('tambahPegawai');
     Route::get('/admin/kepegawaian/edit/{id}',[AdminKepegawaian::class,'edit'])->name('editPegawai');
-    Route::put('/admin/kepegawaian/update/{id}',[AdminKepegawaian::class,'update'])->name('updatePegawai');
+    Route::post('/admin/kepegawaian/update/{id}',[AdminKepegawaian::class,'update'])->name('updatePegawai');
     Route::delete('/admin/kepegawaian/hapus/{id}',[AdminKepegawaian::class,'hapus'])->name('hapusPegawai');
 
     // Publikasi Admin

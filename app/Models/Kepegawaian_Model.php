@@ -13,4 +13,15 @@ class Kepegawaian_Model extends Model
     protected $primaryKey = 'idKepegawaian';
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
+
+    protected $fillable = [
+        'kode_kecamatan',
+        'nama_pegawai',
+        'gambar_pegawai',
+        'jabatan_pegawai',
+        'motivasi_pegawai',
+        'link_facebook',
+        'link_instagram',
+        'link_twitter',
+    ];
 }
