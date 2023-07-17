@@ -15,6 +15,7 @@ const TambahUsers: React.FC<PageProps> = ({ auth }) => {
     const { data, setData, post, errors, processing } = useForm({
         name: "",
         email: "",
+        kode_kecamatan: "",
         password: "",
         konfirmasi_password: "",
     });
@@ -62,6 +63,7 @@ const TambahUsers: React.FC<PageProps> = ({ auth }) => {
                                 required
                             />
                         </div>
+
                         <div>
                             <div className="mt-2 block">
                                 <Label htmlFor="password" value="Password" />
