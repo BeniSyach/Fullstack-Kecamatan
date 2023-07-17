@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUnduhanRequest extends FormRequest
+class UpdateDetailUnduhanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class UpdateUnduhanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'judul_unduhan' => 'required|string|max:200',
+            'dokumen' => 'required|mimes:doc,pdf,docx,csv,xlsx,xls|max:5000'
         ];
     }
 
@@ -30,16 +30,16 @@ class UpdateUnduhanRequest extends FormRequest
     {
         return [
             // judul Foto
-            'judul_unduhan.required' => ':attribute Tidak Boleh Kosong',
-            'judul_unduhan.string' => ':attribute Harus Text',
-            'judul_unduhan.max' => ':attribute text maximal 200 digit',
+            'dokumen.required' => ':attribute Tidak Boleh Kosong',
+            'dokumen.mimes' => ':attribute File harus berektensi doc,pdf,docx,csv,xlsx,xls',
+            'dokumen.max' => ':attribute tidak lebih dari 5 MB',
         ];
     }
 
     public function attributes(): array
     {
         return [
-            'judul_unduhan' => 'Judul Potensi'
+            'dokumen' => 'Dokumen',
         ];
     }
 }

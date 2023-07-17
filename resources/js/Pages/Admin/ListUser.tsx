@@ -5,6 +5,8 @@ import { PageProps } from "@/types";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
+import { format, parseISO } from "date-fns";
+import { id } from "date-fns/locale";
 
 interface myUser {
     id: number;
@@ -80,7 +82,13 @@ const ListUser: React.FC<Props & PageProps> = ({
                                     <Table.Cell>{k + 1}</Table.Cell>
                                     <Table.Cell> {user.name} </Table.Cell>
                                     <Table.Cell> {user.email} </Table.Cell>
-                                    <Table.Cell> {user.created_at} </Table.Cell>
+                                    <Table.Cell>
+                                        {format(
+                                            parseISO(user.created_at),
+                                            "EEEE, dd MMMM yyyy",
+                                            { locale: id }
+                                        )}
+                                    </Table.Cell>
                                     <Table.Cell>
                                         <Link
                                             href={route("editUsers", {

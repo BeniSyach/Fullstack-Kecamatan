@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('kode_kecamatan');
             $table->foreign('kode_kecamatan')->references('kode_kecamatan')->on('tb_domain_kecamatan');
+            $table->string('role_user');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

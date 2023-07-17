@@ -10,6 +10,7 @@ import {
 import { FormEventHandler, useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
+import InputError from "@/Components/InputError";
 
 const TambahListPotensi: React.FC<PageProps> = ({ auth }) => {
     const { data, setData, post, errors, processing } = useForm({
@@ -46,6 +47,10 @@ const TambahListPotensi: React.FC<PageProps> = ({ auth }) => {
                                 }
                                 placeholder="Judul Potensi"
                                 required
+                            />
+                            <InputError
+                                message={errors.judul_potensi}
+                                className="mt-2"
                             />
                         </div>
                         <div className="w-full">

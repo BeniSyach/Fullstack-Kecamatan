@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreListKecamatanRequest;
 use App\Http\Requests\StoreListPotensiRequest;
+use App\Http\Requests\UpdateDetailPotensiRequest;
 use App\Http\Requests\UpdateKecamatanRequest;
 use App\Http\Requests\UpdatePotensiRequest;
 use App\Models\Detail_Potensi_Model;
@@ -102,18 +103,18 @@ class AdminPotensi extends Controller
         ]);
     }
 
-    public function update_detail(UpdatePotensiRequest $request)
+    public function update_detail(UpdateDetailPotensiRequest $request, Detail_Potensi_Model $detail_potensi)
     {
-        // ambil url domain
-        $GetDomain = FacadesRequest::getHost();
-        $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
-        // get kode Kecamatan
-        $get_kd_kecamatan = $domain['kode_kecamatan'];
+        $request->validated();
 
-        $detail_potensi = new Detail_Potensi_Model();
-        $detail_potensi->kode_kecamatan = $get_kd_kecamatan;
-        $detail_potensi->judul_potensi = $request->judul_potensi;
-        $detail_potensi->save();
+        $imageName = time().'.'.$request->gambar_potensi->extension();
+        $uploadedImage = $request->gambar_potensi->move(public_path('images/potensi/'), $imageName);
+        $imagePath = 'images/potensi/' . $imageName;
+
+        $detail_potensi::find(request()->segment(4))->update([
+            'gambar_potensi' =>$imagePath,
+            'konten_potensi' => $request->konten_potensi,
+        ]);
 
         return redirect(route('AdminPotensi'))->with('message','Data Berhasil Di Ubah');
     }

@@ -36,13 +36,19 @@ class UsersController extends Controller
     }
 
     public function create(){
-        return Inertia::render('Admin/TambahUsers');
+        $kecamatan = Kecamatan::all();
+        return Inertia::render('Admin/TambahUsers',[
+            'kecamatan' => $kecamatan
+        ]);
     }
 
     public function store(StoreUserRequest $request){
+        $request->validated();
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'kode_kecamatan' => $request->kode_kecamatan,
+            'role_user' => $request->role_user,
             'password' => Hash::make($request->password),
         ]);
         event(new Registered($user));
@@ -51,15 +57,20 @@ class UsersController extends Controller
 
     public function edit($id){
         $data = User::where('id',$id)->first();
+        $kecamatan = Kecamatan::all();
         return Inertia::render('Admin/EditUser',[
-            'user' => $data
+            'user' => $data,
+            'kecamatan' => $kecamatan
         ]);
     }
 
     public function update(UpdateUserRequest $request, User $user){
+        $request->validated();
         $user::find(request()->segment(4))->update([
             'name' => $request->name,
             'email' => $request->email,
+            'kode_kecamatan' => $request->kode_kecamatan,
+            'role_user' => $request->role_user,
             'password' => Hash::make($request->password)
         ]);
         return redirect(route('listUser'))->with('message','User Berhasil Di Ubah');
