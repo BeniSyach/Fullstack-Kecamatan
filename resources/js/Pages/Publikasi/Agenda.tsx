@@ -50,9 +50,14 @@ const Agenda: React.FC<Props> = ({ domain, agenda }) => {
                                             >
                                                 {data.judul_agenda}
                                             </a>
-                                            <p className="font-normal">
-                                                {data.isi_agenda}
-                                            </p>
+
+                                            <div
+                                                className="font-normal"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: data.isi_agenda,
+                                                }}
+                                            />
+                                            {}
                                         </h3>
                                     </div>
                                 </div>
