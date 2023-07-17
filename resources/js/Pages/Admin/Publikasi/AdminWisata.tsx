@@ -76,7 +76,9 @@ const AdminWisata: React.FC<PageProps & Props> = ({
                                     <Table.Cell> {ws.judul_wisata} </Table.Cell>
                                     <Table.Cell>
                                         <img
-                                            src={ws.foto_wisata}
+                                            src={`${route("home")}/${
+                                                ws.foto_wisata
+                                            }`}
                                             alt="Gambar Berita"
                                             className="w-1/4"
                                         />

@@ -12,6 +12,7 @@ import { FormEventHandler, useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import CKEditorComponen from "@/Components/CKEditorComponen";
+import InputError from "@/Components/InputError";
 
 interface Props {
     kategori_berita: any;
@@ -29,7 +30,7 @@ const TambahDataBerita: React.FC<PageProps & Props> = ({
 
     const { data, setData, post, errors, processing } = useForm({
         judul_berita: "",
-        gambar_berita: "",
+        gambar_berita: null,
         isi_berita: "",
         kategori_berita_id: "",
     });
@@ -65,6 +66,10 @@ const TambahDataBerita: React.FC<PageProps & Props> = ({
                                 placeholder="Judul Berita"
                                 required
                             />
+                            <InputError
+                                message={errors.judul_berita}
+                                className="mt-2"
+                            />
                         </div>
                         <div className="max-w-md">
                             <div className="mt-2 block">
@@ -77,9 +82,13 @@ const TambahDataBerita: React.FC<PageProps & Props> = ({
                                 helperText="Ukuran Gambar Tidak Lebih dari 2 Mb"
                                 id="gambar_berita"
                                 name="gambar_berita"
-                                onChange={(e) =>
-                                    setData("gambar_berita", e.target.value)
+                                onChange={(e: any) =>
+                                    setData("gambar_berita", e.target.files[0])
                                 }
+                            />
+                            <InputError
+                                message={errors.gambar_berita}
+                                className="mt-2"
                             />
                         </div>
                         <div className="max-w-md" id="select">
@@ -107,7 +116,7 @@ const TambahDataBerita: React.FC<PageProps & Props> = ({
                                                 <option
                                                     key={k}
                                                     value={
-                                                        kategori.jenis_kategori_berita
+                                                        kategori.idKategoriBerita
                                                     }
                                                 >
                                                     {
@@ -121,6 +130,10 @@ const TambahDataBerita: React.FC<PageProps & Props> = ({
                                     <p>Data Tidak Ada</p>
                                 )}
                             </Select>
+                            <InputError
+                                message={errors.kategori_berita_id}
+                                className="mt-2"
+                            />
                         </div>
                         <div className="max-w-full sm:col-span-2">
                             <Label
@@ -132,6 +145,10 @@ const TambahDataBerita: React.FC<PageProps & Props> = ({
                             <CKEditorComponen
                                 value={EditorContent}
                                 onchange={handleEditorChange}
+                            />
+                            <InputError
+                                message={errors.isi_berita}
+                                className="mt-2"
                             />
                         </div>
                         <div className="w-full">

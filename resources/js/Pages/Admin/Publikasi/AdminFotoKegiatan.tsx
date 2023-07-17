@@ -87,7 +87,7 @@ const AdminFotoKegiatan: React.FC<PageProps & Props> = ({
                                     </Table.Cell>
                                     <Table.Cell>
                                         <img
-                                            src={ft.foto}
+                                            src={`${route("home")}/${ft.foto}`}
                                             alt="Gambar Berita"
                                             className="w-1/4"
                                         />

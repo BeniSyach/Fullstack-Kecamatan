@@ -38,6 +38,8 @@ class AdminVideoKegiatan extends Controller
 
     public function store(StoreVideoRequest $request)
     {
+        $request->validated();
+
         // ambil url domain
         $GetDomain = FacadesRequest::getHost();
         $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
@@ -62,6 +64,8 @@ class AdminVideoKegiatan extends Controller
 
     public function update(UpdateVideoRequest $request, Video_Model $video)
     {
+        $request->validated();
+
         // ambil url domain
         $GetDomain = FacadesRequest::getHost();
         $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();

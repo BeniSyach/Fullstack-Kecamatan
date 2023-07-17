@@ -12,6 +12,7 @@ import { FormEventHandler, useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import CKEditorComponen from "@/Components/CKEditorComponen";
+import InputError from "@/Components/InputError";
 
 interface Props {
     judul_wisata: string;
@@ -29,14 +30,14 @@ const TambahDataWisata: React.FC<PageProps & Props> = ({ auth }) => {
 
     const { data, setData, post, errors, processing } = useForm({
         judul_wisata: "",
-        foto_wisata: "",
+        foto_wisata: null,
         deskripsi_wisata: "",
         konten_wisata: "",
     });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route("createWisata"));
+        post(route("tambahWisata"));
     };
 
     return (
@@ -65,6 +66,10 @@ const TambahDataWisata: React.FC<PageProps & Props> = ({ auth }) => {
                                 placeholder="Judul Wisata"
                                 required
                             />
+                            <InputError
+                                message={errors.judul_wisata}
+                                className="mt-2"
+                            />
                         </div>
                         <div className="max-w-md">
                             <div className="mt-2 block">
@@ -77,9 +82,13 @@ const TambahDataWisata: React.FC<PageProps & Props> = ({ auth }) => {
                                 helperText="Ukuran Gambar Tidak Lebih dari 2 Mb"
                                 id="foto_wisata"
                                 name="foto_wisata"
-                                onChange={(e) =>
-                                    setData("foto_wisata", e.target.value)
+                                onChange={(e: any) =>
+                                    setData("foto_wisata", e.target.files[0])
                                 }
+                            />
+                            <InputError
+                                message={errors.foto_wisata}
+                                className="mt-2"
                             />
                         </div>
                         <div className="max-w-xl">
@@ -99,6 +108,10 @@ const TambahDataWisata: React.FC<PageProps & Props> = ({ auth }) => {
                                 placeholder="Deskripsi Wisata"
                                 required
                             />
+                            <InputError
+                                message={errors.deskripsi_wisata}
+                                className="mt-2"
+                            />
                         </div>
                         <div className="max-w-full sm:col-span-2">
                             <Label
@@ -110,6 +123,10 @@ const TambahDataWisata: React.FC<PageProps & Props> = ({ auth }) => {
                             <CKEditorComponen
                                 value={EditorContent}
                                 onchange={handleEditorChange}
+                            />
+                            <InputError
+                                message={errors.konten_wisata}
+                                className="mt-2"
                             />
                         </div>
                         <div className="w-full">

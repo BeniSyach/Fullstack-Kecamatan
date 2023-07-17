@@ -4,6 +4,7 @@ import { FormEventHandler, useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import CKEditorComponen from "@/Components/CKEditorComponen";
+import InputError from "@/Components/InputError";
 
 interface Props {
     judul_video_kegiatan: string;
@@ -55,6 +56,10 @@ const TambahDataVideo: React.FC<PageProps & Props> = ({ auth }) => {
                                 }
                                 placeholder="Judul Video"
                                 required
+                            />
+                            <InputError
+                                message={errors.judul_video_kegiatan}
+                                className="mt-2"
                             />
                         </div>
 

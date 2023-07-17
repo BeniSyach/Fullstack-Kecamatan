@@ -4,12 +4,9 @@ namespace App\Http\Controllers\Admin\Publikasi;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAgendaRequest;
-use App\Http\Requests\StoreWisataRequest;
 use App\Http\Requests\UpdateAgendaRequest;
-use App\Http\Requests\UpdateWisataRequest;
 use App\Models\Agenda_Model;
 use App\Models\Kecamatan;
-use App\Models\Wisata_Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Inertia\Inertia;
@@ -42,6 +39,7 @@ class AdminAgenda extends Controller
 
     public function store(StoreAgendaRequest $request)
     {
+        $request->validated();
           // ambil url domain
           $GetDomain = FacadesRequest::getHost();
           $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
@@ -71,6 +69,7 @@ class AdminAgenda extends Controller
 
     public function update(UpdateAgendaRequest $request, Agenda_Model $wisata)
     {
+        $request->validated();
          // ambil url domain
          $GetDomain = FacadesRequest::getHost();
          $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();

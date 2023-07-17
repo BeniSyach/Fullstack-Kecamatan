@@ -45,6 +45,8 @@ class AdminBerita extends Controller
 
     public function store(StoreBeritaRequest $request)
     {   
+        $request->validated();
+
         // ambil url domain
         $GetDomain = FacadesRequest::getHost();
         $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
@@ -54,11 +56,16 @@ class AdminBerita extends Controller
         // Membuat slug dari Judul Berita
         $slug = Str::of($request->judul_berita)->snake();
 
+        // upload gambar
+        $imageName = time().'.'.$request->gambar_berita->extension();
+        $uploadedImage = $request->gambar_berita->move(public_path('images/berita/'), $imageName);
+        $imagePath = 'images/berita/' . $imageName;
+
         $berita = new Berita_Model();
         $berita->kode_kecamatan = $get_kd_kecamatan;
         $berita->judul_berita = $request->judul_berita;
         $berita->slug_berita =$slug;
-        $berita->gambar_berita = $request->gambar_berita;
+        $berita->gambar_berita = $imagePath;
         $berita->isi_berita = $request->isi_berita;
         $berita->kategori_berita_id = $request->kategori_berita_id;
         $berita->penulis_berita = $request->user()->id;
@@ -78,6 +85,8 @@ class AdminBerita extends Controller
 
     public function update(UpdateBeritaRequest $request, Berita_Model $berita)
     {
+        $request->validated();
+        
         // ambil url domain
         $GetDomain = FacadesRequest::getHost();
         $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
@@ -85,13 +94,22 @@ class AdminBerita extends Controller
         $get_kd_kecamatan = $domain['kode_kecamatan'];
 
         // Membuat slug dari Judul Berita
-        $slug = Str::of($request->judul_berita)->snake();       
+        $slug = Str::of($request->judul_berita)->snake(); 
+        
+        // Hapus Gambar Berita Sebelumnya
+        $hapus_gambar=Berita_Model::find(request()->segment(4));
+        unlink($hapus_gambar->gambar_berita);
+
+         // upload gambar Baru
+         $imageName = time().'.'.$request->gambar_berita->extension();
+         $uploadedImage = $request->gambar_berita->move(public_path('images/berita/'), $imageName);
+         $imagePath = 'images/berita/' . $imageName;       
 
         $berita::find(request()->segment(4))->update([
             'kode_kecamatan' => $get_kd_kecamatan,
             'judul_berita' => $request->judul_berita,
             'slug_berita' =>$slug,
-            'gambar_berita' => $request->gambar_berita,
+            'gambar_berita' => $imagePath,
             'isi_berita' => $request->isi_berita,
             'kategori_berita_id' => $request->kategori_berita_id,
             'penulis_berita' => $request->user()->id,
@@ -102,6 +120,7 @@ class AdminBerita extends Controller
     public function hapus($id)
     {
         $berita =Berita_Model::find($id);
+        unlink($berita->gambar_berita);
         $berita->delete();
         return redirect(route('AdminBerita'))->with('message','Data Berhasil Di Hapus');
     }

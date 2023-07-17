@@ -12,6 +12,7 @@ import { FormEventHandler, useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import CKEditorComponen from "@/Components/CKEditorComponen";
+import InputError from "@/Components/InputError";
 
 interface Props {
     judul_agenda: string;
@@ -63,6 +64,10 @@ const TambahDataAgenda: React.FC<PageProps & Props> = ({ auth }) => {
                                 placeholder="Judul Agenda"
                                 required
                             />
+                            <InputError
+                                message={errors.judul_agenda}
+                                className="mt-2"
+                            />
                         </div>
 
                         <div className="max-w-xl">
@@ -83,6 +88,10 @@ const TambahDataAgenda: React.FC<PageProps & Props> = ({ auth }) => {
                                 placeholder="Tanggal Agenda"
                                 required
                             />
+                            <InputError
+                                message={errors.tanggal_agenda}
+                                className="mt-2"
+                            />
                         </div>
                         <div className="max-w-full sm:col-span-2">
                             <Label
@@ -94,6 +103,10 @@ const TambahDataAgenda: React.FC<PageProps & Props> = ({ auth }) => {
                             <CKEditorComponen
                                 value={EditorContent}
                                 onchange={handleEditorChange}
+                            />
+                            <InputError
+                                message={errors.isi_agenda}
+                                className="mt-2"
                             />
                         </div>
                         <div className="w-full">

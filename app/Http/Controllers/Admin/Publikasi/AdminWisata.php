@@ -39,23 +39,31 @@ class AdminWisata extends Controller
 
     public function store(StoreWisataRequest $request)
     {
+
+        $request->validated();
+
           // ambil url domain
           $GetDomain = FacadesRequest::getHost();
           $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
           // get kode Kecamatan
           $get_kd_kecamatan = $domain['kode_kecamatan'];
   
-          // Membuat slug dari Judul Berita
+          // Membuat slug dari Judul wisata
           $slug = Str::of($request->judul_wisata)->snake();
+
+        // upload foto
+        $imageName = time().'.'.$request->foto_wisata->extension();
+        $uploadedImage = $request->foto_wisata->move(public_path('images/foto_wisata/'), $imageName);
+        $imagePath = 'images/foto_wisata/' . $imageName;  
   
-          $berita = new Wisata_Model();
-          $berita->kode_kecamatan = $get_kd_kecamatan;
-          $berita->judul_berita = $request->judul_berita;
-          $berita->slug_berita =$slug;
-          $berita->foto_wisata = $request->foto_wisata;
-          $berita->deskripsi_wisata = $request->deskripsi_wisata;
-          $berita->konten_wisata = $request->konten_wisata;
-          $berita->save();      
+          $wisata = new Wisata_Model();
+          $wisata->kode_kecamatan = $get_kd_kecamatan;
+          $wisata->judul_wisata = $request->judul_wisata;
+          $wisata->slug_wisata =$slug;
+          $wisata->foto_wisata = $imagePath;
+          $wisata->deskripsi_wisata = $request->deskripsi_wisata;
+          $wisata->konten_wisata = $request->konten_wisata;
+          $wisata->save();      
         return redirect(route('AdminWisata'))->with('message','Data Berhasil Di Tambah');
     }
 
@@ -69,6 +77,8 @@ class AdminWisata extends Controller
 
     public function update(UpdateWisataRequest $request, Wisata_Model $wisata)
     {
+        $request->validated();
+
          // ambil url domain
          $GetDomain = FacadesRequest::getHost();
          $domain = Kecamatan::where('domain_kecamatan',$GetDomain)->first();
@@ -77,12 +87,21 @@ class AdminWisata extends Controller
  
          // Membuat slug dari Judul Berita
          $slug = Str::of($request->judul_wisata)->snake();       
+
+          // Hapus Gambar Berita Sebelumnya
+        $hapus_gambar=Wisata_Model::find(request()->segment(4));
+        unlink($hapus_gambar->foto_wisata);
+
+         // upload gambar Baru
+         $imageName = time().'.'.$request->foto_wisata->extension();
+         $uploadedImage = $request->foto_wisata->move(public_path('images/foto_wisata/'), $imageName);
+         $imagePath = 'images/foto_wisata/' . $imageName;       
  
          $wisata::find(request()->segment(4))->update([
              'kode_kecamatan' => $get_kd_kecamatan,
              'judul_wisata' => $request->judul_wisata,
              'slug_berita' =>$slug,
-             'foto_wisata' => $request->foto_wisata,
+             'foto_wisata' => $imagePath,
              'deskripsi_wisata' => $request->deskripsi_wisata,
              'konten_wisata' => $request->konten_wisata
          ]);

@@ -12,9 +12,11 @@ import { FormEventHandler, useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import CKEditorComponen from "@/Components/CKEditorComponen";
+import InputError from "@/Components/InputError";
 
 interface Props {
     wisata: {
+        idWisata: number;
         judul_wisata: string;
         foto_wisata: string;
         deskripsi_wisata: string;
@@ -22,11 +24,7 @@ interface Props {
     };
 }
 
-const EditDataWisata: React.FC<PageProps & Props> = ({
-    auth,
-    kategori_berita,
-    wisata,
-}) => {
+const EditDataWisata: React.FC<PageProps & Props> = ({ auth, wisata }) => {
     const [EditorContent, SetEditorContent] = useState(wisata.konten_wisata);
     const handleEditorChange = (content: any) => {
         SetEditorContent(content);
@@ -42,7 +40,7 @@ const EditDataWisata: React.FC<PageProps & Props> = ({
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route("createWisata"));
+        post(route("updateWisata", { id: wisata.idWisata }));
     };
 
     return (
@@ -71,6 +69,10 @@ const EditDataWisata: React.FC<PageProps & Props> = ({
                                 placeholder="Judul Wisata"
                                 required
                             />
+                            <InputError
+                                message={errors.judul_wisata}
+                                className="mt-2"
+                            />
                         </div>
                         <div className="max-w-md">
                             <div className="mt-2 block">
@@ -80,7 +82,7 @@ const EditDataWisata: React.FC<PageProps & Props> = ({
                                 />
                             </div>
                             <img
-                                src={data.foto_wisata}
+                                src={`${route("home")}/${wisata.foto_wisata}`}
                                 alt="Foto Berita"
                                 className="w-1/3 mb-3"
                             />
@@ -88,9 +90,13 @@ const EditDataWisata: React.FC<PageProps & Props> = ({
                                 helperText="Ukuran Gambar Tidak Lebih dari 2 Mb"
                                 id="foto_wisata"
                                 name="foto_wisata"
-                                onChange={(e) =>
-                                    setData("foto_wisata", e.target.value)
+                                onChange={(e: any) =>
+                                    setData("foto_wisata", e.target.files[0])
                                 }
+                            />
+                            <InputError
+                                message={errors.foto_wisata}
+                                className="mt-2"
                             />
                         </div>
                         <div className="max-w-xl">
@@ -110,6 +116,10 @@ const EditDataWisata: React.FC<PageProps & Props> = ({
                                 placeholder="Deskripsi Wisata"
                                 required
                             />
+                            <InputError
+                                message={errors.deskripsi_wisata}
+                                className="mt-2"
+                            />
                         </div>
                         <div className="max-w-full sm:col-span-2">
                             <Label
@@ -121,6 +131,10 @@ const EditDataWisata: React.FC<PageProps & Props> = ({
                             <CKEditorComponen
                                 value={EditorContent}
                                 onchange={handleEditorChange}
+                            />
+                            <InputError
+                                message={errors.konten_wisata}
+                                className="mt-2"
                             />
                         </div>
                         <div className="w-full">

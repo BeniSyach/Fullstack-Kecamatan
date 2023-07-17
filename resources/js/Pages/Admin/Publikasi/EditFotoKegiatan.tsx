@@ -4,9 +4,11 @@ import { FormEventHandler, useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import CKEditorComponen from "@/Components/CKEditorComponen";
+import InputError from "@/Components/InputError";
 
 interface Props {
     foto: {
+        idFoto: number;
         judul_foto_kegiatan: string;
         foto: string;
     };
@@ -15,12 +17,12 @@ interface Props {
 const EditFotoKegiatan: React.FC<PageProps & Props> = ({ auth, foto }) => {
     const { data, setData, post, errors, processing } = useForm({
         judul_foto_kegiatan: foto.judul_foto_kegiatan,
-        foto: foto.foto,
+        foto: null,
     });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route("updateFotoAdminFotoKegiatan"));
+        post(route("updateFotoAdminFotoKegiatan", { id: foto.idFoto }));
     };
 
     return (
@@ -49,13 +51,17 @@ const EditFotoKegiatan: React.FC<PageProps & Props> = ({ auth, foto }) => {
                                 placeholder="Judul Foto"
                                 required
                             />
+                            <InputError
+                                message={errors.judul_foto_kegiatan}
+                                className="mt-2"
+                            />
                         </div>
                         <div className="max-w-md">
                             <div className="mt-2 block">
                                 <Label htmlFor="foto" value="Foto" />
                             </div>
                             <img
-                                src={data.foto}
+                                src={`${route("home")}/${foto.foto}`}
                                 alt="Foto Berita"
                                 className="w-1/3 mb-3"
                             />
@@ -63,8 +69,8 @@ const EditFotoKegiatan: React.FC<PageProps & Props> = ({ auth, foto }) => {
                                 helperText="Ukuran Gambar Tidak Lebih dari 2 Mb"
                                 id="foto"
                                 name="foto"
-                                onChange={(e) =>
-                                    setData("foto", e.target.value)
+                                onChange={(e: any) =>
+                                    setData("foto", e.target.files[0])
                                 }
                             />
                         </div>

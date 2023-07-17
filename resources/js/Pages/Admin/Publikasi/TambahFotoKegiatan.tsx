@@ -4,6 +4,7 @@ import { FormEventHandler, useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import CKEditorComponen from "@/Components/CKEditorComponen";
+import InputError from "@/Components/InputError";
 
 interface Props {
     judul_foto_kegiatan: string;
@@ -13,7 +14,7 @@ interface Props {
 const TambahFotoKegiatan: React.FC<PageProps & Props> = ({ auth }) => {
     const { data, setData, post, errors, processing } = useForm({
         judul_foto_kegiatan: "",
-        foto: "",
+        foto: null,
     });
 
     const submit: FormEventHandler = (e) => {
@@ -50,6 +51,10 @@ const TambahFotoKegiatan: React.FC<PageProps & Props> = ({ auth }) => {
                                 placeholder="Judul Foto"
                                 required
                             />
+                            <InputError
+                                message={errors.judul_foto_kegiatan}
+                                className="mt-2"
+                            />
                         </div>
                         <div className="max-w-md">
                             <div className="mt-2 block">
@@ -59,9 +64,13 @@ const TambahFotoKegiatan: React.FC<PageProps & Props> = ({ auth }) => {
                                 helperText="Ukuran Gambar Tidak Lebih dari 2 Mb"
                                 id="foto"
                                 name="foto"
-                                onChange={(e) =>
-                                    setData("foto", e.target.value)
+                                onChange={(e: any) =>
+                                    setData("foto", e.target.files[0])
                                 }
+                            />
+                            <InputError
+                                message={errors.foto}
+                                className="mt-2"
                             />
                         </div>
 

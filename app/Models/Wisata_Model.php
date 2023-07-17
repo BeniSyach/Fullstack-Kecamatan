@@ -15,6 +15,7 @@ class Wisata_Model extends Model
     const UPDATED_AT = 'updated_at';
 
     protected $fillable = [
+        'kode_kecamatan',
         'judul_wisata',
         'foto_wisata',
         'deskripsi_wisata',

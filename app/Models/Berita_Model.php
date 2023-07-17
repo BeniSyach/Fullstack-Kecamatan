@@ -14,6 +14,17 @@ class Berita_Model extends Model
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
+    protected $fillable = [
+        'kode_kecamatan',
+            'judul_berita' ,
+            'slug_berita' ,
+            'gambar_berita',
+            'isi_berita' ,
+            'kategori_berita_id',
+            'penulis_berita'
+    ];
+
+
     public function get_kategori_berita()
     {
         return $this->belongsTo(User::class);

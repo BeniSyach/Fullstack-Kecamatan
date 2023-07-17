@@ -12,6 +12,7 @@ import { FormEventHandler, useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import CKEditorComponen from "@/Components/CKEditorComponen";
+import InputError from "@/Components/InputError";
 
 interface Props {
     agenda: {
@@ -46,10 +47,10 @@ const TambahDataAgenda: React.FC<PageProps & Props> = ({ auth, agenda }) => {
 
     return (
         <Flowbite>
-            <Head title="Tambah Agenda" />
+            <Head title="Edit Agenda" />
             <AuthenticatedLayout
                 user={auth.user}
-                header={<h4> Tambah Agenda</h4>}
+                header={<h4> Edit Agenda</h4>}
             >
                 <div className="space-y-6 ml-5">
                     <form onSubmit={submit}>
@@ -69,6 +70,10 @@ const TambahDataAgenda: React.FC<PageProps & Props> = ({ auth, agenda }) => {
                                 }
                                 placeholder="Judul Agenda"
                                 required
+                            />
+                            <InputError
+                                message={errors.judul_agenda}
+                                className="mt-2"
                             />
                         </div>
 
@@ -90,6 +95,10 @@ const TambahDataAgenda: React.FC<PageProps & Props> = ({ auth, agenda }) => {
                                 placeholder="Tanggal Agenda"
                                 required
                             />
+                            <InputError
+                                message={errors.tanggal_agenda}
+                                className="mt-2"
+                            />
                         </div>
                         <div className="max-w-full sm:col-span-2">
                             <Label
@@ -101,6 +110,10 @@ const TambahDataAgenda: React.FC<PageProps & Props> = ({ auth, agenda }) => {
                             <CKEditorComponen
                                 value={EditorContent}
                                 onchange={handleEditorChange}
+                            />
+                            <InputError
+                                message={errors.isi_agenda}
+                                className="mt-2"
                             />
                         </div>
                         <div className="w-full">

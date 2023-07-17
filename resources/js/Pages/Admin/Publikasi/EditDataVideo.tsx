@@ -4,9 +4,11 @@ import { FormEventHandler, useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { PageProps } from "@/types";
 import CKEditorComponen from "@/Components/CKEditorComponen";
+import InputError from "@/Components/InputError";
 
 interface Props {
     video: {
+        idVideo: number;
         judul_video_kegiatan: string;
         video: string;
     };
@@ -26,7 +28,7 @@ const EditDataVideo: React.FC<PageProps & Props> = ({ auth, video }) => {
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route("tambahVideoKegiatan"));
+        post(route("updateVideoKegiatan", { id: video.idVideo }));
     };
 
     return (
@@ -54,6 +56,10 @@ const EditDataVideo: React.FC<PageProps & Props> = ({ auth, video }) => {
                                 }
                                 placeholder="Judul Video"
                                 required
+                            />
+                            <InputError
+                                message={errors.judul_video_kegiatan}
+                                className="mt-2"
                             />
                         </div>
 

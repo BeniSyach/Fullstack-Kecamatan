@@ -37,7 +37,6 @@ class StorePegawaiRequest extends FormRequest
         return [
             // judul Tupoksi
             'nama_pegawai.required' => ':attribute Tidak Boleh Kosong',
-            'nama_pegawai.required' => ':attribute Tidak Boleh Kosong',
             'nama_pegawai.string' => ':attribute Harus Text',
             // judul Tupoksi
             'gambar_pegawai.required' => ':attribute Tidak Boleh Kosong',

@@ -92,7 +92,9 @@ const AdminBerita: React.FC<PageProps & Props> = ({
                                         </Table.Cell>
                                         <Table.Cell>
                                             <img
-                                                src={berita.gambar_berita}
+                                                src={`${route("home")}/${
+                                                    berita.gambar_berita
+                                                }`}
                                                 alt="Gambar Berita"
                                                 className="w-1/4"
                                             />
