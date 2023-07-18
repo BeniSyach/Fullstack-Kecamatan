@@ -71,7 +71,7 @@ const Home: React.FC<Props> = ({
             {/* carousel */}
             <div className="relative w-full z-0">
                 {slider && slider.length > 0 ? (
-                    <Carousel slideInterval={5000} className="h-[350px]">
+                    <Carousel slideInterval={5000} className="h-96 md:h-96">
                         {slider.map((slider: MyInterface, k: number) => (
                             <img
                                 key={k}

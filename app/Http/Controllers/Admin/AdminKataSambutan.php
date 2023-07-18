@@ -34,8 +34,10 @@ class AdminKataSambutan extends Controller
     {
         $request->validated();
 
+        $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]";
+
         $hapus_gambar_camat=KataSambutan_Model::find(request()->segment(3));
-        unlink($hapus_gambar_camat->gambar_camat);
+        unlink($actual_link.'/'.$hapus_gambar_camat->gambar_camat);
 
         $imageName = time().'.'.$request->gambar_camat->extension();
         $uploadedImage = $request->gambar_camat->move(public_path('images'), $imageName);
