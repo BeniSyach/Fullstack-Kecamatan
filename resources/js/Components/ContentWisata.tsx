@@ -42,7 +42,9 @@ const ContentWisata: React.FC<Props> = ({ data }) => {
                             >
                                 <article className="max-w-xs">
                                     <img
-                                        src={data.foto_wisata}
+                                        src={`${route("home")}/${
+                                            data.foto_wisata
+                                        }`}
                                         className="mb-5 rounded-lg"
                                         alt="Image 1"
                                     />
@@ -58,9 +60,16 @@ const ContentWisata: React.FC<Props> = ({ data }) => {
                                             { locale: id }
                                         )}
                                     </p>
-                                    <p className="mb-4 font-light text-gray-500 dark:text-gray-400">
-                                        {truncateText(data.konten_wisata, 100)}
-                                    </p>
+
+                                    <div
+                                        className="mb-4 font-light text-gray-500 dark:text-gray-400"
+                                        dangerouslySetInnerHTML={{
+                                            __html: truncateText(
+                                                data.konten_wisata,
+                                                100
+                                            ),
+                                        }}
+                                    />
                                 </article>
                             </Link>
                         ))}
