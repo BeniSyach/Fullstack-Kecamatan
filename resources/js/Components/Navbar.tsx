@@ -179,7 +179,7 @@ const NavbarLandingPage: React.FC<ChildProps> = (props) => {
                     )}
                 </Dropdown>
                 <Dropdown inline label="Statistik">
-                    <Link href={route("berita")}>
+                    <Link href="#">
                         <Dropdown.Item>
                             berisikan Statistik/jumlah desa pada kecamatan
                         </Dropdown.Item>
@@ -205,15 +205,15 @@ const NavbarLandingPage: React.FC<ChildProps> = (props) => {
                         <Dropdown.Item>Tidak Ada Data</Dropdown.Item>
                     )}
                 </Dropdown>
-                <Link
-                    href={route("kontak_kami")}
-                    as="div"
+                <a
+                    href="https://www.lapor.go.id/"
+                    target="_blank"
                     className=" cursor-pointer"
                 >
                     <Navbar.Link>
-                        <p className="dark:text-white">Kontak</p>
+                        <p className="dark:text-white">SP4N LAPOR</p>
                     </Navbar.Link>
-                </Link>
+                </a>
             </Navbar.Collapse>
         </Navbar>
     );
