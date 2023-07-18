@@ -27,6 +27,7 @@
     "dependencies": {
         "@ckeditor/ckeditor5-build-classic": "^38.0.1",
         "@ckeditor/ckeditor5-react": "^6.0.0",
+        "@cyntler/react-doc-viewer": "^1.13.0",
         "@types/react-icons": "^3.0.0",
         "apexcharts": "^3.40.0",
         "date-fns": "^2.30.0",

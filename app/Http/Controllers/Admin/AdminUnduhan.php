@@ -88,7 +88,8 @@ class AdminUnduhan extends Controller
     }
 
     public function hapus($id){
-        $detailunduhan = Detail_Unduhan_Model::where('unduhan_id',$id);
+        $detailunduhan = Detail_Unduhan_Model::where('unduhan_id',$id)->first();
+        unlink($detailunduhan['dokumen']);
         $detailunduhan->delete();
         $unduhan =Unduhan_Model::find($id);
         $unduhan->delete();

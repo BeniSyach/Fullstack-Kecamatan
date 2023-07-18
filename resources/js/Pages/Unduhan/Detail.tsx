@@ -4,12 +4,12 @@ import NavbarLandingPage from "@/Components/Navbar";
 import SideBarAgendaDanBerita from "@/Components/SideBarAgendaDanBerita";
 import Letter from "@/Components/Letter";
 import FooterLandingPage from "@/Components/FooterLandingPage";
+import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
 
 interface Props {
     domain: any;
-    potensi: {
-        gambar_potensi: string;
-        konten_potensi: any;
+    unduhan: {
+        dokumen: string;
     };
     detail_berita: any;
     agenda: any;
@@ -22,12 +22,15 @@ const truncateText = (text: string, maxlength: number) => {
     return text.substring(0, maxlength) + "....";
 };
 
-const ContentPotensi: React.FC<Props> = ({
+const ContentUnduhan: React.FC<Props> = ({
     domain,
-    potensi,
+    unduhan,
     detail_berita,
     agenda,
 }) => {
+    const docs = [
+        { uri: `${route("home")}/${unduhan.dokumen}` }, // Local File
+    ];
     return (
         <Flowbite>
             <Head title="Detail Berita" />
@@ -46,26 +49,17 @@ const ContentPotensi: React.FC<Props> = ({
                                             <p>Home</p>
                                         </Breadcrumb.Item>
                                         <Breadcrumb.Item>
-                                            <p>Potensi</p>
+                                            <p>Unduhan</p>
                                         </Breadcrumb.Item>
                                         <Breadcrumb.Item href="#">
                                             <p>Detail Potensi</p>
                                         </Breadcrumb.Item>
                                     </Breadcrumb>
-                                    <figure>
-                                        <img
-                                            src={`${route("home")}/${
-                                                potensi.gambar_potensi
-                                            }`}
-                                            alt=""
-                                        />
-                                    </figure>
                                 </header>
 
-                                <div
-                                    dangerouslySetInnerHTML={{
-                                        __html: potensi.konten_potensi,
-                                    }}
+                                <DocViewer
+                                    documents={docs}
+                                    pluginRenderers={DocViewerRenderers}
                                 />
                             </article>
                         </div>
@@ -81,4 +75,4 @@ const ContentPotensi: React.FC<Props> = ({
         </Flowbite>
     );
 };
-export default ContentPotensi;
+export default ContentUnduhan;
