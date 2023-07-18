@@ -7,9 +7,9 @@ const baseURL =
     "https://desajatirejo.deliserdangkab.go.id/API/GetKodeDesaByKodeKecamatan";
 
 const domain = window.location.hostname;
-const baseUrlPotensi = `http://${domain}:8000/api/potensi`;
-const baseUrlPelayanan = `http://${domain}:8000/api/pelayanan`;
-const baseUrlUnduhan = `http://${domain}:8000/api/unduhan`;
+const baseUrlPotensi = `${route("home")}/api/potensi`;
+const baseUrlPelayanan = `${route("home")}/api/pelayanan`;
+const baseUrlUnduhan = `${route("home")}/api/unduhan`;
 
 interface ChildProps {
     data: {
@@ -27,8 +27,8 @@ const NavbarLandingPage: React.FC<ChildProps> = (props) => {
     useEffect(() => {
         axios
             .post(baseURL, {
-                // kodeKecamatan: props.data.kode_kecamatan,
-                kodeKecamatan: "120701",
+                kodeKecamatan: props.data.kode_kecamatan,
+                // kodeKecamatan: "120701",
             })
             .then((response) => {
                 setDesa(response.data);

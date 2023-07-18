@@ -46,7 +46,7 @@ const ContentPotensi: React.FC<Props> = ({
                                             <p>Home</p>
                                         </Breadcrumb.Item>
                                         <Breadcrumb.Item>
-                                            <p>Publik</p>
+                                            <p>Potensi</p>
                                         </Breadcrumb.Item>
                                         <Breadcrumb.Item href={route("berita")}>
                                             <p>Detail Potensi</p>

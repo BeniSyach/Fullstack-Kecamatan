@@ -46,7 +46,7 @@ const ContentPelayanan: React.FC<Props> = ({
                                             <p>Home</p>
                                         </Breadcrumb.Item>
                                         <Breadcrumb.Item>
-                                            <p>Publik</p>
+                                            <p>Pelayanan</p>
                                         </Breadcrumb.Item>
                                         <Breadcrumb.Item href={route("berita")}>
                                             <p>Detail Pelayanan</p>

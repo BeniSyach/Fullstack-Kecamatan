@@ -76,7 +76,7 @@ const Home: React.FC<Props> = ({
                             <img
                                 key={k}
                                 alt="..."
-                                src={`/${slider.gambar_slider}`}
+                                src={`${route("home")}/${slider.gambar_slider}`}
                                 className="img-responsive"
                             />
                         ))}
@@ -160,16 +160,21 @@ const Home: React.FC<Props> = ({
                     />
                     <img
                         className="w-1/2 hidden mx-auto dark:block"
-                        src={kata_sambutan.gambar_camat}
+                        src={`${route("home")}/${kata_sambutan.gambar_camat}`}
                         alt="Gambar Camat"
                     />
                     <div className="mt-4 md:mt-0">
                         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
                             {kata_sambutan.judul_kataSambutan}
                         </h2>
-                        <p className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400">
-                            {isi_kata_sambutan}
-                        </p>
+
+                        <div
+                            className="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400"
+                            dangerouslySetInnerHTML={{
+                                __html: isi_kata_sambutan,
+                            }}
+                        />
+
                         <Link
                             href={route("kata_sambutan")}
                             className="inline-flex items-center bg-blue-600 dark:text-white text-black bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900"
@@ -215,7 +220,9 @@ const Home: React.FC<Props> = ({
                             >
                                 <img
                                     className="p-8 rounded-t-lg"
-                                    src={berita.gambar_berita}
+                                    src={`${route("home")}/${
+                                        berita.gambar_berita
+                                    }`}
                                     alt="product image"
                                 />
                             </Link>
@@ -238,9 +245,17 @@ const Home: React.FC<Props> = ({
                                         { locale: id }
                                     )}{" "}
                                 </p>
-                                <div className="flex items-center mt-2.5 mb-5">
-                                    {truncateText(berita.isi_berita, 100)}
-                                </div>
+
+                                <div
+                                    className="flex items-center mt-2.5 mb-5"
+                                    dangerouslySetInnerHTML={{
+                                        __html: truncateText(
+                                            berita.isi_berita,
+                                            100
+                                        ),
+                                    }}
+                                />
+
                                 <div className="flex items-center justify-between">
                                     <Badge color="warning">
                                         {" "}
