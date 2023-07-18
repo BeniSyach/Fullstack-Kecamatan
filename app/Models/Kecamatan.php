@@ -18,5 +18,8 @@ class Kecamatan extends Model
         'judul_website',
         'domain_kecamatan',
         'kode_kecamatan',
+        'alamat',
+        'nohp',
+        'email',
     ];
 }

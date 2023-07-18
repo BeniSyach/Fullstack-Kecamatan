@@ -116,6 +116,15 @@ const SideBar: React.FC<Props> = (data) => {
                                 Kata Sambutan
                             </Sidebar.Item>
                         </Link>
+                        <Link
+                            href={route("data_kecamatan")}
+                            as="div"
+                            className=" cursor-pointer"
+                        >
+                            <Sidebar.Item icon={FaImages}>
+                                data Kecamatan
+                            </Sidebar.Item>
+                        </Link>
                     </Sidebar.Collapse>
 
                     <Sidebar.Collapse label="Profil" icon={FaHome}>

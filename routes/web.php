@@ -73,6 +73,10 @@ Route::get('/profil/kepegawaian',[Kepegawaian::class,'index'])->name('kepegawaia
 // kata Sambutan
 Route::get('/profil/kata_sambutan',[KataSambutan::class,'index'])->name('kata_sambutan');
 
+// data Kecamatan
+Route::get('/data/kecamatan',[Kontak_Kami::class,'index'])->name('data_kecamatan');
+Route::post('/data/kecamatan/{id}',[Kontak_Kami::class,'update'])->name('update_kecamatan');
+
 // Publikasi
 Route::get('/publikasi/berita',[Berita::class,'index'])->name('berita');
 Route::get('/publikasi/berita/{slug}',[Berita::class,'detailBerita'])->name('detailBerita');
