@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            data_domain_kecamatan::class,
+            // data_domain_kecamatan::class,
             data_adat_dan_budaya::class,
             data_agenda::class,
             data_kategori_berita::class,
