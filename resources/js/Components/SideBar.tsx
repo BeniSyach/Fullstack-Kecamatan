@@ -19,6 +19,19 @@ import {
     FaIcons,
     FaImage,
     FaHiking,
+    FaAutoprefixer,
+    FaElementor,
+    FaFirstOrder,
+    FaWpforms,
+    FaBoxes,
+    FaBoxOpen,
+    FaPeopleCarry,
+    FaBahai,
+    FaBookmark,
+    FaCalendarCheck,
+    FaHouseUser,
+    FaRegChartBar,
+    FaChartLine,
 } from "react-icons/fa";
 import { Link } from "@inertiajs/react";
 
@@ -112,7 +125,7 @@ const SideBar: React.FC<Props> = (data) => {
                             as="div"
                             className=" cursor-pointer"
                         >
-                            <Sidebar.Item icon={FaImages}>
+                            <Sidebar.Item icon={FaAutoprefixer}>
                                 Kata Sambutan
                             </Sidebar.Item>
                         </Link>
@@ -121,7 +134,7 @@ const SideBar: React.FC<Props> = (data) => {
                             as="div"
                             className=" cursor-pointer"
                         >
-                            <Sidebar.Item icon={FaImages}>
+                            <Sidebar.Item icon={FaElementor}>
                                 data Kecamatan
                             </Sidebar.Item>
                         </Link>
@@ -133,7 +146,7 @@ const SideBar: React.FC<Props> = (data) => {
                             as="div"
                             className="cursor-pointer"
                         >
-                            <Sidebar.Item icon={FaImages} href="#">
+                            <Sidebar.Item icon={FaFirstOrder} href="#">
                                 Sejarah
                             </Sidebar.Item>
                         </Link>
@@ -178,7 +191,7 @@ const SideBar: React.FC<Props> = (data) => {
                             as="div"
                             className="cursor-pointer"
                         >
-                            <Sidebar.Item icon={FaImages}>
+                            <Sidebar.Item icon={FaWpforms}>
                                 Prestasi
                             </Sidebar.Item>
                         </Link>
@@ -187,7 +200,7 @@ const SideBar: React.FC<Props> = (data) => {
                             as="div"
                             className="cursor-pointer"
                         >
-                            <Sidebar.Item icon={FaImages}>
+                            <Sidebar.Item icon={FaBoxes}>
                                 Struktur Organisasi
                             </Sidebar.Item>
                         </Link>
@@ -196,14 +209,16 @@ const SideBar: React.FC<Props> = (data) => {
                             as="div"
                             className="cursor-pointer"
                         >
-                            <Sidebar.Item icon={FaImages}>Tupoksi</Sidebar.Item>
+                            <Sidebar.Item icon={FaBoxOpen}>
+                                Tupoksi
+                            </Sidebar.Item>
                         </Link>
                         <Link
                             href={route("AdminKepegawaian")}
                             as="div"
                             className="cursor-pointer"
                         >
-                            <Sidebar.Item icon={FaImages}>
+                            <Sidebar.Item icon={FaPeopleCarry}>
                                 Kepegawaian
                             </Sidebar.Item>
                         </Link>
@@ -241,14 +256,14 @@ const SideBar: React.FC<Props> = (data) => {
                             as="div"
                             className="cursor-pointer"
                         >
-                            <Sidebar.Item icon={FaImages}>Wisata</Sidebar.Item>
+                            <Sidebar.Item icon={FaBahai}>Wisata</Sidebar.Item>
                         </Link>
                         <Link
                             href={route("AdminAgenda")}
                             as="div"
                             className="cursor-pointer"
                         >
-                            <Sidebar.Item icon={FaImages} h>
+                            <Sidebar.Item icon={FaBookmark}>
                                 Agenda
                             </Sidebar.Item>
                         </Link>
@@ -259,7 +274,7 @@ const SideBar: React.FC<Props> = (data) => {
                             as="div"
                             className="cursor-pointer"
                         >
-                            <Sidebar.Item icon={FaImages} href="#">
+                            <Sidebar.Item icon={FaCalendarCheck} href="#">
                                 List Potensi
                             </Sidebar.Item>
                         </Link>
@@ -270,13 +285,13 @@ const SideBar: React.FC<Props> = (data) => {
                             as="div"
                             className="cursor-pointer"
                         >
-                            <Sidebar.Item icon={FaImages}>
+                            <Sidebar.Item icon={FaHouseUser}>
                                 List Pelayanan
                             </Sidebar.Item>
                         </Link>
                     </Sidebar.Collapse>
-                    <Sidebar.Collapse label="Statistik" icon={FaHome}>
-                        <Sidebar.Item icon={FaImages} href="#">
+                    <Sidebar.Collapse label="Statistik" icon={FaChartLine}>
+                        <Sidebar.Item icon={FaRegChartBar} href="#">
                             List Statistik
                         </Sidebar.Item>
                     </Sidebar.Collapse>

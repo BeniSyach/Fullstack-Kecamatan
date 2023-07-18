@@ -39,6 +39,15 @@ const TambahDataSlider: React.FC<PageProps> = ({ auth }) => {
                             </div>
                             <FileInput
                                 id="gambar_slider"
+                                helperText={
+                                    <>
+                                        <span className="font-medium">
+                                            Gambar
+                                        </span>{" "}
+                                        maximal ukuran maximal lebar : 3200
+                                        pixel dan tinggi : 350 Pixel
+                                    </>
+                                }
                                 name="gambar_slider"
                                 onChange={(e) => {
                                     if (e.target.files && e.target.files[0]) {
