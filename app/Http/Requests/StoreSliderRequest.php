@@ -22,7 +22,7 @@ class StoreSliderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'gambar_slider' => 'required|image|mimes:jpeg,jpg,png,gif|max:5000'
+            'gambar_slider' => 'required|image|mimes:jpeg,jpg,png,gif|dimensions:max_width=1000,max_height=250|max:5000'
         ];
     }
 
@@ -33,6 +33,7 @@ class StoreSliderRequest extends FormRequest
             'gambar_slider.image' => ':attribute harus foto/gambar',
             'gambar_slider.mimes' => ':attribute File harus berektensi jpeg,jpg,png,gif',
             'gambar_slider.max' => ':attribute tidak lebih dari 5 MB',
+            'gambar_slider.dimensions' => ':attribute ukuran maximal lebar : 1000 pixel dan tinggi : 250 Pixel',
         ];
     }
 
