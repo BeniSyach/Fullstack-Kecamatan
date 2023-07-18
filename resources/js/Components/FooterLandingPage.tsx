@@ -3,7 +3,7 @@ import { Footer } from "flowbite-react";
 import { BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-icons/bs";
 
 interface ChildProps {
-    data: string;
+    data: any;
 }
 
 const FooterLandingPage: React.FC<ChildProps> = (props) => {
@@ -15,16 +15,17 @@ const FooterLandingPage: React.FC<ChildProps> = (props) => {
                         <Footer.Brand
                             alt="logo Kecamatan"
                             href="/"
-                            name={props.data}
+                            name={props.data.judul_website}
                             src="/assets/image/logo/logo_kabupaten_deli_serdang.png"
                         />
                         <p className="mt-5 dark:text-white">
-                            Lorem ipsum, dolor sit amet consectetur adipisicing
-                            elit. Excepturi aliquid, non libero deleniti fuga
-                            nostrum distinctio illo perspiciatis enim
-                            reprehenderit! Voluptas placeat aspernatur
-                            voluptatibus pariatur, voluptatum dolorem magnam
-                            doloribus! A.
+                            Alamat : {props.data.alamat}
+                        </p>
+                        <p className=" dark:text-white">
+                            No.Hp : {props.data.nohp}
+                        </p>
+                        <p className=" dark:text-white">
+                            Email : {props.data.email}
                         </p>
                     </div>
 

@@ -478,7 +478,7 @@ const Home: React.FC<Props> = ({
             </div>
             <Letter />
             {/* <Kerjasama /> */}
-            <FooterLandingPage data={domain.judul_website} />
+            <FooterLandingPage data={domain} />
         </Flowbite>
     );
 };

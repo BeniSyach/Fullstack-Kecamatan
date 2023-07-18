@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('domain_kecamatan')->unique();
             $table->string('kode_kecamatan')->unique();
             $table->string('judul_website')->unique();
+            $table->string('alamat')->nullable();
+            $table->string('nohp')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }
